@@ -17,6 +17,8 @@ class LoginController:
     def cancelLogin(self):
         pass
 
+    def checkPassword(self):
+
 
     
 
