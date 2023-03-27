@@ -553,8 +553,8 @@ QPushButton:focus {
      <y>348</y>
     </hint>
     <hint type="destinationlabel">
-     <x>485</x>
-     <y>436</y>
+     <x>399</x>
+     <y>767</y>
     </hint>
    </hints>
   </connection>
@@ -565,12 +565,12 @@ QPushButton:focus {
    <slot>hide()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>402</x>
-     <y>672</y>
+     <x>378</x>
+     <y>746</y>
     </hint>
     <hint type="destinationlabel">
-     <x>484</x>
-     <y>584</y>
+     <x>399</x>
+     <y>767</y>
     </hint>
    </hints>
   </connection>
@@ -581,14 +581,20 @@ QPushButton:focus {
    <slot>show()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>382</x>
-     <y>684</y>
+     <x>378</x>
+     <y>746</y>
     </hint>
     <hint type="destinationlabel">
-     <x>486</x>
-     <y>316</y>
+     <x>399</x>
+     <y>413</y>
     </hint>
    </hints>
   </connection>
  </connections>
+ <slots>
+  <signal>createAccountClicked()</signal>
+  <slot>loginButtonClicked()</slot>
+  <slot>cancelButtonClicked()</slot>
+  <slot>createAccountButtonClicked()</slot>
+ </slots>
 </ui>

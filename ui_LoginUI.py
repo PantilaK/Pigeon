@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'LoginUIXGYIZp.ui'
+## Form generated from reading UI file 'LoginUIUTBWix.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.2
 ##
