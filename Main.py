@@ -1,12 +1,12 @@
 from LoginControl import *
 from LoginUI import *
-from PasswordManager import *
+from LoginModel import *
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    loginControl = LoginController(None, None)
+    loginControl = LoginController(app)
     loginControl.view = LoginUI(loginControl)
-    loginControl.model = PasswordManager()
-    loginControl.startLoginProcess()
+    loginControl.model = LoginModel()
+    loginControl.enterLoginProcess()
     sys.exit(app.exec())

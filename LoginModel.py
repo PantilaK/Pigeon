@@ -15,7 +15,7 @@ class LoginModel:
         
         self.cur = self.conn.cursor()
 
-    def isPasswordMatch(self, password1:str, passowrd2:str):
+    def isPasswordMatched(self, password1:str, passowrd2:str):
         """
         Check if passwords are matched.
 
@@ -34,10 +34,10 @@ class LoginModel:
             password1 = password2.
         """
         
-        if (password1 == passowrd2):
+        if (password1 == passowrd2) and (password1 != "" or password1 != " "):
             return True
         
-        return False
+        return (False, "Passwords do not match")
 
     
     def getPassword(self, username:str):
@@ -99,16 +99,18 @@ class LoginModel:
         Returns
         -------
         bool
-            username is existed.
+            False = Username does not exists.
+            True = Username exists.
         """
 
         self.cur.execute(f'''select "username" from "userPassword"
-        where "username" = '{username}' ''')
+        where "username" = '{username}'
+        limit 1 ''')
 
         if self.cur.fetchone() == None:
             return False
         
-        return True
+        return (True, "Username already exists")
     
     def createAccount(self, username:str, password:str):
         """
@@ -126,9 +128,16 @@ class LoginModel:
             password for an account.
         """
 
-        if not self.usernameExists(username):
+        if username == "":
+            return "Invalid username"
+
+        usernameExists = self.usernameExists(username)
+
+        if type(usernameExists) == tuple:
+            return usernameExists
+        elif not usernameExists:
             self.storingPassword(username, password)
-            return True
+            return (True, "Account succesfully created")
         
 
     def verifyPassword(self, username:str, password:str):
@@ -155,7 +164,7 @@ class LoginModel:
         if hash == self.getPassword(username):
             return True
         else:
-            return False
+            return (False, "Incorrect password")
 
 # o = LoginDriver()
 # math.sqrt()

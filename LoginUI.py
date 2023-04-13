@@ -15,7 +15,8 @@ class LoginUI(QWidget):
         self.UI.loginButton.clicked.connect(self.loginButtonClicked)
         self.UI.createAccountButton.clicked.connect(self.createAccountButtonClicked)
         self.UI.CAconfirmPasswordLineEdit.textChanged.connect(self.passwordLineEditChanged)
-        self.UI.CApasswordLineEdit.textChanged.connect(self.passwordLineEditChanged)      
+        self.UI.CApasswordLineEdit.textChanged.connect(self.passwordLineEditChanged)
+        self.UI.CAcreateAccountButton.clicked.connect(self.CACreateAccountButtonClicked)      
 
 
     def getUsername(self) -> str:
@@ -43,6 +44,12 @@ class LoginUI(QWidget):
         self.controller.createAccount()
 
     def passwordLineEditChanged(self) -> None:
-        self.controller.checkPassword()
+        self.controller.CAcheckPassword()
+
+    def setEnabledCACreateAccountButton(self, enable:bool) -> None:
+        self.UI.CAcreateAccountButton.setEnabled(enable)
+
+    def CACreateAccountButtonClicked(self) -> None:
+        self.controller.CAcreateAccount()
     
 
