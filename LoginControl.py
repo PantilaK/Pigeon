@@ -18,7 +18,23 @@ class LoginController:
         pass
 
     def checkPassword(self):
+        pass
 
+    def clearErrorFields(self):
+        self.clearErrorFieldCA()
+        self.clearErrorField()
+    
+    def clearErrorFieldCA(self):
+        self.view.UI.errorLabel.setText(" ")
+    
+    def clearErrorField(self):
+        self.view.UI.CAerrorLabel.setText(" ")
+    
+    def setErrorFieldText(self, text:str):
+        self.view.UI.errorLabel.setText(text)
+    
+    def setErrorFieldTextCA(self, text:str):
+        self.view.UI.CAerrorLabel.setText(text)
 
     
 

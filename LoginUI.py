@@ -9,13 +9,15 @@ class LoginUI(QWidget):
         self.UI = Ui_Form()
         self.UI.setupUi(self)
         self.UI.createAccountWidget.setVisible(False)
+        self.controller.clearErrorFields()
         self.resize(500, 600)
+        
 
         self.UI.cancelButton.clicked.connect(self.cancelButtonClicked)
         self.UI.loginButton.clicked.connect(self.loginButtonClicked)
         self.UI.createAccountButton.clicked.connect(self.createAccountButtonClicked)
         self.UI.CAconfirmPasswordLineEdit.textChanged.connect(self.passwordLineEditChanged)
-        self.UI.CApasswordLineEdit.textChanged.connect(self.passwordLineEditChanged)      
+        self.UI.CApasswordLineEdit.textChanged.connect(self.passwordLineEditChanged)    
 
 
     def getUsername(self) -> str:
