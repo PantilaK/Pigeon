@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'LoginUIUTBWix.ui'
+## Form generated from reading UI file 'LoginUIIYbTqa.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.2
 ##
@@ -23,7 +23,7 @@ class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(460, 988)
+        Form.resize(460, 1036)
         sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -44,6 +44,11 @@ class Ui_Form(object):
 "QLabel {\n"
 "  color: #464d55;\n"
 "  font-weight: 600;\n"
+"}\n"
+"QLabel#errorLabel {\n"
+"  color: #e6583c;\n"
+"  font-weight: 600;\n"
+"  font-size: 10px;\n"
 "}\n"
 "QLabel#heading {\n"
 "  color: #0f1925;\n"
@@ -83,7 +88,8 @@ class Ui_Form(object):
 "  outline: 0px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"  border: 3px solid #9ac3fe;\n"
+""
+                        "  border: 3px solid #9ac3fe;\n"
 "}\n"
 "QPushButton:focus {\n"
 "  border: 3px solid #9ac3fe;\n"
@@ -117,6 +123,17 @@ class Ui_Form(object):
         self.passwordLineEdit.setEchoMode(QLineEdit.Password)
 
         self.verticalLayout_2.addWidget(self.passwordLineEdit)
+
+        self.errorLabel = QLabel(self.loginWidget)
+        self.errorLabel.setObjectName(u"errorLabel")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.errorLabel.sizePolicy().hasHeightForWidth())
+        self.errorLabel.setSizePolicy(sizePolicy1)
+        self.errorLabel.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_2.addWidget(self.errorLabel)
 
         self.verticalSpacer_3 = QSpacerItem(0, 20, QSizePolicy.Minimum, QSizePolicy.Fixed)
 
@@ -159,6 +176,11 @@ class Ui_Form(object):
 "  color: #464d55;\n"
 "  font-weight: 600;\n"
 "}\n"
+"QLabel#CAerrorLabel {\n"
+"  color: #e6583c;\n"
+"  font-weight: 600;\n"
+"  font-size: 10px;\n"
+"}\n"
 "QLabel#CAcreateAccountLabel {\n"
 "  color: #0f1925;\n"
 "  font-size: 18px;\n"
@@ -195,14 +217,14 @@ class Ui_Form(object):
 "  border: 1px solid rgb(82, 158, 218);\n"
 "  padding: 5px 15px;\n"
 "  margin-top: 10px;\n"
-"  outline: 0px;\n"
+"  outlin"
+                        "e: 0px;\n"
 "}\n"
 "QPushButton:hover {\n"
 "  border: 3px solid #9ac3fe;\n"
 "}\n"
 "QPushButton:focus {\n"
-""
-                        "  border: 3px solid #9ac3fe;\n"
+"  border: 3px solid #9ac3fe;\n"
 "}")
         self.verticalLayout_4 = QVBoxLayout(self.createAccountWidget)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
@@ -251,6 +273,14 @@ class Ui_Form(object):
 
         self.verticalLayout_4.addWidget(self.CAconfirmPasswordLineEdit)
 
+        self.CAerrorLabel = QLabel(self.createAccountWidget)
+        self.CAerrorLabel.setObjectName(u"CAerrorLabel")
+        sizePolicy1.setHeightForWidth(self.CAerrorLabel.sizePolicy().hasHeightForWidth())
+        self.CAerrorLabel.setSizePolicy(sizePolicy1)
+        self.CAerrorLabel.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_4.addWidget(self.CAerrorLabel)
+
         self.verticalSpacer_4 = QSpacerItem(0, 20, QSizePolicy.Minimum, QSizePolicy.Fixed)
 
         self.verticalLayout_4.addItem(self.verticalSpacer_4)
@@ -281,9 +311,6 @@ class Ui_Form(object):
 
         self.pigeonLabel = QLabel(Form)
         self.pigeonLabel.setObjectName(u"pigeonLabel")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.pigeonLabel.sizePolicy().hasHeightForWidth())
         self.pigeonLabel.setSizePolicy(sizePolicy1)
         self.pigeonLabel.setMinimumSize(QSize(0, 80))
@@ -296,13 +323,13 @@ class Ui_Form(object):
 
         self.gridLayout.addWidget(self.pigeonLabel, 0, 2, 1, 1)
 
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout.addItem(self.horizontalSpacer_2, 1, 3, 2, 1)
-
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.gridLayout.addItem(self.horizontalSpacer, 1, 1, 2, 1)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout.addItem(self.horizontalSpacer_2, 1, 3, 2, 1)
 
         QWidget.setTabOrder(self.usernameLineEdit, self.passwordLineEdit)
         QWidget.setTabOrder(self.passwordLineEdit, self.loginButton)
@@ -327,6 +354,7 @@ class Ui_Form(object):
         self.passwordLabel.setText(QCoreApplication.translate("Form", u"Password:", None))
         self.passwordLineEdit.setInputMask("")
         self.passwordLineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Enter your password", None))
+        self.errorLabel.setText(QCoreApplication.translate("Form", u"error", None))
         self.loginButton.setText(QCoreApplication.translate("Form", u"Login", None))
         self.cancelButton.setText(QCoreApplication.translate("Form", u"Cancel", None))
         self.createAccountButton.setText(QCoreApplication.translate("Form", u"Create an account", None))
@@ -340,6 +368,7 @@ class Ui_Form(object):
         self.CApasswordLineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Enter your password", None))
         self.label_4.setText(QCoreApplication.translate("Form", u"Confirm Password:", None))
         self.CAconfirmPasswordLineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Re-enter your password", None))
+        self.CAerrorLabel.setText(QCoreApplication.translate("Form", u"error", None))
         self.CAcreateAccountButton.setText(QCoreApplication.translate("Form", u"Create Account", None))
         self.CAcancelButton.setText(QCoreApplication.translate("Form", u"Cancel", None))
         self.pigeonLabel.setText(QCoreApplication.translate("Form", u"Pigeon", None))

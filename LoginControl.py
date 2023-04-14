@@ -38,12 +38,30 @@ class LoginController:
         password = self.view.CAgetPassword()
         confirmPassword = self.view.CAgetComfirmPassword()
         isMatched = self.model.isPasswordMatched(password, confirmPassword)
-
         if type(isMatched) == tuple:
             print(isMatched[1])
             self.view.setEnabledCACreateAccountButton(isMatched[0])
         else:
             self.view.setEnabledCACreateAccountButton(isMatched)
+
+    def checkPassword(self):
+        pass
+
+    def clearErrorFields(self):
+        self.clearErrorFieldCA()
+        self.clearErrorField()
+    
+    def clearErrorFieldCA(self):
+        self.view.UI.errorLabel.setText(" ")
+    
+    def clearErrorField(self):
+        self.view.UI.CAerrorLabel.setText(" ")
+    
+    def setErrorFieldText(self, text:str):
+        self.view.UI.errorLabel.setText(text)
+    
+    def setErrorFieldTextCA(self, text:str):
+        self.view.UI.CAerrorLabel.setText(text)
     
 
     

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainFormPHxkzj.ui'
+## Form generated from reading UI file 'mainForm.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.2
 ##
@@ -23,7 +23,7 @@ class Ui_mainWidget(object):
     def setupUi(self, mainWidget):
         if not mainWidget.objectName():
             mainWidget.setObjectName(u"mainWidget")
-        mainWidget.resize(647, 310)
+        mainWidget.resize(668, 415)
         mainWidget.setStyleSheet(u"background-color: rgb(82, 158, 218);\n"
 "\n"
 "QWidget {\n"
@@ -163,6 +163,12 @@ class Ui_mainWidget(object):
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.acountDetailsLabel = QLabel(self.accountWidget)
         self.acountDetailsLabel.setObjectName(u"acountDetailsLabel")
+        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.acountDetailsLabel.sizePolicy().hasHeightForWidth())
+        self.acountDetailsLabel.setSizePolicy(sizePolicy)
+        self.acountDetailsLabel.setMinimumSize(QSize(120, 0))
 
         self.horizontalLayout_2.addWidget(self.acountDetailsLabel)
 
@@ -174,11 +180,11 @@ class Ui_mainWidget(object):
 
         self.tripListWidget = QWidget(mainWidget)
         self.tripListWidget.setObjectName(u"tripListWidget")
-        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.MinimumExpanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.tripListWidget.sizePolicy().hasHeightForWidth())
-        self.tripListWidget.setSizePolicy(sizePolicy)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.MinimumExpanding)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.tripListWidget.sizePolicy().hasHeightForWidth())
+        self.tripListWidget.setSizePolicy(sizePolicy1)
         self.tripListWidget.setStyleSheet(u"QWidget {\n"
 "  background-color: #fff;\n"
 "  border-radius: 12px;\n"
@@ -226,6 +232,12 @@ class Ui_mainWidget(object):
         self.verticalLayout_2 = QVBoxLayout(self.tripListWidget)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setSizeConstraint(QLayout.SetDefaultConstraint)
+        self.tripListHeading = QLabel(self.tripListWidget)
+        self.tripListHeading.setObjectName(u"tripListHeading")
+        self.tripListHeading.setAlignment(Qt.AlignRight|Qt.AlignTop|Qt.AlignTrailing)
+
+        self.verticalLayout_2.addWidget(self.tripListHeading)
+
         self.scrollArea = QScrollArea(self.tripListWidget)
         self.scrollArea.setObjectName(u"scrollArea")
         self.scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -233,20 +245,14 @@ class Ui_mainWidget(object):
         self.scrollArea.setWidgetResizable(True)
         self.tripListScrollWidget = QWidget()
         self.tripListScrollWidget.setObjectName(u"tripListScrollWidget")
-        self.tripListScrollWidget.setGeometry(QRect(0, 0, 432, 262))
-        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.tripListScrollWidget.sizePolicy().hasHeightForWidth())
-        self.tripListScrollWidget.setSizePolicy(sizePolicy1)
+        self.tripListScrollWidget.setGeometry(QRect(0, 0, 446, 297))
+        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.tripListScrollWidget.sizePolicy().hasHeightForWidth())
+        self.tripListScrollWidget.setSizePolicy(sizePolicy2)
         self.verticalLayout_3 = QVBoxLayout(self.tripListScrollWidget)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.tripListHeading = QLabel(self.tripListScrollWidget)
-        self.tripListHeading.setObjectName(u"tripListHeading")
-        self.tripListHeading.setAlignment(Qt.AlignRight|Qt.AlignTop|Qt.AlignTrailing)
-
-        self.verticalLayout_3.addWidget(self.tripListHeading)
-
         self.scrollArea.setWidget(self.tripListScrollWidget)
 
         self.verticalLayout_2.addWidget(self.scrollArea)
