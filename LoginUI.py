@@ -9,7 +9,7 @@ class LoginUI(QWidget):
         self.UI = Ui_Form()
         self.UI.setupUi(self)
         self.UI.createAccountWidget.setVisible(False)
-        self.controller.clearErrorFields()
+        # self.controller.clearErrorFields()
         self.resize(500, 600)
         
 

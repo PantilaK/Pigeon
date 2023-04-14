@@ -35,7 +35,7 @@ class LoginModel:
         """
         
         if (password1 == passowrd2) and (password1 != "" or password1 != " "):
-            return True
+            return (True, "")
         
         return (False, "Passwords do not match")
 
@@ -108,7 +108,7 @@ class LoginModel:
         limit 1 ''')
 
         if self.cur.fetchone() == None:
-            return False
+            return (False, "Username does not exists")
         
         return (True, "Username already exists")
     
@@ -128,16 +128,18 @@ class LoginModel:
             password for an account.
         """
 
-        if username == "":
-            return "Invalid username"
+        if username == "" or password == "":
+            return "Invalid username or password"
 
         usernameExists = self.usernameExists(username)
 
-        if type(usernameExists) == tuple:
-            return usernameExists
-        elif not usernameExists:
+        # if type(usernameExists) == tuple:
+        #     return usernameExists
+        if not usernameExists[0]:
             self.storingPassword(username, password)
-            return (True, "Account succesfully created")
+            return "Account succesfully created"
+        
+        return usernameExists[1]
         
 
     def verifyPassword(self, username:str, password:str):
@@ -159,6 +161,11 @@ class LoginModel:
         bool
             True or False.
         """
+        # Check if username exists
+        userExists = self.usernameExists(username)
+        if not userExists[0]:
+            return (False, userExists[1])
+        
         hash = hashlib.sha256(password.encode()).hexdigest()
 
         if hash == self.getPassword(username):
@@ -171,6 +178,7 @@ class LoginModel:
 # o.isPasswordMatch()
 # o.createAccount()
 
-# o = LoginModel()
+o = LoginModel()
 # o.createAccount("jiji","koko")
 # o.verifyPassword('jiji', 'kok')
+# print(o.getPassword("Prae"))
