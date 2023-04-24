@@ -5,8 +5,8 @@ from PasswordManager import *
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    loginControl = LoginController(None, None)
+    loginControl = LoginController()
     loginControl.view = LoginUI(loginControl)
-    loginControl.model = PasswordManager()
-    loginControl.startLoginProcess()
+    # loginControl.model = PasswordManager()
+    loginControl.enterLoginProcess()
     sys.exit(app.exec())
