@@ -2,6 +2,7 @@ from LoginUI import LoginUI
 from LoginModel import LoginModel
 
 import sys
+from MainControl import MainController
 
 class LoginController:
     def __init__(self, app) -> None:
@@ -29,6 +30,15 @@ class LoginController:
         else:
             # Send user information to another window
             self.setErrorFieldText("go to main")
+            # temporary login function
+            self.view.close()
+            self.transferToMain()
+
+    def transferToMain(self):
+        # temporary main startup
+        mainControl = MainController()
+        mainControl.enterMainProcess()
+
 
     def cancelLogin(self):
         self.view.close()

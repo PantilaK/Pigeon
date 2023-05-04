@@ -1,7 +1,8 @@
 from LoginControl import *
 from LoginUI import *
-from LoginModel import *
-import ZODB, ZODB.FileStorage
+from PasswordManager import *
+import sys
+
 
 if __name__ == '__main__':
     storage = ZODB.FileStorage.FileStorage('data.fs')

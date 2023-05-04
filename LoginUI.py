@@ -1,5 +1,4 @@
 from ui_LoginUI import *
-import sys
 
 
 class LoginUI(QWidget):
@@ -10,6 +9,7 @@ class LoginUI(QWidget):
         self.UI.setupUi(self)
         self.UI.createAccountWidget.setVisible(False)
         # self.controller.clearErrorFields()
+        # self.controller.clearErrorFieldCA()
         self.resize(500, 600)
         
 

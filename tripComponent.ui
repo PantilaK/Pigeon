@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>tripWidget</class>
+ <widget class="QWidget" name="tripWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>490</width>
+    <height>421</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#headerWidget{
+  background-color: #fff;
+  border-radius: 20px;
+  border: 2px solid #464d55;;
+}
+
+QWidget{
+    background-color: #fff;
+}
+
+QLabel {
+  color: #464d55;
+  font-weight: 600;
+  font-size: 24px
+}
+
+QPushButton {
+  background-color: #464d55;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 12px;
+  border: 1px solid #464d55;
+  padding: 5px 15px;
+  outline: 0px;
+}
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QWidget" name="headerWidget" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>400</width>
+       <height>0</height>
+      </size>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="tripTitle">
+          <property name="text">
+           <string>trip</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="tripTime">
+          <property name="text">
+           <string>Time</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="tripExpandButton">
+          <property name="text">
+           <string>Expand</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="tripEditButton">
+          <property name="text">
+           <string>Edit</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="tripDeleteButton">
+          <property name="text">
+           <string>Delete</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="tripSubWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QWidget#sidebarWidget{
+  background-color: #464d55;
+  border-radius: 2px
+}</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QWidget" name="sidebarWidget" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>3</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QWidget" name="tripDetailWidget" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#detailHeaderLabel{
+  color: #464d55;
+  font-weight: 600;
+  font-size: 20px
+}
+QLabel#reminderHeaderLabel{
+  color: #464d55;
+  font-weight: 600;
+  font-size: 20px
+}
+QLabel{
+  color: #464d55;
+  font-weight: 400;
+  font-size: 14px
+}
+QCheckBox{
+  color: #464d55;
+  font-weight: 400;
+  font-size: 14px
+}
+</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QWidget" name="tripDetailsWidget" native="true">
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QLabel" name="detailHeaderLabel">
+              <property name="text">
+               <string>Details</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>tripDetails1
+tripDetails2</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="tripReminderWidget" native="true">
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <widget class="QLabel" name="reminderHeaderLabel">
+              <property name="text">
+               <string>Reminder</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="checkboxLayout"/>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="tripComponentControlWidget" native="true">
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QPushButton" name="addComponentButton">
+              <property name="text">
+               <string>Add Components</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="componentWidget" native="true">
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <layout class="QVBoxLayout" name="componentLayout"/>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
