@@ -1,39 +1,13 @@
-import psycopg2
 import hashlib
-import math
+from User import User
+import transaction
 
 class LoginModel:
 
-    def __init__(self):
-        self.conn = psycopg2.connect(
-            host = 'localhost',
-            dbname = 'Pigeon',
-            user = 'postgres',
-            password = '132547',
-            port = '5432'
-            )
-        
-        self.cur = self.conn.cursor()
+    def __init__(self, root):
+        self.root = root
 
     def isPasswordMatched(self, password1:str, passowrd2:str):
-        """
-        Check if passwords are matched.
-
-        This function check whether two passwords are matched or not.
-
-        Parameters
-        ----------
-        password1 : str
-            First password to check.
-        password2 : str
-            Second password to check.
-
-        Returns
-        -------
-        bool
-            password1 = password2.
-        """
-        
         if (password1 == passowrd2) and (password1 != "" or password1 != " "):
             return (True, "")
         
@@ -41,130 +15,38 @@ class LoginModel:
 
     
     def getPassword(self, username:str):
-        """
-        Get password of the given username from database.
+        if username in self.root['username']:
+            return self.root['username'][username].getPassword()
 
-        This function get password that stores in the database
-        using the given username.
-
-        Parameters
-        ----------
-        username : str
-            Username to find password.
-
-        Returns
-        -------
-            Password of the given username.
-        """
-
-        self.cur.execute(f'''select "password" from "userPassword"
-        where "username" = '{username}' ''')
-        userPassword = self.cur.fetchone()[0]
-        
-        return userPassword
 
     def storingPassword(self, username:str, password:str):
-        """
-        Add username and password into database table.
-
-        This function receive username and password then convert password into 
-        hash before add it into the database table.
-
-        Parameters
-        ----------
-        username : str
-            Username to add.
-        password : str
-            Password to add.
-        """
-
         hash = hashlib.sha256(password.encode()).hexdigest()
 
-        self.cur.execute(f'''insert into "userPassword"(username, password)
-        values('{username}', '{hash}')''')
-        self.conn.commit()
+        tmp = self.root['username']
+        tmp[username] = User(username, hash)
+        self.root['username'] = tmp
 
-    def usernameExists(self, username:str):
-        """
-        Check if username exists.
+        transaction.commit()
 
-        This function check if the given username is already
-        exists in the database table or not.
-
-        Parameters
-        ----------
-        username : str
-            username to check if it is existed,
-        
-        Returns
-        -------
-        bool
-            False = Username does not exists.
-            True = Username exists.
-        """
-
-        self.cur.execute(f'''select "username" from "userPassword"
-        where "username" = '{username}'
-        limit 1 ''')
-
-        if self.cur.fetchone() == None:
-            return (False, "Username does not exists")
-        
-        return (True, "Username already exists")
-    
     def createAccount(self, username:str, password:str):
-        """
-        Check username availability.
-
-        This function check whether there is the same username in the 
-        database table or not. If not it will create an account for
-        the user.
-
-        Parameters
-        ----------
-        username : str
-            username to check and create an account.
-        password : str
-            password for an account.
-        """
+        ruser = username.strip()
+        username = ruser
 
         if username == "" or password == "":
             return "Invalid username or password"
-
-        usernameExists = self.usernameExists(username)
-
-        # if type(usernameExists) == tuple:
-        #     return usernameExists
-        if not usernameExists[0]:
-            self.storingPassword(username, password)
-            return "Account succesfully created"
         
-        return usernameExists[1]
+        if username in self.root['username']:
+            return "Username already exists"
         
+        self.storingPassword(username, password)
+        return "Account Succesfully Created"
 
     def verifyPassword(self, username:str, password:str):
-        """
-        Verify password.
-
-        This function check input password matchs with password that is
-        in database or not.
-
-        Parameters
-        ----------
-        username : str
-            username that is used to verify.
-        password : str
-            input password to be checked.
-    
-        Returns
-        -------
-        bool
-            True or False.
-        """
         # Check if username exists
-        userExists = self.usernameExists(username)
-        if not userExists[0]:
-            return (False, userExists[1])
+        ruser = username.strip()
+        username = ruser
+        if username not in self.root['username']:
+            return (False, "Username does not exists")
         
         hash = hashlib.sha256(password.encode()).hexdigest()
 
@@ -173,12 +55,3 @@ class LoginModel:
         else:
             return (False, "Incorrect password")
 
-# o = LoginDriver()
-# math.sqrt()
-# o.isPasswordMatch()
-# o.createAccount()
-
-o = LoginModel()
-# o.createAccount("jiji","koko")
-# o.verifyPassword('jiji', 'kok')
-# print(o.getPassword("Prae"))

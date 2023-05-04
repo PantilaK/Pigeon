@@ -28,7 +28,7 @@ class LoginController:
             self.setErrorFieldText(message[1])
         else:
             # Send user information to another window
-            pass
+            self.setErrorFieldText("go to main")
 
     def cancelLogin(self):
         self.view.close()
