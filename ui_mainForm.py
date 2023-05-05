@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainFormSDGqGv.ui'
+## Form generated from reading UI file 'mainFormkQgBhL.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.2
 ##
@@ -23,6 +23,7 @@ class Ui_mainWidget(object):
     def setupUi(self, mainWidget):
         if not mainWidget.objectName():
             mainWidget.setObjectName(u"mainWidget")
+        mainWidget.setWindowModality(Qt.ApplicationModal)
         mainWidget.resize(802, 617)
         mainWidget.setStyleSheet(u"background-color: rgb(82, 158, 218);\n"
 "\n"

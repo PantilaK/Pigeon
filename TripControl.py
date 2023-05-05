@@ -1,15 +1,17 @@
 from TripComponentWidget import *
+from ComponentEditControl import EditController
 
 class TripController():
-    def __init__(self, tripComponent):
+    def __init__(self, tripComponent, mainUI=None):
         self.tripComponent = tripComponent
         self.isExpanded:bool = False
         self.hasReminder:bool = False
         self.isExtendable:bool = True
         self.UI = None
+        self.mainUI = mainUI
 
     def createUI(self):
-        self.UI = TripComponentWidget(self)
+        self.UI = TripComponentWidget(self, self.mainUI)
         self.update()
 
     def update(self):
@@ -49,4 +51,5 @@ class TripController():
         pass
 
     def addComponent(self):
-        pass
+        #temporary run code
+        EditController()

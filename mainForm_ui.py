@@ -23,6 +23,7 @@ class Ui_mainWidget(object):
     def setupUi(self, mainWidget):
         if not mainWidget.objectName():
             mainWidget.setObjectName(u"mainWidget")
+        mainWidget.setWindowModality(Qt.ApplicationModal)
         mainWidget.resize(802, 617)
         mainWidget.setStyleSheet(u"background-color: rgb(82, 158, 218);\n"
 "\n"
