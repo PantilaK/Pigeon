@@ -279,7 +279,6 @@ QLabel {
 QLabel#tripListHeading {
   color: #0f1925;
   font-size: 30px;
-  margin-bottom: 10px;
 }
 QLineEdit {
   color: #464d55;
@@ -394,7 +393,7 @@ QScrollBar::sub-line:vertical {
            <x>0</x>
            <y>0</y>
            <width>572</width>
-           <height>441</height>
+           <height>467</height>
           </rect>
          </property>
          <property name="sizePolicy">

@@ -1,4 +1,4 @@
-from TripComponentWidget import *
+from TripComponentWidget import TripComponentWidget
 from ComponentEditControl import EditController
 
 class TripController():
@@ -7,7 +7,7 @@ class TripController():
         self.isExpanded:bool = False
         self.hasReminder:bool = False
         self.isExtendable:bool = True
-        self.UI = None
+        self.UI:TripComponentWidget = None
         self.mainUI = mainUI
 
     def createUI(self):
@@ -53,3 +53,9 @@ class TripController():
     def addComponent(self):
         #temporary run code
         EditController()
+        
+        #temporary add component code
+        newComponentControl = TripController(self)
+        newComponentControl.createUI()
+        self.UI.widget.componentLayout.addWidget(newComponentControl.UI)
+
