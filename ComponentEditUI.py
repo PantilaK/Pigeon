@@ -18,4 +18,10 @@ class ComponentEditUI(QDialog):
     def okButtonClicked(self):
         self.controller.ok()
 
+    def getTripName(self):
+        return self.UI.tripNameLineEdit.text()
+    
+    def getSelectedType(self):
+        return self.UI.typeComboBox.currentText()
+
     

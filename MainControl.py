@@ -54,9 +54,9 @@ class MainController:
         self.view.setTripMode('Future Trip')
         self.update()
 
-    def addTrip(self):
+    def addTrip(self, tripName):
         # temporary code
-        newTrip = self.model.addTrip(self.currentShowMode, "Mahnun in Hong Kong", self.view)
+        newTrip = self.model.addTrip(self.currentShowMode, tripName, self.view)
         self.view.addTrip(newTrip.UI)
         # self.view.UI.tripListLayout.addWidget(newTripControl.UI)
 

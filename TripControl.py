@@ -1,5 +1,5 @@
 from TripComponentWidget import TripComponentWidget
-from ComponentEditControl import EditController
+# from ComponentEditControl import EditController
 
 from typing import TYPE_CHECKING
 
@@ -61,7 +61,8 @@ class TripController():
 
     def addComponent(self):
         #temporary run code
-        EditController()
+        # EditController()
+        pass
         
         #temporary add component code
         # newComponentControl = TripController(self, None)
