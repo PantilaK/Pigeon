@@ -3,6 +3,12 @@ from TripControl import *
 from enum import Enum
 from MainModel import *
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from LoginControl import LoginController
+    from TripControl import TripController
+
 
 class ShowMode(Enum):
     currentTrip = 0
@@ -11,10 +17,9 @@ class ShowMode(Enum):
 
 class MainController:
     def __init__(self, loginController, user):
-        from LoginControl import LoginController
         self.view = MainUI(self)
-        self.model = MainModel(user)
-        self.loginController: LoginController = loginController
+        self.model = MainModel(self, user)
+        self.loginController: "LoginController" = loginController
         self.goToCurrentTrip()
 
     def enterMainProcess(self):
@@ -27,7 +32,12 @@ class MainController:
 
     def update(self):
         #update UI with model
-        pass
+        self.view.clearTripList()
+        trips: list[TripController] = self.model.getTrips(self.currentShowMode, self.view)
+        
+        for trip in trips:
+            self.view.addTrip(trip.UI)
+        
 
     def goToCurrentTrip(self):
         self.currentShowMode = ShowMode.currentTrip
@@ -46,8 +56,8 @@ class MainController:
 
     def addTrip(self):
         # temporary code
-        newTripControl = TripController(None, self.view)
-        newTripControl.createUI()
-        self.view.UI.tripListLayout.addWidget(newTripControl.UI)
+        newTrip = self.model.addTrip(self.currentShowMode, "Mahnun in Hong Kong", self.view)
+        self.view.addTrip(newTrip.UI)
+        # self.view.UI.tripListLayout.addWidget(newTripControl.UI)
 
 

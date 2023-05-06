@@ -1,13 +1,19 @@
 from TripComponentWidget import TripComponentWidget
 from ComponentEditControl import EditController
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from Trip import Trip
+
 class TripController():
-    def __init__(self, tripComponent, mainUI=None):
+    def __init__(self, tripComponent, trip: "Trip", mainUI=None):
         self.tripComponent = tripComponent
         self.isExpanded:bool = False
         self.hasReminder:bool = False
         self.isExtendable:bool = True
         self.UI:TripComponentWidget = None
+        self.trip = trip
         self.mainUI = mainUI
 
     def createUI(self):
@@ -50,12 +56,15 @@ class TripController():
     def delete(self):
         pass
 
+    def setTripName(self, tripName):
+        self.UI.widget.tripTitle.setText(tripName)
+
     def addComponent(self):
         #temporary run code
         EditController()
         
         #temporary add component code
-        newComponentControl = TripController(self)
-        newComponentControl.createUI()
-        self.UI.widget.componentLayout.addWidget(newComponentControl.UI)
+        # newComponentControl = TripController(self, None)
+        # newComponentControl.createUI()
+        # self.UI.widget.componentLayout.addWidget(newComponentControl.UI)
 

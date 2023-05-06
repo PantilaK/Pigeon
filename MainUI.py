@@ -1,11 +1,15 @@
 from ui_mainForm import *
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from MainControl import MainController
 
 
 class MainUI(QWidget):
     def __init__(self, controller, parent=None) -> None:
         super().__init__(parent, Qt.WindowType.Window)
-        self.controller = controller
+        self.controller: "MainController" = controller
         self.UI = Ui_mainWidget()
         self.UI.setupUi(self)
 
@@ -17,6 +21,13 @@ class MainUI(QWidget):
 
     def setTripMode(self, mode):
         self.UI.tripListHeading.setText(mode)
+
+    def addTrip(self, newTripUI):
+        self.UI.tripListLayout.addWidget(newTripUI)
+
+    def clearTripList(self):
+        for i in reversed(range(self.UI.tripListLayout.count())):
+            self.UI.tripListLayout.itemAt(i).widget().setParent(None)
 
     def currentTripButtonPressed(self):
         self.controller.goToCurrentTrip()
