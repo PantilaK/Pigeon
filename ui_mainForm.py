@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainFormSDGqGv.ui'
+## Form generated from reading UI file 'mainFormUeDbil.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.2
 ##
@@ -23,6 +23,7 @@ class Ui_mainWidget(object):
     def setupUi(self, mainWidget):
         if not mainWidget.objectName():
             mainWidget.setObjectName(u"mainWidget")
+        mainWidget.setWindowModality(Qt.ApplicationModal)
         mainWidget.resize(802, 617)
         mainWidget.setStyleSheet(u"background-color: rgb(82, 158, 218);\n"
 "\n"
@@ -235,7 +236,6 @@ class Ui_mainWidget(object):
 "QLabel#tripListHeading {\n"
 "  color: #0f1925;\n"
 "  font-size: 30px;\n"
-"  margin-bottom: 10px;\n"
 "}\n"
 "QLineEdit {\n"
 "  color: #464d55;\n"
@@ -273,9 +273,9 @@ class Ui_mainWidget(object):
 "\n"
 "  border-color: rgb(227, 227, 227);\n"
 "  border-width: 1px;\n"
-"  border-style: solid"
-                        ";\n"
-"  border-radius: 8px;\n"
+"  border-style: solid;\n"
+"  border-radius: 8px;"
+                        "\n"
 "\n"
 "  background-color: rgb(240, 240, 240);\n"
 "  width: 8px;\n"
@@ -329,7 +329,7 @@ class Ui_mainWidget(object):
         self.scrollArea.setWidgetResizable(True)
         self.tripListScrollWidget = QWidget()
         self.tripListScrollWidget.setObjectName(u"tripListScrollWidget")
-        self.tripListScrollWidget.setGeometry(QRect(0, 0, 572, 441))
+        self.tripListScrollWidget.setGeometry(QRect(0, 0, 572, 467))
         sizePolicy3 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy3.setHorizontalStretch(0)
         sizePolicy3.setVerticalStretch(0)

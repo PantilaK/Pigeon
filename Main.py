@@ -15,6 +15,7 @@ if __name__ == '__main__':
         print(root['username'])
 
     app = QApplication(sys.argv)
+    
     loginControl = LoginController(app)
     loginControl.view = LoginUI(loginControl)
     loginControl.model = LoginModel(root)

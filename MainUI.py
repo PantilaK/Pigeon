@@ -3,10 +3,9 @@ from ui_mainForm import *
 
 
 class MainUI(QWidget):
-    def __init__(self, controller) -> None:
-        super().__init__(None)
-        from MainControl import MainController
-        self.controller:MainController = controller
+    def __init__(self, controller, parent=None) -> None:
+        super().__init__(parent, Qt.WindowType.Window)
+        self.controller = controller
         self.UI = Ui_mainWidget()
         self.UI.setupUi(self)
 

@@ -3,7 +3,7 @@ from ui_LoginUI import *
 
 class LoginUI(QWidget):
     def __init__(self, controller) -> None:
-        super().__init__(None)
+        super().__init__(None, Qt.WindowType.Window)
         self.controller = controller
         self.UI = Ui_Form()
         self.UI.setupUi(self)
