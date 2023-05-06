@@ -1,6 +1,6 @@
 from abc import ABC, abstractclassmethod
 from datetime import datetime, date
-import persistent
+import persistent, persistent.list
 from Reminder import Reminder
 
 class Trip(persistent.Persistent):
