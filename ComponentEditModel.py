@@ -3,7 +3,6 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from User import User
     from MainModel import MainModel
-    from MainControl import MainController
     from ComponentEditControl import EditController
 
 class ComponentEditModel:
@@ -11,9 +10,15 @@ class ComponentEditModel:
     def __init__(self, editController: "EditController"):
         self.editController = editController
 
-    def ok(self, source, mainController: "MainController"=None):
+    def ok(self, source, controller = None):
+        from MainControl import MainController
         if source == "Trip":
             tripName = self.editController.getTripName()
-            mainController.addTrip(tripName)
+            if type(controller) == MainController:
+                controller.addTrip(tripName)
+            else:
+                # for trip in self.user.
+                print(controller)
+                
         else:
             print("Bye")

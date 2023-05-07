@@ -16,9 +16,9 @@ class ShowMode(Enum):
     futureTrip = 2
 
 class MainController:
-    def __init__(self, loginController, user):
+    def __init__(self, loginController):
         self.view = MainUI(self)
-        self.model = MainModel(self, user)
+        self.model = MainModel(self)
         self.loginController: "LoginController" = loginController
         self.goToCurrentTrip()
 
@@ -53,6 +53,9 @@ class MainController:
         self.currentShowMode = ShowMode.futureTrip
         self.view.setTripMode('Future Trip')
         self.update()
+
+    def newTrip(self):
+        EditController(canChangeType=False, controller=self) 
 
     def addTrip(self, tripName):
         # temporary code

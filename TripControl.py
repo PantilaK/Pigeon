@@ -1,10 +1,12 @@
 from TripComponentWidget import TripComponentWidget
-# from ComponentEditControl import EditController
+from ComponentEditControl import EditController
+import CurrentUser
 
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from Trip import Trip
+    from User import User
 
 class TripController():
     def __init__(self, tripComponent, trip: "Trip", mainUI=None):
@@ -51,7 +53,7 @@ class TripController():
         self.update()
 
     def edit(self):
-        pass
+        EditController(canChangeType=False, user=self.user)
 
     def delete(self):
         pass
@@ -61,7 +63,7 @@ class TripController():
 
     def addComponent(self):
         #temporary run code
-        # EditController()
+        EditController()
         pass
         
         #temporary add component code

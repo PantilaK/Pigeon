@@ -2,6 +2,11 @@ from ComponentEditUI import *
 from ComponentEditModel import *
 from enum import IntEnum, Enum
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from User import User
+
 class TypeString(str, Enum):
     trip = "Trip"
     travel = "Travel"
@@ -31,13 +36,13 @@ typeStringToIndexDict:dict[str,int] = {TypeString.trip:TypeIndex.trip,
 
 class EditController:
     
-    def __init__(self, model=None, typeEdit:str=TypeString.trip, canChangeType:bool = True, mainController = None):
+    def __init__(self, model=None, typeEdit:str=TypeString.trip, canChangeType:bool = True, controller = None):
         self.view:ComponentEditUI = ComponentEditUI(self)
         self.model:ComponentEditModel = ComponentEditModel(self) #replace this with model constructor
         self.currentShowMode:str = typeEdit
         self.canChangeType:bool = canChangeType
 
-        self.mainController = mainController
+        self.controller = controller
 
         self.subUIDict:dict[str,QWidget] = {TypeString.trip:self.view.UI.tripEditWidget,
                                             TypeString.travel:self.view.UI.travelEditWidget,
@@ -75,11 +80,10 @@ class EditController:
 
     def ok(self):
         source = self.view.getSelectedType()
-        self.model.ok(source, self.mainController)
+        self.model.ok(source, self.controller)
 
         self.view.close()
 
     def getTripName(self):
         return self.view.getTripName()
-
     

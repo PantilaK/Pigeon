@@ -1,5 +1,4 @@
 from ui_mainForm import *
-from ComponentEditControl import EditController
 
 from typing import TYPE_CHECKING
 
@@ -40,7 +39,7 @@ class MainUI(QWidget):
         self.controller.goToFutureTrip()
 
     def newTripButtonPressed(self):
-        EditController(canChangeType=False, mainController=self.controller)
+        self.controller.newTrip()
 
     def newTripOKButtonPressed(self):
         self.controller.addTrip()
