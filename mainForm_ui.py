@@ -236,6 +236,7 @@ class Ui_mainWidget(object):
 "QLabel#tripListHeading {\n"
 "  color: #0f1925;\n"
 "  font-size: 30px;\n"
+"  bottom-margin: 5px;\n"
 "}\n"
 "QLineEdit {\n"
 "  color: #464d55;\n"
@@ -259,7 +260,6 @@ class Ui_mainWidget(object):
 "  border-radius: 8px;\n"
 "  border: 1px solid rgb(82, 158, 218);\n"
 "  padding: 5px 15px;\n"
-"  margin-top: 10px;\n"
 "  outline: 0px;\n"
 "}\n"
 "QPushButton:hover {\n"
@@ -274,8 +274,8 @@ class Ui_mainWidget(object):
 "  border-color: rgb(227, 227, 227);\n"
 "  border-width: 1px;\n"
 "  border-style: solid;\n"
-"  border-radius: 8px;"
-                        "\n"
+"  border-radius: 8p"
+                        "x;\n"
 "\n"
 "  background-color: rgb(240, 240, 240);\n"
 "  width: 8px;\n"
@@ -329,7 +329,7 @@ class Ui_mainWidget(object):
         self.scrollArea.setWidgetResizable(True)
         self.tripListScrollWidget = QWidget()
         self.tripListScrollWidget.setObjectName(u"tripListScrollWidget")
-        self.tripListScrollWidget.setGeometry(QRect(0, 0, 572, 467))
+        self.tripListScrollWidget.setGeometry(QRect(0, 0, 550, 477))
         sizePolicy3 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy3.setHorizontalStretch(0)
         sizePolicy3.setVerticalStretch(0)

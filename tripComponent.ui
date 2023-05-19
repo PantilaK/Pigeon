@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>490</width>
-    <height>421</height>
+    <width>551</width>
+    <height>415</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -44,6 +44,13 @@ QPushButton {
   border: 1px solid #464d55;
   padding: 5px 15px;
   outline: 0px;
+}
+QLineEdit {
+  color: #464d55;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid #e0e4e7;
+  padding: 5px 15px;
 }
 </string>
   </property>
@@ -197,6 +204,18 @@ QCheckBox{
          <item>
           <widget class="QWidget" name="tripDetailsWidget" native="true">
            <layout class="QVBoxLayout" name="verticalLayout_4">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item>
              <widget class="QLabel" name="detailHeaderLabel">
               <property name="text">
@@ -221,6 +240,18 @@ tripDetails2</string>
          <item>
           <widget class="QWidget" name="tripReminderWidget" native="true">
            <layout class="QVBoxLayout" name="verticalLayout_5">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item>
              <widget class="QLabel" name="reminderHeaderLabel">
               <property name="text">
@@ -232,7 +263,34 @@ tripDetails2</string>
              </widget>
             </item>
             <item>
-             <layout class="QVBoxLayout" name="checkboxLayout"/>
+             <layout class="QVBoxLayout" name="tripReminderLayout"/>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_7">
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLineEdit" name="tripReminderLineEdit">
+                <property name="placeholderText">
+                 <string>Add reminder text here</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="tripReminderAddButton">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>Add Reminders</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>
@@ -240,6 +298,18 @@ tripDetails2</string>
          <item>
           <widget class="QWidget" name="tripComponentControlWidget" native="true">
            <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item>
              <widget class="QPushButton" name="addComponentButton">
               <property name="text">

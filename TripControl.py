@@ -1,41 +1,40 @@
 from TripComponentWidget import TripComponentWidget
 from ComponentEditControl import EditController
+from ReminderController import ReminderController
 
 class TripController():
-    def __init__(self, tripComponent, mainUI=None):
+    def __init__(self, tripComponent, mainUI=None, isExpanded=False, hasReminder=True, isExtendable=True):
         self.tripComponent = tripComponent
-        self.isExpanded:bool = False
-        self.hasReminder:bool = False
-        self.isExtendable:bool = True
-        self.UI:TripComponentWidget = None
+        self.isExpanded:bool = isExpanded
+        self.hasReminder:bool = hasReminder
+        self.isExtendable:bool = isExtendable
         self.mainUI = mainUI
 
-    def createUI(self):
-        self.UI = TripComponentWidget(self, self.mainUI)
+        self.view:TripComponentWidget = TripComponentWidget(self, self.mainUI)
         self.update()
 
     def update(self):
         # if isExpanded make the subwidget visible
         if self.isExpanded:
-            self.UI.widget.tripSubWidget.setVisible(True)
-            self.UI.widget.tripExpandButton.setText("Close")
+            self.view.UI.tripSubWidget.setVisible(True)
+            self.view.UI.tripExpandButton.setText("Close")
         else:
-            self.UI.widget.tripSubWidget.setVisible(False)
-            self.UI.widget.tripExpandButton.setText("Expand")
+            self.view.UI.tripSubWidget.setVisible(False)
+            self.view.UI.tripExpandButton.setText("Expand")
     
         # if hasReminder make reminder widget visible
         if self.hasReminder:
-            self.UI.widget.tripReminderWidget.setVisible(True)
+            self.view.UI.tripReminderWidget.setVisible(True)
         else:
-            self.UI.widget.tripReminderWidget.setVisible(False)
+            self.view.UI.tripReminderWidget.setVisible(False)
 
         # if isExtendable make tripComponentControl visible and componentWidget visible
         if self.isExtendable:
-            self.UI.widget.tripComponentControlWidget.setVisible(True)
-            self.UI.widget.componentWidget.setVisible(True)
+            self.view.UI.tripComponentControlWidget.setVisible(True)
+            self.view.UI.componentWidget.setVisible(True)
         else:
-            self.UI.widget.tripComponentControlWidget.setVisible(False)
-            self.UI.widget.componentWidget.setVisible(False)
+            self.view.UI.tripComponentControlWidget.setVisible(False)
+            self.view.UI.componentWidget.setVisible(False)
     
     def setUI(self, widget):
         self.widget = widget
@@ -54,8 +53,15 @@ class TripController():
         #temporary run code
         EditController()
         
-        #temporary add component code
+        #temporary add component code, replace with update
         newComponentControl = TripController(self)
-        newComponentControl.createUI()
-        self.UI.widget.componentLayout.addWidget(newComponentControl.UI)
+        self.view.UI.componentLayout.addWidget(newComponentControl.view)
+
+    def addReminder(self):
+        #temporary run code
+        newReminder = ReminderController(parent=self.view)
+
+        #temporary add component code, replace with update
+        self.view.UI.tripReminderLayout.addWidget(newReminder.view)
+
 

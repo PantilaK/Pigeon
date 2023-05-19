@@ -279,6 +279,7 @@ QLabel {
 QLabel#tripListHeading {
   color: #0f1925;
   font-size: 30px;
+  bottom-margin: 5px;
 }
 QLineEdit {
   color: #464d55;
@@ -302,7 +303,6 @@ QPushButton {
   border-radius: 8px;
   border: 1px solid rgb(82, 158, 218);
   padding: 5px 15px;
-  margin-top: 10px;
   outline: 0px;
 }
 QPushButton:hover {
@@ -392,8 +392,8 @@ QScrollBar::sub-line:vertical {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>572</width>
-           <height>467</height>
+           <width>550</width>
+           <height>477</height>
           </rect>
          </property>
          <property name="sizePolicy">

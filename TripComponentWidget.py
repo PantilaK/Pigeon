@@ -4,13 +4,15 @@ class TripComponentWidget(QWidget):
     def __init__(self, tripController, parent=None):
         super().__init__(parent)
         self.controller  = tripController
-        self.widget = Ui_tripWidget()
-        self.widget.setupUi(self)
+        self.UI = Ui_tripWidget()
+        self.UI.setupUi(self)
         
-        self.widget.tripExpandButton.clicked.connect(self.expandButtonClicked)
-        self.widget.tripEditButton.clicked.connect(self.editButtonClicked)
-        self.widget.tripDeleteButton.clicked.connect(self.deleteButtonClicked)
-        self.widget.addComponentButton.clicked.connect(self.addComponentButtonClicked)
+        self.UI.tripExpandButton.clicked.connect(self.expandButtonClicked)
+        self.UI.tripEditButton.clicked.connect(self.editButtonClicked)
+        self.UI.tripDeleteButton.clicked.connect(self.deleteButtonClicked)
+        self.UI.addComponentButton.clicked.connect(self.addComponentButtonClicked)
+        self.UI.tripReminderAddButton.clicked.connect(self.tripReminderAddButtonClicked)
+        self.UI.tripReminderLineEdit.returnPressed.connect(self.tripReminderLineEditReturn)
 
     def expandButtonClicked(self):
         self.controller.expand()
@@ -24,8 +26,9 @@ class TripComponentWidget(QWidget):
     def addComponentButtonClicked(self):
         self.controller.addComponent()
 
+    def tripReminderAddButtonClicked(self):
+        self.controller.addReminder()
+
+    def tripReminderLineEditReturn(self):
+        self.controller.addReminder()
     
-
-
-
-        

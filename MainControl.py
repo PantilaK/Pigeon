@@ -37,7 +37,6 @@ class MainController:
     def addTrip(self):
         # temporary code
         newTripControl = TripController(None, self.view)
-        newTripControl.createUI()
-        self.view.UI.tripListLayout.addWidget(newTripControl.UI)
+        self.view.UI.tripListLayout.addWidget(newTripControl.view)
 
 
