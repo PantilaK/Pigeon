@@ -1,6 +1,6 @@
 from TripComponentWidget import TripComponentWidget
 from ComponentEditControl import EditController
-import CurrentUser
+import globals
 
 from typing import TYPE_CHECKING
 
@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from User import User
 
 class TripController():
-    def __init__(self, tripComponent, trip: "Trip", mainUI=None):
+    def __init__(self,  trip: "Trip", tripComponent=None, mainUI=None):
         self.tripComponent = tripComponent
         self.isExpanded:bool = False
         self.hasReminder:bool = False
@@ -60,6 +60,9 @@ class TripController():
 
     def setTripName(self, tripName):
         self.UI.widget.tripTitle.setText(tripName)
+
+    def setTripTime(self, startTime):
+        self.UI.widget.tripTime.setText(startTime)
 
     def addComponent(self):
         #temporary run code

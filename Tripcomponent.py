@@ -5,10 +5,10 @@ import persistent, persistent.list
 class Tripcomponent(ABC):
 
     def __init__(self):
-        self.name = '' # Hotel, Train, Place name
+        self.name = None # Hotel, Train, Place name
         self.timesensitive = False # Important
         self.time = datetime.now() # Date and time of the event
-        self.briefInfo = '' # Brief information
+        self.briefInfo = None # Brief information
 
     # Name
     def getName(self):
@@ -65,8 +65,8 @@ class Place(Tripcomponent, persistent.Persistent):
         super().__init__()
         self.requireTicket = False # Ticket require
         self.ticket = 0 # Price of the ticket
-        self.open = ''
-        self.close = ''
+        self.open = None
+        self.close = None
 
     # Ticket price
     def getTicket(self):
@@ -123,7 +123,7 @@ class Event(Tripcomponent, persistent.Persistent):
         self.requireTicket = False # Ticket require
         self.ticket = 0 # Price of the ticket
         self.place = Place() # Place where that event haves
-        self.eventType = '' # Type of the event (Movies, Shows, Fairs, etc.)    
+        self.eventType = None # Type of the event (Movies, Shows, Fairs, etc.)    
 
     # Ticket price
     def getTicket(self):
@@ -150,7 +150,7 @@ class Stay(Tripcomponent, persistent.Persistent):
 
     def __init__(self):
         super().__init__()
-        self.accommodationType = '' # Type of the accommodation (Hotel, Hostel, Apartment, etc.)
+        self.accommodationType = None # Type of the accommodation (Hotel, Hostel, Apartment, etc.)
         self.period = 0 # 2 or ... nights
         self.price = 0 # Price for a whole period
 

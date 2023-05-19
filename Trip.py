@@ -1,18 +1,24 @@
 from abc import ABC, abstractclassmethod
-from datetime import datetime, date
 import persistent, persistent.list
 from Reminder import Reminder
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from PySide6.QtCore import QDateTime
+
+
 class Trip(persistent.Persistent):
 
-    def __init__(self, tripName):
+    def __init__(self, tripName: str, startTime: "QDateTime", endTime: "QDateTime", reminder=None, timesensitive=None, info=None):
         self.duration = 0 # StartDate - EndDate
-        self.startDate = datetime.now() # Date when the trip start
-        self.endDate = datetime.now() # Date when the trip end
+        self.startDate: "QDateTime" = startTime # Date when the trip start
+        self.endDate: "QDateTime" = endTime # Date when the trip end
         self.tripName = tripName
         self.tripcomponents = persistent.list.PersistentList()
         self.reminder = Reminder()
         self.timesensitiveEvent = persistent.list.PersistentList()
+        self.info = None
 
     # Duration
     def getDuration(self):

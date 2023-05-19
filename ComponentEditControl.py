@@ -84,6 +84,13 @@ class EditController:
 
         self.view.close()
 
+    # Trip Info
     def getTripName(self):
         return self.view.getTripName()
+    
+    def getTripStartDate(self):
+        return self.view.getTripStartDate()
+    
+    def getTripEndDate(self):
+        return self.view.getTripEndDate()
     

@@ -17,8 +17,8 @@ class ShowMode(Enum):
 
 class MainController:
     def __init__(self, loginController):
-        self.view = MainUI(self)
-        self.model = MainModel(self)
+        self.view = MainUI(controller=self)
+        self.model = MainModel(controller=self)
         self.loginController: "LoginController" = loginController
         self.goToCurrentTrip()
 
@@ -33,7 +33,7 @@ class MainController:
     def update(self):
         #update UI with model
         self.view.clearTripList()
-        trips: list[TripController] = self.model.getTrips(self.currentShowMode, self.view)
+        trips: list[TripController] = self.model.getTrips(mainUI=self.view, tripMode=self.currentShowMode)
         
         for trip in trips:
             self.view.addTrip(trip.UI)
@@ -57,10 +57,9 @@ class MainController:
     def newTrip(self):
         EditController(canChangeType=False, controller=self) 
 
-    def addTrip(self, tripName):
+    def addTrip(self, tripName, startDate, endDate):
         # temporary code
-        newTrip = self.model.addTrip(self.currentShowMode, tripName, self.view)
-        self.view.addTrip(newTrip.UI)
-        # self.view.UI.tripListLayout.addWidget(newTripControl.UI)
+        newTrip = self.model.addTrip(tripName=tripName, mainUI=self.view, startDate=startDate, endDate=endDate)
+        self.update()
 
 

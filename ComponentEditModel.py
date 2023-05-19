@@ -4,6 +4,7 @@ if TYPE_CHECKING:
     from User import User
     from MainModel import MainModel
     from ComponentEditControl import EditController
+    from PySide6.QtCore import QDateTime
 
 class ComponentEditModel:
 
@@ -14,11 +15,14 @@ class ComponentEditModel:
         from MainControl import MainController
         if source == "Trip":
             tripName = self.editController.getTripName()
+            startDateTime = self.editController.getTripStartDate()
+            endDateTime = self.editController.getTripEndDate()
             if type(controller) == MainController:
-                controller.addTrip(tripName)
+                controller.addTrip(tripName=tripName, startDate=startDateTime, endDate=endDateTime)
             else:
                 # for trip in self.user.
                 print(controller)
                 
         else:
             print("Bye")
+

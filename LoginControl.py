@@ -1,7 +1,7 @@
 from LoginUI import LoginUI
 from LoginModel import LoginModel
 
-import CurrentUser
+import globals
 import sys
 from MainControl import MainController
 
@@ -37,7 +37,7 @@ class LoginController:
             self.setErrorFieldText("go to main")
             # temporary login function
             self.view.close()
-            CurrentUser.currentUser = self.model.getUser(username)
+            globals.currentUser = self.model.getUser(username)
             self.transferToMain()
 
     def transferToMain(self):
