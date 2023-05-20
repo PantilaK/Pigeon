@@ -1,11 +1,10 @@
 from typing import TYPE_CHECKING
+import globals
+import transaction
 
 if TYPE_CHECKING:
     from TripControl import TripController
-    from User import User
-    from MainModel import MainModel
-    from ComponentEditControl import EditController
-    from PySide6.QtCore import QDateTime
+    from Trip import Trip
 
 class TripModel:
 
@@ -15,4 +14,10 @@ class TripModel:
     def editTripInfo(self, tripName, startDate, endDate):
         if tripName != "":
             self.controller.trip.tripName = tripName
+
+    def deleteTrip(self, trip: "Trip"):
+        globals.currentUser.removeTrip(trip)
+        globals.mainController.update()
+
+        transaction.commit()
         

@@ -21,7 +21,7 @@ class MainModel:
         trip = Trip(tripName, startTime=startDate, endTime=endDate)
         globals.currentUser.addTrip(trip) # เวลาหาให้หาจากชื่อ trp.tripName
         
-        newTrip = TripController(trip=trip, mainUI=mainUI)
+        newTrip = TripController(trip=trip, mainUI=mainUI, mainController=self.controller)
         newTrip.createUI()
         newTrip.setTripName(newTrip.trip.getTripName())
         

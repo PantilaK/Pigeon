@@ -61,7 +61,7 @@ class TripController():
         self.model.editTripInfo(tripName=tripName, startDate=startDate, endDate=endDate)
 
     def delete(self):
-        pass
+        self.model.deleteTrip(self.trip)
 
     def setTripName(self, tripName):
         self.UI.widget.tripTitle.setText(tripName)

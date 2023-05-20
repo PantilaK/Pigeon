@@ -1,4 +1,5 @@
 from typing import TYPE_CHECKING
+import globals
 
 if TYPE_CHECKING:
     from User import User
@@ -24,4 +25,6 @@ class ComponentEditModel:
                 
         else:
             print("Bye")
+
+        globals.mainController.update()
 
