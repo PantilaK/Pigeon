@@ -1,8 +1,8 @@
 from ui_tripComponent import *
 
 class TripComponentWidget(QWidget):
-    def __init__(self, tripController, parent=None):
-        super().__init__(parent)
+    def __init__(self, tripController, parentUI=None):
+        super().__init__(parentUI)
         self.controller  = tripController
         self.UI = Ui_tripWidget()
         self.UI.setupUi(self)

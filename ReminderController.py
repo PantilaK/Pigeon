@@ -7,10 +7,10 @@ class ReminderController:
         normal = 0
         editting = 1
 
-    def __init__(self, model=None, parent=None, mode=0) -> None:
+    def __init__(self, model=None, parentController=None, mode=0) -> None:
         self.model = model
-        self.parentUI = parent
-        self.view = ReminderUI(self, self.parentUI)
+        self.parentController = parentController
+        self.view = ReminderUI(self, self.parentController.view)
 
         self.operatingMode = mode
         self.updateUI()

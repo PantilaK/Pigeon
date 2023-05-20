@@ -3,14 +3,14 @@ from ComponentEditControl import EditController
 from ReminderController import ReminderController
 
 class TripController():
-    def __init__(self, tripComponent, mainUI=None, isExpanded=False, hasReminder=True, isExtendable=True):
+    def __init__(self, tripComponent=None, mainControl=None, isExpanded=False, hasReminder=True, isExtendable=True):
         self.tripComponent = tripComponent
         self.isExpanded:bool = isExpanded
         self.hasReminder:bool = hasReminder
         self.isExtendable:bool = isExtendable
-        self.mainUI = mainUI
+        self.mainControl = mainControl
 
-        self.view:TripComponentWidget = TripComponentWidget(self, self.mainUI)
+        self.view:TripComponentWidget = TripComponentWidget(self, self.mainControl.view)
         self.update()
 
     def update(self):
@@ -54,12 +54,12 @@ class TripController():
         EditController()
         
         #temporary add component code, replace with update
-        newComponentControl = TripController(self)
+        newComponentControl = TripController(mainControl=self)
         self.view.UI.componentLayout.addWidget(newComponentControl.view)
 
     def addReminder(self):
         #temporary run code
-        newReminder = ReminderController(parent=self.view)
+        newReminder = ReminderController(parentController=self)
 
         #temporary add component code, replace with update
         self.view.UI.tripReminderLayout.addWidget(newReminder.view)
