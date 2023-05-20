@@ -40,18 +40,18 @@ class MainModel:
                 if tripMode == tripMode.pastTrip:
                     tripControl = TripController(trip=trip, mainUI=mainUI)
                     tripControl.createUI()
-                    tripControl.setTripName(trip.getTripName())
+                    tripControl.setTripName(trip.getTripName()+trip.getStartDate().toString("yyyy-MM-dd hh:mm"))
                     trips.append(tripControl)
             elif self.before(sDate):
                 if tripMode == tripMode.currentTrip:
                     tripControl = TripController(trip=trip, mainUI=mainUI)
                     tripControl.createUI()
-                    tripControl.setTripName(trip.getTripName())
+                    tripControl.setTripName(trip.getTripName()+trip.getStartDate().toString("yyyy-MM-dd hh:mm"))
                     trips.append(tripControl)
             elif tripMode == tripMode.futureTrip:
                 tripControl = TripController(trip=trip, mainUI=mainUI)
                 tripControl.createUI()
-                tripControl.setTripName(trip.getTripName())
+                tripControl.setTripName(trip.getTripName()+trip.getStartDate().toString("yyyy-MM-dd hh:mm"))
                 trips.append(tripControl)
 
         return trips

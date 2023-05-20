@@ -41,8 +41,8 @@ class MainUI(QWidget):
     def newTripButtonPressed(self):
         self.controller.newTrip()
 
-    def newTripOKButtonPressed(self):
-        self.controller.addTrip()
+    # def newTripOKButtonPressed(self):
+    #     self.controller.addTrip()
 
     def logoutButtonPressed(self):
         self.controller.transferToLogin()

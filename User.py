@@ -7,7 +7,7 @@ class User(persistent.Persistent):
     def __init__(self, username, password):
         self.username = username
         self.password = password
-        self.name = ''
+        self.name = None
         self.trips = persistent.list.PersistentList()
 
     # Username

@@ -1,6 +1,7 @@
 from TripComponentWidget import TripComponentWidget
 from ComponentEditControl import EditController
 import globals
+from TripModel import TripModel
 
 from typing import TYPE_CHECKING
 
@@ -17,6 +18,7 @@ class TripController():
         self.UI:TripComponentWidget = None
         self.trip = trip
         self.mainUI = mainUI
+        self.model = TripModel(tripController=self)
 
     def createUI(self):
         self.UI = TripComponentWidget(self, self.mainUI)
@@ -53,7 +55,10 @@ class TripController():
         self.update()
 
     def edit(self):
-        EditController(canChangeType=False, user=self.user)
+        EditController(controller=self, typeEdit="Trip",canChangeType=None)
+
+    def editTripInfo(self, tripName, startDate, endDate):
+        self.model.editTripInfo(tripName=tripName, startDate=startDate, endDate=endDate)
 
     def delete(self):
         pass

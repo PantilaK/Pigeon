@@ -5,7 +5,7 @@ from enum import IntEnum, Enum
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from User import User
+    from Trip import Trip
 
 class TypeString(str, Enum):
     trip = "Trip"

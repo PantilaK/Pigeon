@@ -19,9 +19,8 @@ class ComponentEditModel:
             endDateTime = self.editController.getTripEndDate()
             if type(controller) == MainController:
                 controller.addTrip(tripName=tripName, startDate=startDateTime, endDate=endDateTime)
-            else:
-                # for trip in self.user.
-                print(controller)
+            else: # for editing
+                controller.editTripInfo(tripName=tripName, startDate=startDateTime, endDate=endDateTime)
                 
         else:
             print("Bye")
