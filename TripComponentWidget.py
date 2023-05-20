@@ -1,4 +1,4 @@
-from ui_tripComponent import *
+from tripComponent_ui import *
 
 class TripComponentWidget(QWidget):
     def __init__(self, tripController, parentUI=None):

@@ -45,6 +45,12 @@ QPushButton {
   padding: 5px 15px;
   outline: 0px;
 }
+QPushButton:hover {
+  border: 1px solid #767e89;
+}
+QPushButton:focus {
+  border: 1px solid #767e89;
+}
 QLineEdit {
   color: #464d55;
   font-weight: 600;

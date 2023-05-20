@@ -1,5 +1,6 @@
 from MainUI import *
 from TripControl import *
+from settingController import SettingController
 from enum import Enum
 
 
@@ -39,4 +40,15 @@ class MainController:
         newTripControl = TripController(None, self)
         self.view.UI.tripListLayout.addWidget(newTripControl.view)
 
+    def logout(self):
+        # logout
+        
+        # close window and go to login
+        self.view.close()
+        #TODO
 
+    def settings(self):
+        #go to settings
+        settingController = SettingController(self)
+
+    

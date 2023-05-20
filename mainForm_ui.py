@@ -236,7 +236,6 @@ class Ui_mainWidget(object):
 "QLabel#tripListHeading {\n"
 "  color: #0f1925;\n"
 "  font-size: 30px;\n"
-"  bottom-margin: 5px;\n"
 "}\n"
 "QLineEdit {\n"
 "  color: #464d55;\n"
@@ -274,10 +273,10 @@ class Ui_mainWidget(object):
 "  border-color: rgb(227, 227, 227);\n"
 "  border-width: 1px;\n"
 "  border-style: solid;\n"
-"  border-radius: 8p"
-                        "x;\n"
+"  border-radius: 8px;\n"
 "\n"
-"  background-color: rgb(240, 240, 240);\n"
+"  background-c"
+                        "olor: rgb(240, 240, 240);\n"
 "  width: 8px;\n"
 "  margin: 21px 0 21px 0;\n"
 "}\n"
@@ -380,6 +379,7 @@ class Ui_mainWidget(object):
         sizePolicy4.setHeightForWidth(self.hLineSplitWidget.sizePolicy().hasHeightForWidth())
         self.hLineSplitWidget.setSizePolicy(sizePolicy4)
         self.hLineSplitWidget.setMinimumSize(QSize(0, 3))
+        self.hLineSplitWidget.setStyleSheet(u"")
 
         self.verticalLayout_3.addWidget(self.hLineSplitWidget)
 

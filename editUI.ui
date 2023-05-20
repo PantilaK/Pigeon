@@ -117,10 +117,10 @@ QPushButton {
   outline: 0px;
 }
 QPushButton:hover {
-  border: 3px solid #767e89;
+  border: 1px solid #767e89;
 }
 QPushButton:focus {
-  border: 3px solid #767e89;
+  border: 1px solid #767e89;
 }
 QCheckBox {
   color: #464d55;

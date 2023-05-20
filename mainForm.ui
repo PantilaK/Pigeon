@@ -279,7 +279,6 @@ QLabel {
 QLabel#tripListHeading {
   color: #0f1925;
   font-size: 30px;
-  bottom-margin: 5px;
 }
 QLineEdit {
   color: #464d55;
@@ -452,6 +451,9 @@ QWidget#hLineSplitWidget {
               <width>0</width>
               <height>3</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
             </property>
            </widget>
           </item>
