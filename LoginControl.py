@@ -43,6 +43,7 @@ class LoginController:
     def transferToMain(self):
         # temporary main startup
         mainControl = MainController(self)
+        globals.mainController = mainControl
         mainControl.enterMainProcess()
 
 
