@@ -15,13 +15,12 @@ class ComponentEditModel:
     def ok(self, source, controller = None):
         from MainControl import MainController
         if source == "Trip":
-            tripName = self.editController.getTripName()
-            startDateTime = self.editController.getTripStartDate()
-            endDateTime = self.editController.getTripEndDate()
+            tripInfo = self.editController.getTripInfo()
             if type(controller) == MainController:
-                controller.addTrip(tripName=tripName, startDate=startDateTime, endDate=endDateTime)
+                controller.addTrip(tripInfo=tripInfo)
             else: # for editing
-                controller.editTripInfo(tripName=tripName, startDate=startDateTime, endDate=endDateTime)
+                # controller.editTripInfo(tripName=tripName, startDate=startDateTime, endDate=endDateTime)
+                pass
                 
         else:
             print("Bye")

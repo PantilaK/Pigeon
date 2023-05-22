@@ -3,6 +3,7 @@ from TripControl import TripController
 import transaction
 import globals
 from datetime import datetime
+from Reminder import Reminder
 
 from typing import TYPE_CHECKING
 
@@ -17,12 +18,12 @@ class MainModel:
     def __init__(self, controller):
         self.controller: MainController = controller
 
-    def addTrip(self, tripName, mainUI, startDate: "QDateTime", endDate: "QDateTime"):
-        trip = Trip(tripName, startTime=startDate, endTime=endDate)
+    def addTrip(self, tripInfo:dict , mainUI):
+        trip = Trip(tripInfo['name'], tripInfo['timeFrom'], tripInfo['timeTo'], Reminder(),
+                    tripInfo['remind'], tripInfo['timesensitive'], tripInfo['info'])
         globals.currentUser.addTrip(trip) # เวลาหาให้หาจากชื่อ trp.tripName
         
-        newTrip = TripController(trip=trip, mainUI=mainUI, mainController=self.controller)
-        newTrip.createUI()
+        newTrip = TripController(trip=trip, mainUI=mainUI)
         newTrip.setTripName(newTrip.trip.getTripName())
         
         transaction.commit()
@@ -39,18 +40,15 @@ class MainModel:
             if self.before(sDate) and self.before(eDate):
                 if tripMode == tripMode.pastTrip:
                     tripControl = TripController(trip=trip, mainUI=mainUI)
-                    tripControl.createUI()
                     tripControl.setTripName(trip.getTripName()+trip.getStartDate().toString("yyyy-MM-dd hh:mm"))
                     trips.append(tripControl)
             elif self.before(sDate):
                 if tripMode == tripMode.currentTrip:
                     tripControl = TripController(trip=trip, mainUI=mainUI)
-                    tripControl.createUI()
                     tripControl.setTripName(trip.getTripName()+trip.getStartDate().toString("yyyy-MM-dd hh:mm"))
                     trips.append(tripControl)
             elif tripMode == tripMode.futureTrip:
                 tripControl = TripController(trip=trip, mainUI=mainUI)
-                tripControl.createUI()
                 tripControl.setTripName(trip.getTripName()+trip.getStartDate().toString("yyyy-MM-dd hh:mm"))
                 trips.append(tripControl)
 

@@ -11,6 +11,10 @@ class LoginController:
         self.view:LoginUI = LoginUI(self)
         self.view.show()
         self.clearErrorFields()
+
+    def enterLoginProcess(self):
+        self.view.show()
+        self.clearErrorField()
         
     def createAccount(self):
         pass

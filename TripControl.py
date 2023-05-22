@@ -11,19 +11,15 @@ if TYPE_CHECKING:
     from User import User
 
 class TripController():
-    def __init__(self,  trip: "Trip", tripComponent=None, mainControl=None, isExpanded=False, hasReminder=True, isExtendable=True, mainUI=None):
+    def __init__(self,  trip: "Trip", tripComponent=None, isExpanded=False, hasReminder=True, isExtendable=True, mainUI=None):
         self.tripComponent = tripComponent
         self.isExpanded:bool = isExpanded
         self.hasReminder:bool = hasReminder
         self.isExtendable:bool = isExtendable
-        self.view:TripComponentWidget = TripComponentWidget(self, self.mainControl.view)
-        self.trip = trip
         self.mainUI = mainUI
+        self.view:TripComponentWidget = TripComponentWidget(self, self.mainUI)
+        self.trip = trip
         self.model = TripModel(tripController=self)
-
-    def createUI(self):
-        self.UI = TripComponentWidget(self, self.mainUI)
-        self.update()
 
     def update(self):
         # if isExpanded make the subwidget visible
@@ -65,10 +61,10 @@ class TripController():
         self.model.deleteTrip(self.trip)
 
     def setTripName(self, tripName):
-        self.UI.widget.tripTitle.setText(tripName)
+        self.view.UI.tripTitle.setText(tripName)
 
     def setTripTime(self, startTime):
-        self.UI.widget.tripTime.setText(startTime)
+        self.view.UI.tripTime.setText(startTime)
 
     def addComponent(self):
         #temporary run code
@@ -77,8 +73,8 @@ class TripController():
         
         # main
         #temporary add component code, replace with update
-        newComponentControl = TripController(mainControl=self)
-        self.view.UI.componentLayout.addWidget(newComponentControl.view)
+        # newComponentControl = TripController(mainControl=self)
+        # self.view.UI.componentLayout.addWidget(newComponentControl.view)
 
     def addReminder(self):
         #temporary run code

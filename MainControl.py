@@ -37,7 +37,7 @@ class MainController:
         trips: list[TripController] = self.model.getTrips(mainUI=self.view, tripMode=self.currentShowMode)
         
         for trip in trips:
-            self.view.addTrip(trip.UI)
+            self.view.addTrip(trip.view)
         
 
     def goToCurrentTrip(self):
@@ -58,8 +58,8 @@ class MainController:
     def newTrip(self):
         EditController(canChangeType=False, controller=self) 
 
-    def addTrip(self, tripName, startDate, endDate):
-        newTrip = self.model.addTrip(tripName=tripName, mainUI=self.view, startDate=startDate, endDate=endDate)
+    def addTrip(self, tripInfo):
+        newTrip = self.model.addTrip(tripInfo=tripInfo, mainUI=self.view)
         self.update()
 
     def settings(self):
