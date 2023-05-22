@@ -72,7 +72,3 @@ class MainModel:
         if dTime.minute() > today.minute: return False
 
         return True
-
-        
-    def getUsername(self):
-        return globals.currentUser.getUsername()

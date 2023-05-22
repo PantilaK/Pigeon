@@ -10,15 +10,16 @@ if TYPE_CHECKING:
 
 class Trip(persistent.Persistent):
 
-    def __init__(self, tripName: str, startTime: "QDateTime", endTime: "QDateTime", reminder=None, timesensitive=None, info=None):
+    def __init__(self, tripName: str, startTime: "QDateTime", endTime: "QDateTime", reminder:Reminder, remind, timesensitive, info):
         self.duration = 0 # StartDate - EndDate
         self.startDate: "QDateTime" = startTime # Date when the trip start
         self.endDate: "QDateTime" = endTime # Date when the trip end
         self.tripName = tripName
         self.tripcomponents = persistent.list.PersistentList()
-        self.reminder = Reminder()
-        self.timesensitiveEvent = persistent.list.PersistentList()
-        self.info = None
+        self.reminder = reminder
+        self.remind = remind
+        self.timesensitive:QDateTime = timesensitive
+        self.info = info
 
     # Duration
     def getDuration(self):
@@ -52,12 +53,19 @@ class Trip(persistent.Persistent):
     def removeTripComponent(self, component):
         self.tripcomponents.remove(component)
 
-    # Time Sensitive Event
-    def addEvent(self, event):
-        self.timesensitiveEvent.append(event)
+    # Timesensitive: remind:bool and timesensitive:QDateTiem
+    def getRemind(self):
+        return self.remind
+    
+    def setRemind(self, remind):
+        self.remind = remind
 
-    def removeEvent(self, event):
-        self.timesensitiveEvent.append(event)
+    def getTimesensitive(self):
+        return self.timesensitive
+    
+
+    def setTimesensitive(self, timesensitive):
+        self.timesensitive = timesensitive
 
 
     
