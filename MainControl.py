@@ -1,5 +1,6 @@
 from MainUI import *
 from TripControl import *
+from settingController import SettingController
 from enum import Enum
 from MainModel import *
 
@@ -58,8 +59,11 @@ class MainController:
         EditController(canChangeType=False, controller=self) 
 
     def addTrip(self, tripName, startDate, endDate):
-        # temporary code
         newTrip = self.model.addTrip(tripName=tripName, mainUI=self.view, startDate=startDate, endDate=endDate)
         self.update()
 
+    def settings(self):
+        #go to settings
+        settingController = SettingController(self)
 
+    

@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>520</width>
+    <height>565</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #464d55;</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QWidget" name="widget" native="true">
+     <property name="styleSheet">
+      <string notr="true">QWidget {
+  background-color: #fff;
+}
+QWidget#widget{
+  border-radius: 12px;
+}
+QComboBox{
+   background-color: #fff;
+  font-weight: 600;
+   border: 1px solid #ced4da;
+   border-radius: 5px;
+   color: #464d55;
+   padding-left: 15px;
+}
+QComboBox::placeholder{
+  color: #767e89;
+}
+QComboBox::on{
+   border: 3px solid #d0e3ff;
+}
+QComboBox::drop-down{
+   border: 0px;
+}
+QComboBox::down-arrow{
+   image: url(:/dropdown/dropdownPNG.png);
+   width: 12px;
+   height: 12px;
+   margin-right: 15px;
+}
+QComboBox QListView{
+  color: #464d55;
+  font-weight: 600;
+   border: 1px solid rgba(0,0,0, 10%);
+   padding: 5px;
+   background-color: #fff;
+   outline: 0px;
+}
+QComboBox QListView:item {
+   padding-left: 10px;
+   background-color: #fff;
+}
+
+QLabel {
+  color: #464d55;
+  font-weight: 600;
+}
+QLabel#usernameErrorLabel, #passwordErrorLabel {
+  color: #e6583c;
+  font-weight: 600;
+  font-size: 10px;
+}
+
+QLabel#passwordHeaderLabel, #usernameHeaderLabel{  
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+QLineEdit {
+  color: #464d55;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid #e0e4e7;
+  padding: 5px 15px;
+}
+
+QLineEdit:focus {
+  border: 1px solid #d0e3ff;
+}
+
+QLineEdit::placeholder {
+  color: #767e89;
+}
+QPushButton {
+  background-color: #464d55;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 12px;
+  border: 1px solid #464d55;
+  padding: 5px 15px;
+  outline: 0px;
+}
+QPushButton:hover {
+  border: 1px solid #767e89;
+}
+QPushButton:focus {
+  border: 1px solid #767e89;
+}
+QCheckBox {
+  color: #464d55;
+  font-weight: 600;
+}
+QDateTimeEdit{
+  color: #464d55;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid #e0e4e7;
+  padding: 5px 15px;}
+QDateTimeEdit::on{
+   border: 3px solid #d0e3ff;
+}
+QDateTimeEdit::drop-down{
+   border: 0px;
+}
+QDateTimeEdit::down-arrow{
+   image: url(:/dropdown/dropdownPNG.png);
+   width: 12px;
+   height: 12px;
+   margin-right: 15px;
+}
+
+QTextEdit {
+  color: #464d55;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid #e0e4e7;
+  padding: 5px 15px;
+}
+
+QTextEdit:focus {
+  border: 1px solid #d0e3ff;
+}
+
+QTextEdit::placeholder {
+  color: #767e89;
+}
+
+QCalendarWidget QAbstractItemView
+{ 
+selection-background-color: #042944; 
+selection-color: white;
+selection-border:10px solid red;
+
+}
+QCalendarWidget QWidget 
+{
+  color:grey;
+}
+QCalendarWidget QTableView{
+border-width:0px;
+background-color:lightgrey;
+}
+
+
+QScrollBar:vertical {
+
+  border-color: rgb(227, 227, 227);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 8px;
+
+  background-color: rgb(240, 240, 240);
+  width: 8px;
+  margin: 21px 0 21px 0;
+}
+
+QScrollBar::handle:vertical {
+
+  background-color: rgb(200, 200, 200);
+  min-height: 25px;
+
+}
+
+ QScrollBar::add-line:vertical {
+    height: 0px;
+}
+
+QScrollBar::sub-line:vertical {
+    height: 0px;
+}
+
+
+  QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+      background: none;
+   height: 0px;
+  }</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QScrollArea" name="scrollArea">
+        <property name="styleSheet">
+         <string notr="true">QWidget#scrollArea{
+border: 0px;
+}</string>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>472</width>
+           <height>517</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">.QWidget {
+border: 2px solid #464d55;
+border-radius: 12px;}
+
+QWidget #scrollAreaWidgetContents{
+ border: 0px;
+}</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QWidget" name="editUsernameWidget" native="true">
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="0" column="1">
+              <widget class="QLabel" name="usernameHeaderLabel">
+               <property name="text">
+                <string>Username</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>New Username:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0" colspan="2">
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <property name="topMargin">
+                <number>10</number>
+               </property>
+               <item>
+                <spacer name="horizontalSpacer_3">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="changeUsernameButton">
+                 <property name="text">
+                  <string>Change Username</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="usernameLineEdit">
+               <property name="placeholderText">
+                <string>Enter new username</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0" colspan="2">
+              <widget class="QLabel" name="usernameErrorLabel">
+               <property name="text">
+                <string>error</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="editPasswordWidget" native="true">
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="enterPreviousPasswordLineEdit">
+               <property name="echoMode">
+                <enum>QLineEdit::Password</enum>
+               </property>
+               <property name="placeholderText">
+                <string>Enter previous password</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0" colspan="2">
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <property name="topMargin">
+                <number>10</number>
+               </property>
+               <item>
+                <spacer name="horizontalSpacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="changePasswordButton">
+                 <property name="text">
+                  <string>Change Password</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="reEnterNewPasswordLineEdit">
+               <property name="echoMode">
+                <enum>QLineEdit::Password</enum>
+               </property>
+               <property name="placeholderText">
+                <string>Re-enter new password</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>Re-enter Password:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>Previous Password:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>New Password:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="enterNewPasswordLineEdit">
+               <property name="echoMode">
+                <enum>QLineEdit::Password</enum>
+               </property>
+               <property name="placeholderText">
+                <string>Enter new password</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLabel" name="passwordHeaderLabel">
+               <property name="text">
+                <string>Password</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0" colspan="2">
+              <widget class="QLabel" name="passwordErrorLabel">
+               <property name="text">
+                <string>error</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <property name="topMargin">
+             <number>10</number>
+            </property>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="doneButton">
+              <property name="text">
+               <string>Done</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

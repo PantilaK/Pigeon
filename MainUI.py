@@ -17,6 +17,8 @@ class MainUI(QWidget):
         self.UI.pastTripButton.clicked.connect(self.pastTripButtonPressed)
         self.UI.futureTripButton.clicked.connect(self.futureTripButtonPressed)
         self.UI.newTripButton.clicked.connect(self.newTripButtonPressed)
+        
+        self.UI.settingsButton.clicked.connect(self.settingsButtonPressed)
         self.UI.logoutButton.clicked.connect(self.logoutButtonPressed)
 
     def setTripMode(self, mode):
@@ -41,8 +43,8 @@ class MainUI(QWidget):
     def newTripButtonPressed(self):
         self.controller.newTrip()
 
-    # def newTripOKButtonPressed(self):
-    #     self.controller.addTrip()
-
+    def settingsButtonPressed(self):
+        self.controller.settings()
+  
     def logoutButtonPressed(self):
         self.controller.transferToLogin()

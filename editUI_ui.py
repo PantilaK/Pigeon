@@ -27,7 +27,7 @@ class Ui_Form(object):
         if not Form.objectName():
             Form.setObjectName(u"Form")
         Form.setWindowModality(Qt.NonModal)
-        Form.resize(669, 517)
+        Form.resize(669, 550)
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -127,10 +127,10 @@ class Ui_Form(object):
 "  outline: 0px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"  border: 3px solid #767e89;\n"
+"  border: 1px solid #767e89;\n"
 "}\n"
 "QPushButton:focus {\n"
-"  border: 3px solid #767e89;\n"
+"  border: 1px solid #767e89;\n"
 "}\n"
 "QCheckBox {\n"
 "  color: #464d55;\n"
@@ -281,7 +281,7 @@ class Ui_Form(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContent = QWidget()
         self.scrollAreaWidgetContent.setObjectName(u"scrollAreaWidgetContent")
-        self.scrollAreaWidgetContent.setGeometry(QRect(0, -752, 589, 2242))
+        self.scrollAreaWidgetContent.setGeometry(QRect(0, 0, 589, 2264))
         self.verticalLayout_4 = QVBoxLayout(self.scrollAreaWidgetContent)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.tripEditWidget = QWidget(self.scrollAreaWidgetContent)

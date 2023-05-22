@@ -15,14 +15,15 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QPushButton,
-    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QLineEdit,
+    QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
+    QWidget)
 
 class Ui_tripWidget(object):
     def setupUi(self, tripWidget):
         if not tripWidget.objectName():
             tripWidget.setObjectName(u"tripWidget")
-        tripWidget.resize(490, 421)
+        tripWidget.resize(551, 415)
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -52,6 +53,19 @@ class Ui_tripWidget(object):
 "  border: 1px solid #464d55;\n"
 "  padding: 5px 15px;\n"
 "  outline: 0px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"  border: 1px solid #767e89;\n"
+"}\n"
+"QPushButton:focus {\n"
+"  border: 1px solid #767e89;\n"
+"}\n"
+"QLineEdit {\n"
+"  color: #464d55;\n"
+"  font-weight: 600;\n"
+"  border-radius: 8px;\n"
+"  border: 1px solid #e0e4e7;\n"
+"  padding: 5px 15px;\n"
 "}\n"
 "")
         self.verticalLayout = QVBoxLayout(tripWidget)
@@ -164,6 +178,7 @@ class Ui_tripWidget(object):
         self.tripDetailsWidget.setObjectName(u"tripDetailsWidget")
         self.verticalLayout_4 = QVBoxLayout(self.tripDetailsWidget)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.detailHeaderLabel = QLabel(self.tripDetailsWidget)
         self.detailHeaderLabel.setObjectName(u"detailHeaderLabel")
         self.detailHeaderLabel.setAlignment(Qt.AlignRight|Qt.AlignTop|Qt.AlignTrailing)
@@ -182,16 +197,38 @@ class Ui_tripWidget(object):
         self.tripReminderWidget.setObjectName(u"tripReminderWidget")
         self.verticalLayout_5 = QVBoxLayout(self.tripReminderWidget)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.reminderHeaderLabel = QLabel(self.tripReminderWidget)
         self.reminderHeaderLabel.setObjectName(u"reminderHeaderLabel")
         self.reminderHeaderLabel.setAlignment(Qt.AlignRight|Qt.AlignTop|Qt.AlignTrailing)
 
         self.verticalLayout_5.addWidget(self.reminderHeaderLabel)
 
-        self.checkboxLayout = QVBoxLayout()
-        self.checkboxLayout.setObjectName(u"checkboxLayout")
+        self.tripReminderLayout = QVBoxLayout()
+        self.tripReminderLayout.setObjectName(u"tripReminderLayout")
 
-        self.verticalLayout_5.addLayout(self.checkboxLayout)
+        self.verticalLayout_5.addLayout(self.tripReminderLayout)
+
+        self.horizontalLayout_7 = QHBoxLayout()
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.horizontalLayout_7.setContentsMargins(-1, 0, -1, -1)
+        self.tripReminderLineEdit = QLineEdit(self.tripReminderWidget)
+        self.tripReminderLineEdit.setObjectName(u"tripReminderLineEdit")
+
+        self.horizontalLayout_7.addWidget(self.tripReminderLineEdit)
+
+        self.tripReminderAddButton = QPushButton(self.tripReminderWidget)
+        self.tripReminderAddButton.setObjectName(u"tripReminderAddButton")
+        sizePolicy4 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.tripReminderAddButton.sizePolicy().hasHeightForWidth())
+        self.tripReminderAddButton.setSizePolicy(sizePolicy4)
+
+        self.horizontalLayout_7.addWidget(self.tripReminderAddButton)
+
+
+        self.verticalLayout_5.addLayout(self.horizontalLayout_7)
 
 
         self.verticalLayout_3.addWidget(self.tripReminderWidget)
@@ -200,6 +237,7 @@ class Ui_tripWidget(object):
         self.tripComponentControlWidget.setObjectName(u"tripComponentControlWidget")
         self.horizontalLayout_4 = QHBoxLayout(self.tripComponentControlWidget)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.addComponentButton = QPushButton(self.tripComponentControlWidget)
         self.addComponentButton.setObjectName(u"addComponentButton")
 
@@ -244,6 +282,8 @@ class Ui_tripWidget(object):
         self.label.setText(QCoreApplication.translate("tripWidget", u"tripDetails1\n"
 "tripDetails2", None))
         self.reminderHeaderLabel.setText(QCoreApplication.translate("tripWidget", u"Reminder", None))
+        self.tripReminderLineEdit.setPlaceholderText(QCoreApplication.translate("tripWidget", u"Add reminder text here", None))
+        self.tripReminderAddButton.setText(QCoreApplication.translate("tripWidget", u"Add Reminders", None))
         self.addComponentButton.setText(QCoreApplication.translate("tripWidget", u"Add Components", None))
     # retranslateUi
 

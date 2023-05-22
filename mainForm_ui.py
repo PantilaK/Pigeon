@@ -24,7 +24,7 @@ class Ui_mainWidget(object):
         if not mainWidget.objectName():
             mainWidget.setObjectName(u"mainWidget")
         mainWidget.setWindowModality(Qt.ApplicationModal)
-        mainWidget.resize(802, 617)
+        mainWidget.resize(799, 651)
         mainWidget.setStyleSheet(u"background-color: rgb(82, 158, 218);\n"
 "\n"
 "QWidget {\n"
@@ -259,7 +259,6 @@ class Ui_mainWidget(object):
 "  border-radius: 8px;\n"
 "  border: 1px solid rgb(82, 158, 218);\n"
 "  padding: 5px 15px;\n"
-"  margin-top: 10px;\n"
 "  outline: 0px;\n"
 "}\n"
 "QPushButton:hover {\n"
@@ -274,10 +273,10 @@ class Ui_mainWidget(object):
 "  border-color: rgb(227, 227, 227);\n"
 "  border-width: 1px;\n"
 "  border-style: solid;\n"
-"  border-radius: 8px;"
-                        "\n"
+"  border-radius: 8px;\n"
 "\n"
-"  background-color: rgb(240, 240, 240);\n"
+"  background-c"
+                        "olor: rgb(240, 240, 240);\n"
 "  width: 8px;\n"
 "  margin: 21px 0 21px 0;\n"
 "}\n"
@@ -311,17 +310,6 @@ class Ui_mainWidget(object):
 
         self.verticalLayout_2.addWidget(self.tripListHeading)
 
-        self.horizontalLayout_4 = QHBoxLayout()
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.horizontalLayout_4.setContentsMargins(-1, 5, -1, 5)
-        self.newTripButton = QPushButton(self.tripListWidget)
-        self.newTripButton.setObjectName(u"newTripButton")
-
-        self.horizontalLayout_4.addWidget(self.newTripButton)
-
-
-        self.verticalLayout_2.addLayout(self.horizontalLayout_4)
-
         self.scrollArea = QScrollArea(self.tripListWidget)
         self.scrollArea.setObjectName(u"scrollArea")
         self.scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -329,14 +317,83 @@ class Ui_mainWidget(object):
         self.scrollArea.setWidgetResizable(True)
         self.tripListScrollWidget = QWidget()
         self.tripListScrollWidget.setObjectName(u"tripListScrollWidget")
-        self.tripListScrollWidget.setGeometry(QRect(0, 0, 572, 467))
+        self.tripListScrollWidget.setGeometry(QRect(0, 0, 547, 559))
         sizePolicy3 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy3.setHorizontalStretch(0)
         sizePolicy3.setVerticalStretch(0)
         sizePolicy3.setHeightForWidth(self.tripListScrollWidget.sizePolicy().hasHeightForWidth())
         self.tripListScrollWidget.setSizePolicy(sizePolicy3)
+        self.tripListScrollWidget.setStyleSheet(u"QWidget#notificationWidget{\n"
+"  background-color: #fff;\n"
+"  border-radius: 12px;\n"
+"  border: 3px solid rgb(82, 158, 218);\n"
+"}\n"
+"\n"
+"QLabel#notificationHeaderLabel {\n"
+"  color: #0f1925;\n"
+"  font-size: 24px;\n"
+"  margin-bottom: 10px;\n"
+"  text-align: right;\n"
+"}\n"
+"\n"
+"QLabel#noNotificationLabel {\n"
+"  font-size: 16px;\n"
+"  padding: 50px 20px;\n"
+"}\n"
+"\n"
+"QWidget#hLineSplitWidget {\n"
+"  border: 0px;\n"
+"  background-color: #0f1925;\n"
+"}")
         self.verticalLayout_3 = QVBoxLayout(self.tripListScrollWidget)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.notificationWidget = QWidget(self.tripListScrollWidget)
+        self.notificationWidget.setObjectName(u"notificationWidget")
+        self.verticalLayout_4 = QVBoxLayout(self.notificationWidget)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.notificationHeaderLabel = QLabel(self.notificationWidget)
+        self.notificationHeaderLabel.setObjectName(u"notificationHeaderLabel")
+        self.notificationHeaderLabel.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.verticalLayout_4.addWidget(self.notificationHeaderLabel)
+
+        self.noNotificationLabel = QLabel(self.notificationWidget)
+        self.noNotificationLabel.setObjectName(u"noNotificationLabel")
+        self.noNotificationLabel.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_4.addWidget(self.noNotificationLabel)
+
+        self.notificationLayout = QVBoxLayout()
+        self.notificationLayout.setObjectName(u"notificationLayout")
+
+        self.verticalLayout_4.addLayout(self.notificationLayout)
+
+
+        self.verticalLayout_3.addWidget(self.notificationWidget)
+
+        self.hLineSplitWidget = QWidget(self.tripListScrollWidget)
+        self.hLineSplitWidget.setObjectName(u"hLineSplitWidget")
+        sizePolicy4 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.hLineSplitWidget.sizePolicy().hasHeightForWidth())
+        self.hLineSplitWidget.setSizePolicy(sizePolicy4)
+        self.hLineSplitWidget.setMinimumSize(QSize(0, 3))
+        self.hLineSplitWidget.setStyleSheet(u"")
+
+        self.verticalLayout_3.addWidget(self.hLineSplitWidget)
+
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(-1, 5, -1, 5)
+        self.newTripButton = QPushButton(self.tripListScrollWidget)
+        self.newTripButton.setObjectName(u"newTripButton")
+
+        self.horizontalLayout_4.addWidget(self.newTripButton)
+
+
+        self.verticalLayout_3.addLayout(self.horizontalLayout_4)
+
         self.tripListLayout = QVBoxLayout()
         self.tripListLayout.setObjectName(u"tripListLayout")
 
@@ -368,6 +425,8 @@ class Ui_mainWidget(object):
         self.settingsButton.setText(QCoreApplication.translate("mainWidget", u"Settings", None))
         self.logoutButton.setText(QCoreApplication.translate("mainWidget", u"Logout", None))
         self.tripListHeading.setText(QCoreApplication.translate("mainWidget", u"titleList", None))
+        self.notificationHeaderLabel.setText(QCoreApplication.translate("mainWidget", u"Alerts", None))
+        self.noNotificationLabel.setText(QCoreApplication.translate("mainWidget", u"No notifications", None))
         self.newTripButton.setText(QCoreApplication.translate("mainWidget", u"New Trip", None))
     # retranslateUi
 

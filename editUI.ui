@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>669</width>
-    <height>517</height>
+    <height>550</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -117,10 +117,10 @@ QPushButton {
   outline: 0px;
 }
 QPushButton:hover {
-  border: 3px solid #767e89;
+  border: 1px solid #767e89;
 }
 QPushButton:focus {
-  border: 3px solid #767e89;
+  border: 1px solid #767e89;
 }
 QCheckBox {
   color: #464d55;
@@ -343,9 +343,9 @@ border: 0px;
             <property name="geometry">
              <rect>
               <x>0</x>
-              <y>-752</y>
+              <y>0</y>
               <width>589</width>
-              <height>2242</height>
+              <height>2264</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">

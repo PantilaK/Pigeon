@@ -6,15 +6,12 @@ import sys
 from MainControl import MainController
 
 class LoginController:
-    def __init__(self, app) -> None:
-        self.view:LoginUI = None
-        self.model:LoginModel = None
-        self.app = app
-    
-    def enterLoginProcess(self) -> None:
+    def __init__(self, model=None) -> None:
+        self.model:LoginModel = model
+        self.view:LoginUI = LoginUI(self)
         self.view.show()
         self.clearErrorFields()
-
+        
     def createAccount(self):
         pass
 
