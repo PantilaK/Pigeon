@@ -1,16 +1,28 @@
 from TripComponentWidget import TripComponentWidget
 from ComponentEditControl import EditController
 from ReminderController import ReminderController
+import globals
+from TripModel import TripModel
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from Trip import Trip
+    from User import User
 
 class TripController():
-    def __init__(self, tripComponent=None, mainControl=None, isExpanded=False, hasReminder=True, isExtendable=True):
+    def __init__(self,  trip: "Trip", tripComponent=None, mainControl=None, isExpanded=False, hasReminder=True, isExtendable=True, mainUI=None):
         self.tripComponent = tripComponent
         self.isExpanded:bool = isExpanded
         self.hasReminder:bool = hasReminder
         self.isExtendable:bool = isExtendable
-        self.mainControl = mainControl
-
         self.view:TripComponentWidget = TripComponentWidget(self, self.mainControl.view)
+        self.trip = trip
+        self.mainUI = mainUI
+        self.model = TripModel(tripController=self)
+
+    def createUI(self):
+        self.UI = TripComponentWidget(self, self.mainUI)
         self.update()
 
     def update(self):
@@ -44,15 +56,26 @@ class TripController():
         self.update()
 
     def edit(self):
-        pass
+        EditController(controller=self, typeEdit="Trip",canChangeType=None)
+
+    def editTripInfo(self, tripName, startDate, endDate):
+        self.model.editTripInfo(tripName=tripName, startDate=startDate, endDate=endDate)
 
     def delete(self):
-        pass
+        self.model.deleteTrip(self.trip)
+
+    def setTripName(self, tripName):
+        self.UI.widget.tripTitle.setText(tripName)
+
+    def setTripTime(self, startTime):
+        self.UI.widget.tripTime.setText(startTime)
 
     def addComponent(self):
         #temporary run code
         EditController()
+        pass
         
+        # main
         #temporary add component code, replace with update
         newComponentControl = TripController(mainControl=self)
         self.view.UI.componentLayout.addWidget(newComponentControl.view)
@@ -64,4 +87,8 @@ class TripController():
         #temporary add component code, replace with update
         self.view.UI.tripReminderLayout.addWidget(newReminder.view)
 
+        #temporary add component code
+        # newComponentControl = TripController(self, None)
+        # newComponentControl.createUI()
+        # self.UI.widget.componentLayout.addWidget(newComponentControl.UI)
 

@@ -1,14 +1,21 @@
 from abc import ABC, abstractclassmethod
 from datetime import datetime, date
-import persistent
+import persistent, persistent.list
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from PySide6.QtCore import QDateTime
 
 class Tripcomponent(ABC):
 
-    def __init__(self):
-        self.name = '' # Hotel, Train, Place name
-        self.timesensitive = False # Important
-        self.time = datetime.now() # Date and time of the event
-        self.briefInfo = '' # Brief information
+    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info):
+        self.name = name # Hotel, Train, Place name
+        self.timeFrom:"QDateTime"= timeFrom
+        self.timeTo:"QDateTime" = timeTo
+        self.remind:bool = remind
+        self.timesensitive = timesensitive # Important
+        self.briefInfo = info # Brief information
 
     # Name
     def getName(self):
@@ -16,20 +23,32 @@ class Tripcomponent(ABC):
     
     def setName(self, name):
         self.name = name
+
+    # Time From, To
+    def getTimeFrom(self):
+        return self.timeFrom
     
-    # Timesensitive
+    def setTimeFrom(self, timeFrom):
+        self.timeFrom = timeFrom
+
+    def getTimeTo(self):
+        return self.timeTo
+    
+    def setTimeTo(self, timeTo):
+        self.timeTo = timeTo
+    
+    # Timesensitive remind and timesensitive
+    def getRemind(self):
+        return self.remind
+    
+    def setRemind(self, remind):
+        self.remind = remind
+
     def getTimesensitive(self):
         return self.timesensitive
     
     def setTimesensitive(self, timesensitive):
         self.timesensitive = timesensitive
-
-    # Time
-    def getTime(self):
-        return self.time
-    
-    def setTime(self, time):
-        self.time = time
 
     # Info
     def getInfo(self):
@@ -40,61 +59,53 @@ class Tripcomponent(ABC):
 
 class Travel(Tripcomponent, persistent.Persistent):
 
-    def __init__(self):
-        super().__init__()
-        self.requireTicket = False # Ticket require
-        self.ticket = 0 # Price of the ticket
+    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, ticketNeed, ticketPrice):
+        super().__init__(name, timeFrom, timeTo, remind, timesensitive, info)
+        self.ticketNeed:bool = ticketNeed # Ticket require
+        self.ticketPrice = ticketPrice # Price of the ticket
+
+    # Ticket needed
+    def getTicketNeed(self):
+        return self.ticketNeed
+    
+    def setTicketNeed(self, ticketNeed):
+        self.ticketNeed = ticketNeed
 
     # Ticket price
-    def getTicket(self):
-        return self.ticket
+    def getTicketPrice(self):
+        return self.ticketPrice
     
-    def setTicket(self, ticket):
-        self.ticket = ticket
-
-    # Is ticket required
-    def isTicketRequired(self):
-        return self.requireTicket
-    
-    def requireTicket(self, require):
-        self.requireTicket = require
+    def setTicketPrice(self, ticketPrice):
+        self.ticketPrice = ticketPrice
 
 class Place(Tripcomponent, persistent.Persistent):
 
-    def __init__(self):
-        super().__init__()
-        self.requireTicket = False # Ticket require
-        self.ticket = 0 # Price of the ticket
-        self.open = ''
-        self.close = ''
+    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, openTime, closeTime, openInfo):
+        super().__init__(name, timeFrom, timeTo, remind, timesensitive, info)
+        self.openTime = openTime
+        self.closeTime = closeTime
+        self.openInfo = openInfo
 
-    # Ticket price
-    def getTicket(self):
-        return self.ticket
+    # Open time
+    def getOpenTime(self):
+        return self.openTime
     
-    def setTicket(self, ticket):
-        self.ticket = ticket
+    def setOpenTime(self, openTime):
+        self.openTime = openTime
 
-    # Is ticket required
-    def isTicketRequired(self):
-        return self.requireTicket
+    # Close time
+    def getCloseTime(self):
+        return self.closeTime
     
-    def setRequireTicket(self, require):
-        self.requireTicket = require
+    def setCloseTime(self, closeTime):
+        self.closeTime = closeTime
 
-    # Opening time
-    def openingTime(self):
-        return self.open
+    # Open info -> weekend, holiday period
+    def getOpenInfo(self):
+        return self.openInfo
     
-    def setOpeningTime(self, open):
-        self.open = open
-
-    # Closing time
-    def closingTime(self):
-        return self.close
-    
-    def setClosingTime(self, close):
-        self.close = close
+    def setOpenInfo(self, openInfo):
+        self.openInfo = openInfo
 
 class Restaurant(Tripcomponent, persistent.Persistent):
 
@@ -123,7 +134,7 @@ class Event(Tripcomponent, persistent.Persistent):
         self.requireTicket = False # Ticket require
         self.ticket = 0 # Price of the ticket
         self.place = Place() # Place where that event haves
-        self.eventType = '' # Type of the event (Movies, Shows, Fairs, etc.)    
+        self.eventType = None # Type of the event (Movies, Shows, Fairs, etc.)    
 
     # Ticket price
     def getTicket(self):
@@ -148,35 +159,55 @@ class Event(Tripcomponent, persistent.Persistent):
 
 class Stay(Tripcomponent, persistent.Persistent):
 
-    def __init__(self):
-        super().__init__()
-        self.accommodationType = '' # Type of the accommodation (Hotel, Hostel, Apartment, etc.)
-        self.period = 0 # 2 or ... nights
-        self.price = 0 # Price for a whole period
+    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, flatRate, pricePerNight, period, totalPrice):
+        super().__init__(name, timeFrom, timeTo, remind, timesensitive, info)
+        self.flatRate = flatRate
+        self.pricePerNight = pricePerNight
+        self.period = period
+        self.totalPrice =  totalPrice
 
-    # Type of the accommodation
-    def getAccommodationType(self):
-        return self.accommodationType
+    # Flat rate
+    def getFlatRate(self):
+        return self.flatRate
     
-    def setAccommodationType(self, type):
-        self.accommodationType = type
+    def setFlatRate(self, flatRate):
+        self.flatRate = flatRate
 
-    # Duration
-    def getDuration(self):
+    # Price per night
+    def getPricePerNight(self):
+        return self.pricePerNight
+    
+    def setPricePerNight(self, pricePerNight):
+        self.pricePerNight = pricePerNight
+
+    # period
+    def getPeriod(self):
         return self.period
     
-    def setDuration(self, period):
-        self.periof = period
+    def setPeriod(self, period):
+        self.period = period
 
-class CheckInOut(Stay, persistent.Persistent):
-
-    def __init__(self):
-        super().__init__()
-        self.checkInOutDateTime = datetime.now()
-
-    # Check in or check out period
-    def getCheckInOutPeriod(self):
-        return self.checkInDateTime
+    # Total price
+    def getTotalPrice(self):
+        return self.totalPrice
     
-    def setCheckInOutPeriod(self, time):
-        self.checkInDateTime = time
+    def setTotalPrice(self, totalPrice):
+        self.totalPrice = totalPrice
+
+class CheckIn(Stay, persistent.Persistent):
+
+    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, flatRate, pricePerNight, period, totalPrice):
+        super().__init__(name, timeFrom, timeTo, remind, timesensitive, info, flatRate, pricePerNight, period, totalPrice)
+
+    # Check in date and time
+    def getCheckInDate(self):
+        return super().getTimeFrom()
+    
+class CheckOut(Stay, persistent.Persistent):
+
+    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, flatRate, pricePerNight, period, totalPrice):
+        super().__init__(name, timeFrom, timeTo, remind, timesensitive, info, flatRate, pricePerNight, period, totalPrice)
+
+    # Check in date and time
+    def getCheckOut(self):
+        return super().getTimeTo()

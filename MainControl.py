@@ -2,6 +2,13 @@ from MainUI import *
 from TripControl import *
 from settingController import SettingController
 from enum import Enum
+from MainModel import *
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from LoginControl import LoginController
+    from TripControl import TripController
 
 
 class ShowMode(Enum):
@@ -10,42 +17,50 @@ class ShowMode(Enum):
     futureTrip = 2
 
 class MainController:
-    def __init__(self):
-        self.view = MainUI(self)
-        self.model = None  #replace this with model constructor
-        self.currentShowMode = ShowMode.currentTrip
+    def __init__(self, loginController):
+        self.view = MainUI(controller=self)
+        self.model = MainModel(controller=self)
+        self.loginController: "LoginController" = loginController
+        self.goToCurrentTrip()
 
     def enterMainProcess(self):
         self.update()
         self.view.show()
 
+    def transferToLogin(self):
+        self.view.close()
+        self.loginController.enterLoginProcess()
+
     def update(self):
         #update UI with model
-        pass
+        self.view.clearTripList()
+        trips: list[TripController] = self.model.getTrips(mainUI=self.view, tripMode=self.currentShowMode)
+        
+        for trip in trips:
+            self.view.addTrip(trip.UI)
+        
 
     def goToCurrentTrip(self):
         self.currentShowMode = ShowMode.currentTrip
+        self.view.setTripMode('Current Trip')
         self.update()
 
     def goToPastTrip(self):
         self.currentShowMode = ShowMode.pastTrip
+        self.view.setTripMode('Past Trip')
         self.update()
 
     def goToFutureTrip(self):
         self.currentShowMode = ShowMode.futureTrip
+        self.view.setTripMode('Future Trip')
         self.update()
 
-    def addTrip(self):
-        # temporary code
-        newTripControl = TripController(None, self)
-        self.view.UI.tripListLayout.addWidget(newTripControl.view)
+    def newTrip(self):
+        EditController(canChangeType=False, controller=self) 
 
-    def logout(self):
-        # logout
-        
-        # close window and go to login
-        self.view.close()
-        #TODO
+    def addTrip(self, tripName, startDate, endDate):
+        newTrip = self.model.addTrip(tripName=tripName, mainUI=self.view, startDate=startDate, endDate=endDate)
+        self.update()
 
     def settings(self):
         #go to settings

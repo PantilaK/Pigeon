@@ -1,6 +1,7 @@
 from LoginUI import LoginUI
 from LoginModel import LoginModel
 
+import globals
 import sys
 from MainControl import MainController
 
@@ -15,12 +16,16 @@ class LoginController:
         pass
 
     def CAcreateAccount(self):
-        message = self.model.createAccount(self.view.CAgetUsername(), self.view.CAgetPassword())
+        username = self.view.CAgetUsername()
+        password = self.view.CAgetPassword()
+        message = self.model.createAccount(username, password)
         
         self.setErrorFieldTextCA(message)
 
     def login(self):
-        message = self.model.verifyPassword(self.view.getUsername(), self.view.getPassword())
+        username = self.view.getUsername()
+        password = self.view.getPassword()
+        message = self.model.verifyPassword(username, password)
 
         if type(message) == tuple:
             self.setErrorFieldText(message[1])
@@ -29,11 +34,13 @@ class LoginController:
             self.setErrorFieldText("go to main")
             # temporary login function
             self.view.close()
+            globals.currentUser = self.model.getUser(username)
             self.transferToMain()
 
     def transferToMain(self):
         # temporary main startup
-        mainControl = MainController()
+        mainControl = MainController(self)
+        globals.mainController = mainControl
         mainControl.enterMainProcess()
 
 

@@ -1,6 +1,5 @@
 from LoginControl import *
 from LoginUI import *
-from PasswordManager import *
 import ZODB
 import ZODB.FileStorage
 import sys

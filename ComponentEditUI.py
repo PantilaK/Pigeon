@@ -9,6 +9,9 @@ class ComponentEditUI(QDialog):
         self.UI = Ui_Form()
         self.UI.setupUi(self)
 
+        self.UI.tripFromDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.UI.tripToDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+
         self.UI.typeComboBox.currentTextChanged.connect(self.typeComboBoxChanged)
         self.UI.okButton.clicked.connect(self.okButtonClicked)
 
@@ -18,4 +21,15 @@ class ComponentEditUI(QDialog):
     def okButtonClicked(self):
         self.controller.ok()
 
+    # Get trip info
+    def getTripName(self):
+        return self.UI.tripNameLineEdit.text()
     
+    def getTripStartDate(self):
+        return self.UI.tripFromDateTimeEdit.dateTime()
+    
+    def getTripEndDate(self):
+        return self.UI.tripToDateTimeEdit.dateTime()
+    
+    def getSelectedType(self):
+        return self.UI.typeComboBox.currentText()
