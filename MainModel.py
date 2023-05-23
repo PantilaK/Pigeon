@@ -65,8 +65,9 @@ class MainModel:
         if dDate.year() > today.year: return False
         if dDate.month() > today.month: return False
         if dDate.day() > today.day: return False
-
-        if dTime.hour() > today.hour: return False
-        if dTime.minute() > today.minute: return False
+        
+        if dDate.year() == today.year and dDate.month() == today.month and dDate.day() == today.day:
+            if dTime.hour() > today.hour: return False
+            if dTime.minute() > today.minute: return False
 
         return True
