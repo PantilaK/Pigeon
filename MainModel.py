@@ -18,18 +18,14 @@ class MainModel:
     def __init__(self, controller):
         self.controller: MainController = controller
 
-    def addTrip(self, tripInfo:dict , mainUI):
+    def addTrip(self, tripInfo:dict):
         trip = Trip(tripInfo['name'], tripInfo['timeFrom'], tripInfo['timeTo'], Reminder(),
                     tripInfo['remind'], tripInfo['timesensitive'], tripInfo['info'])
         globals.currentUser.addTrip(trip) # เวลาหาให้หาจากชื่อ trp.tripName
         
-        newTrip = TripController(trip=trip, mainUI=mainUI)
-        newTrip.setTripName(newTrip.trip.getTripName())
-        
         transaction.commit()
-        return newTrip
 
-    def getTrips(self, mainUI, tripMode: "ShowMode"):
+    def getTrips(self, tripMode: "ShowMode"):
         trips = []
 
         trip: Trip
@@ -39,16 +35,16 @@ class MainModel:
 
             if self.before(sDate) and self.before(eDate):
                 if tripMode == tripMode.pastTrip:
-                    tripControl = TripController(trip=trip, mainUI=mainUI)
+                    tripControl = TripController(trip=trip, mainControl=self.controller)
                     tripControl.setTripName(trip.getTripName()+trip.getStartDate().toString("yyyy-MM-dd hh:mm"))
                     trips.append(tripControl)
             elif self.before(sDate):
                 if tripMode == tripMode.currentTrip:
-                    tripControl = TripController(trip=trip, mainUI=mainUI)
+                    tripControl = TripController(trip=trip, mainControl=self.controller)
                     tripControl.setTripName(trip.getTripName()+trip.getStartDate().toString("yyyy-MM-dd hh:mm"))
                     trips.append(tripControl)
             elif tripMode == tripMode.futureTrip:
-                tripControl = TripController(trip=trip, mainUI=mainUI)
+                tripControl = TripController(trip=trip, mainControl=self.controller)
                 tripControl.setTripName(trip.getTripName()+trip.getStartDate().toString("yyyy-MM-dd hh:mm"))
                 trips.append(tripControl)
 
@@ -62,12 +58,16 @@ class MainModel:
         dTime = d.time()
         dDate = d.date()
 
-        if dDate.year() > today.year: return False
-        if dDate.month() > today.month: return False
-        if dDate.day() > today.day: return False
-        
         if dDate.year() == today.year and dDate.month() == today.month and dDate.day() == today.day:
             if dTime.hour() > today.hour: return False
             if dTime.minute() > today.minute: return False
+
+        if dDate.year() > today.year: return False
+        if dDate.year() < today.year: return True
+        
+        if dDate.month() > today.month: return False
+        if dDate.month() < today.month: return True
+        
+        if dDate.day() > today.day: return False
 
         return True

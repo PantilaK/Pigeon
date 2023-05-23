@@ -11,13 +11,13 @@ if TYPE_CHECKING:
     from User import User
 
 class TripController():
-    def __init__(self,  trip: "Trip", tripComponent=None, isExpanded=False, hasReminder=True, isExtendable=True, mainUI=None):
+    def __init__(self,  trip: "Trip", mainControl=None, tripComponent=None, isExpanded=False, hasReminder=True, isExtendable=True, mainUI=None):
         self.tripComponent = tripComponent
         self.isExpanded:bool = isExpanded
         self.hasReminder:bool = hasReminder
         self.isExtendable:bool = isExtendable
-        self.mainUI = mainUI
-        self.view:TripComponentWidget = TripComponentWidget(self, self.mainUI)
+        self.mainControl = mainControl
+        self.view:TripComponentWidget = TripComponentWidget(self, self.mainControl.view)
         self.trip = trip
         self.model = TripModel(tripController=self)
 
