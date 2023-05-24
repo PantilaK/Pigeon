@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from Trip import Trip
     from User import User
+    from Tripcomponent import Tripcomponent
 
 class TripController():
     def __init__(self,  trip: "Trip"=None, component=None, mainControl=None, tripComponent=None, isExpanded=False, hasReminder=True, isExtendable=True, mainUI=None):
@@ -19,7 +20,7 @@ class TripController():
         self.mainControl = mainControl
         self.view:TripComponentWidget = TripComponentWidget(self, self.mainControl.view)
         self.trip = trip
-        self.component = component
+        self.component:"Tripcomponent" = component
         self.model = TripModel(tripController=self)
 
         self.update()
@@ -70,6 +71,10 @@ class TripController():
     def setTripTime(self, startTime):
         self.view.UI.tripTime.setText(startTime)
 
+    def setTitle(self):
+        title = self.model.getTitle()
+        self.view.setTitle(title=title)
+
     def updateComponent(self):
         if self.trip != None:
             self.view.clearComponentLists()
@@ -78,6 +83,8 @@ class TripController():
             print(len(components))
 
             for c in components:
+                c.setTitle()
+                c.showInfo()
                 self.view.addComponent(c.view)
 
     # Call editController
@@ -108,6 +115,13 @@ class TripController():
     def addCheckOut(self, stayInfo, trip):
         self.model.addCheckOut(trip=trip, stayInfo=stayInfo)
 
+    # Show information
+    def showInfo(self):
+        detail = self.model.showInfo()
+        self.view.addDetil(detail=detail)
+
+
+    # Reminder
     def addReminder(self):
         #temporary run code
         newReminder = ReminderController(parentController=self)

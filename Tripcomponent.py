@@ -80,7 +80,7 @@ class Travel(Tripcomponent, persistent.Persistent):
 
 class Place(Tripcomponent, persistent.Persistent):
 
-    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, openTime, closeTime, openInfo):
+    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, openTime:"QDateTime", closeTime:"QDateTime", openInfo):
         super().__init__(name, timeFrom, timeTo, remind, timesensitive, info)
         self.openTime = openTime
         self.closeTime = closeTime

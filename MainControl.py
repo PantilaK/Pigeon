@@ -37,6 +37,8 @@ class MainController:
         trips: list[TripController] = self.model.getTrips(tripMode=self.currentShowMode)
         
         for trip in trips:
+            trip.setTitle()
+            trip.showInfo()
             self.view.addTrip(trip.view)
         
 

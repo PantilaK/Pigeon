@@ -39,3 +39,9 @@ class TripComponentWidget(QWidget):
     def tripReminderLineEditReturn(self):
         self.controller.addReminder()
     
+    # Add detail
+    def addDetil(self, detail):
+        self.UI.label.setText(detail)
+
+    def setTitle(self, title):
+        self.UI.tripTitle.setText(title)

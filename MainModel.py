@@ -36,16 +36,13 @@ class MainModel:
             if self.before(sDate) and self.before(eDate):
                 if tripMode == tripMode.pastTrip:
                     tripControl = TripController(trip=trip, mainControl=self.controller)
-                    tripControl.setTripName(trip.getTripName()+trip.getStartDate().toString("yyyy-MM-dd hh:mm"))
                     trips.append(tripControl)
             elif self.before(sDate):
                 if tripMode == tripMode.currentTrip:
                     tripControl = TripController(trip=trip, mainControl=self.controller)
-                    tripControl.setTripName(trip.getTripName()+trip.getStartDate().toString("yyyy-MM-dd hh:mm"))
                     trips.append(tripControl)
             elif tripMode == tripMode.futureTrip:
                 tripControl = TripController(trip=trip, mainControl=self.controller)
-                tripControl.setTripName(trip.getTripName()+trip.getStartDate().toString("yyyy-MM-dd hh:mm"))
                 trips.append(tripControl)
 
         return trips
