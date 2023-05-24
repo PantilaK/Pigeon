@@ -98,6 +98,22 @@ class LoginModel:
 
         transaction.commit()
 
+    def changePassword(self, username, password:str):
+        if password == "":
+            return "Invalid password"
+        
+        hash = hashlib.sha256(password.encode()).hexdigest()
+
+        tmp = self.root['username']
+
+        user:User = tmp[username]
+        user.password = hash
+
+        tmp[username] = user
+        self.root['username'] = tmp
+
+        transaction.commit()
+
 
 
         

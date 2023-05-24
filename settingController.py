@@ -1,5 +1,6 @@
 from settingUI import settingUI
 import globals
+import hashlib
 
 from typing import TYPE_CHECKING
 
@@ -32,4 +33,21 @@ class SettingController:
 
     def changePassword(self):
         # change password button is clicked from UI
-        pass
+        username = globals.currentUser.username
+        password = globals.currentUser.password
+        previousPassword = self.view.getPassword()
+        newPassword = self.view.getNewPassword()
+        hash = hashlib.sha256(previousPassword.encode()).hexdigest()
+        print(previousPassword, password)
+        
+        if self.mainController.loginController.model.isPasswordMatched(hash, password)[0]:
+            print("MMMM")
+            self.mainController.loginController.model.changePassword(username=username, password=newPassword)
+
+    def checkPassword(self):
+        password = self.view.getNewPassword()
+        confirmPassword = self.view.getNewPasswordConfirm()
+
+        isMatched = self.mainController.loginController.model.isPasswordMatched(password, confirmPassword)[0]
+
+        self.view.setEnableChangePasswordButton(isMatched)
