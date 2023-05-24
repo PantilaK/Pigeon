@@ -58,13 +58,15 @@ class MainController:
     def newTrip(self):
         EditController(canChangeType=False, controller=self) 
 
+    # Add Component
     def addTrip(self, tripInfo):
         self.model.addTrip(tripInfo=tripInfo)
         self.update()
 
+    # Call Setting
     def settings(self):
         #go to settings
-        settingController = SettingController(self)
+        SettingController(self)
 
     def changeUsername(self, username, newUsername):
         self.loginController.changeUsername(username=username, newUsername=newUsername)
