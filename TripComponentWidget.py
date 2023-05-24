@@ -14,6 +14,13 @@ class TripComponentWidget(QWidget):
         self.UI.tripReminderAddButton.clicked.connect(self.tripReminderAddButtonClicked)
         self.UI.tripReminderLineEdit.returnPressed.connect(self.tripReminderLineEditReturn)
 
+    def addComponent(self, component):
+        self.UI.componentLayout.addWidget(component)
+
+    def clearComponentLists(self):
+        for i in reversed(range(self.UI.componentLayout.count())):
+            self.UI.componentLayout.itemAt(i).widget().setParent(None)
+
     def expandButtonClicked(self):
         self.controller.expand()
 
@@ -32,3 +39,9 @@ class TripComponentWidget(QWidget):
     def tripReminderLineEditReturn(self):
         self.controller.addReminder()
     
+    # Add detail
+    def addDetil(self, detail):
+        self.UI.label.setText(detail)
+
+    def setTitle(self, title):
+        self.UI.tripTitle.setText(title)

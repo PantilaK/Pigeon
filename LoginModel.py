@@ -72,6 +72,49 @@ class LoginModel:
         tmp = self.root['username']
         user = tmp[username]
         return user
+    
+    def changeUsername(self, newUsername: str, username: str):
+        ruser = newUsername.strip()
+        newUsername = ruser
+
+        if newUsername == "":
+            return "Invalid username"
+        
+        if newUsername in self.root['username']:
+            return "Username already exists"
+        
+        self.storingNewUsername(username=username, newUsername=newUsername)
+        return "Username Sucesfully Changed"
+    
+    def storingNewUsername(self, username, newUsername):
+        tmp = self.root['username']
+
+        user:User = tmp[username]
+        del tmp[username]
+        user.username = newUsername
+
+        tmp[newUsername] = user
+        self.root['username'] = tmp
+
+        transaction.commit()
+
+    def changePassword(self, username, password:str):
+        if password == "":
+            return "Invalid password"
+        
+        hash = hashlib.sha256(password.encode()).hexdigest()
+
+        tmp = self.root['username']
+
+        user:User = tmp[username]
+        user.password = hash
+
+        tmp[username] = user
+        self.root['username'] = tmp
+
+        transaction.commit()
+
+
 
         
     

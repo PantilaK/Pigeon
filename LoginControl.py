@@ -11,6 +11,10 @@ class LoginController:
         self.view:LoginUI = LoginUI(self)
         self.view.show()
         self.clearErrorFields()
+
+    def enterLoginProcess(self):
+        self.view.show()
+        self.clearErrorField()
         
     def createAccount(self):
         pass
@@ -31,8 +35,6 @@ class LoginController:
             self.setErrorFieldText(message[1])
         else:
             # Send user information to another window
-            self.setErrorFieldText("go to main")
-            # temporary login function
             self.view.close()
             globals.currentUser = self.model.getUser(username)
             self.transferToMain()
@@ -71,6 +73,9 @@ class LoginController:
     
     def setErrorFieldTextCA(self, text:str):
         self.view.UI.CAerrorLabel.setText(text)
+
+    def changeUsername(self, username, newUsername):
+        self.model.changeUsername(username=username, newUsername=newUsername)
     
 
     

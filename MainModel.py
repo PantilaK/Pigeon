@@ -3,6 +3,7 @@ from TripControl import TripController
 import transaction
 import globals
 from datetime import datetime
+from Reminder import Reminder
 
 from typing import TYPE_CHECKING
 
@@ -17,18 +18,14 @@ class MainModel:
     def __init__(self, controller):
         self.controller: MainController = controller
 
-    def addTrip(self, tripName, mainUI, startDate: "QDateTime", endDate: "QDateTime"):
-        trip = Trip(tripName, startTime=startDate, endTime=endDate)
+    def addTrip(self, tripInfo:dict):
+        trip = Trip(tripInfo['name'], tripInfo['timeFrom'], tripInfo['timeTo'], Reminder(),
+                    tripInfo['remind'], tripInfo['timesensitive'], tripInfo['info'])
         globals.currentUser.addTrip(trip) # เวลาหาให้หาจากชื่อ trp.tripName
         
-        newTrip = TripController(trip=trip, mainUI=mainUI, mainController=self.controller)
-        newTrip.createUI()
-        newTrip.setTripName(newTrip.trip.getTripName())
-        
         transaction.commit()
-        return newTrip
 
-    def getTrips(self, mainUI, tripMode: "ShowMode"):
+    def getTrips(self, tripMode: "ShowMode"):
         trips = []
 
         trip: Trip
@@ -38,20 +35,14 @@ class MainModel:
 
             if self.before(sDate) and self.before(eDate):
                 if tripMode == tripMode.pastTrip:
-                    tripControl = TripController(trip=trip, mainUI=mainUI)
-                    tripControl.createUI()
-                    tripControl.setTripName(trip.getTripName()+trip.getStartDate().toString("yyyy-MM-dd hh:mm"))
+                    tripControl = TripController(trip=trip, mainControl=self.controller)
                     trips.append(tripControl)
             elif self.before(sDate):
                 if tripMode == tripMode.currentTrip:
-                    tripControl = TripController(trip=trip, mainUI=mainUI)
-                    tripControl.createUI()
-                    tripControl.setTripName(trip.getTripName()+trip.getStartDate().toString("yyyy-MM-dd hh:mm"))
+                    tripControl = TripController(trip=trip, mainControl=self.controller)
                     trips.append(tripControl)
             elif tripMode == tripMode.futureTrip:
-                tripControl = TripController(trip=trip, mainUI=mainUI)
-                tripControl.createUI()
-                tripControl.setTripName(trip.getTripName()+trip.getStartDate().toString("yyyy-MM-dd hh:mm"))
+                tripControl = TripController(trip=trip, mainControl=self.controller)
                 trips.append(tripControl)
 
         return trips
@@ -64,11 +55,16 @@ class MainModel:
         dTime = d.time()
         dDate = d.date()
 
-        if dDate.year() > today.year: return False
-        if dDate.month() > today.month: return False
-        if dDate.day() > today.day: return False
+        if dDate.year() == today.year and dDate.month() == today.month and dDate.day() == today.day:
+            if dTime.hour() > today.hour: return False
+            if dTime.minute() > today.minute: return False
 
-        if dTime.hour() > today.hour: return False
-        if dTime.minute() > today.minute: return False
+        if dDate.year() > today.year: return False
+        if dDate.year() < today.year: return True
+        
+        if dDate.month() > today.month: return False
+        if dDate.month() < today.month: return True
+        
+        if dDate.day() > today.day: return False
 
         return True

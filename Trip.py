@@ -67,5 +67,12 @@ class Trip(persistent.Persistent):
     def setTimesensitive(self, timesensitive):
         self.timesensitive = timesensitive
 
+    # Info
+    def getInfo(self):
+        return self.info
+    
+    def setInfo(self, info):
+        self.info = info
+
 
     
