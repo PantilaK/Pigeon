@@ -65,6 +65,12 @@ class ReminderController:
     #     transaction.commit()
     #     self.updateUI()
 
+    def showCheck(self):
+        isChecked = self.view.UI.showReminderCheckbox.isChecked()
+        self.model.setIsChecked(isChecked=isChecked)
+
+        transaction.commit()
+        self.updateUI()
 
     def setReminder(self):
         name = self.model.getName()
