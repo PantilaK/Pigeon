@@ -5,6 +5,7 @@ from TripControl import TripController
 import transaction
 from ComponentEditControl import EditController
 from Tripcomponent import *
+from Reminder import Reminder
 
 from typing import TYPE_CHECKING
 
@@ -62,7 +63,20 @@ class MainController:
         self.update()
 
     def newTrip(self):
-        EditController(canChangeType=False, controller=self, model=self.model) 
+        EditController(canChangeType=False, controller=self)
+
+    def addTrip(self, info: dict):
+        trip = Trip(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
+                    timesensitive=info['timesensitive'], info=info['info'], duration=info['duration'], reminder=Reminder())
+        
+        self.model.addTrip(trip=trip)
+        transaction.commit()
+        self.update()
+
+    def deleteTrip(self, trip:"Trip"):
+        self.model.removeTrip(trip=trip)
+        transaction.commit()
+        self.update()
 
     def getTrips(self):
         trips = []

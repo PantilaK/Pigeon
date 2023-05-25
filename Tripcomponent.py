@@ -178,9 +178,11 @@ class Event(Tripcomponent, persistent.Persistent):
 
 class Stay(Tripcomponent, persistent.Persistent):
 
-    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, flatRate, pricePerNight, night, totalPrice):
+    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, flatRate, flatRateCheck, pricePerNight, pricePerNightCheck, night, totalPrice):
         super().__init__(name, timeFrom, timeTo, remind, timesensitive, info)
         self.__flatRate = flatRate
+        self.__flatRateCheck = flatRateCheck
+        self.__pricePerNightCheck = pricePerNightCheck
         self.__pricePerNight = pricePerNight
         self.__night = night
         self.__totalPrice =  totalPrice
@@ -192,12 +194,26 @@ class Stay(Tripcomponent, persistent.Persistent):
     def setFlatRate(self, flatRate):
         self.__flatRate = flatRate
 
+    # Flat rate checked
+    def getFlatRateCheck(self):
+        return self.__flatRateCheck
+    
+    def setFlatRateCheck(self, flatRateCheck):
+        self.__flatRateCheck = flatRateCheck
+
     # Price per night
     def getPricePerNight(self):
         return self.__pricePerNight
     
     def setPricePerNight(self, pricePerNight):
         self.__pricePerNight = pricePerNight
+
+    # Price per night check
+    def getPPNCheck(self):
+        return self.__pricePerNightCheck
+    
+    def setPPNCheck(self, pPN):
+        self.__pricePerNightCheck = pPN
 
     # Night
     def getNight(self):

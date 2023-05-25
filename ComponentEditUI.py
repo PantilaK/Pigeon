@@ -116,9 +116,11 @@ class ComponentEditUI(QDialog):
         info = self.UI.tripInfoTextEdit_4.toPlainText()
         flatRate = self.UI.stayFlatPriceLineEdit.text()
         pricePerNight = self.UI.stayPricePerNightLineEdit.text()
+        flatRateChecked = self.UI.stayPricingFlatRateCheckBox.isChecked()
+        pricePNChecked = self.UI.stayPricingPricePerNightCheckBox.isChecked()
 
         stayInfo =  {'name': name, 'timeFrom': timeFrom, 'timeTo': timeTo, 'remind': remind,
                      'timesensitive': timesensitive, 'info': info, 'flatRate': flatRate,
-                     'pricePerNight': pricePerNight}
+                     'pricePerNight': pricePerNight, 'flatRateChecked': flatRateChecked, 'pricePerNightChecked': pricePNChecked}
         
         return stayInfo

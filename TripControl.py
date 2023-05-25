@@ -2,6 +2,7 @@ from TripComponentWidget import TripComponentWidget
 from ComponentEditControl import EditController
 from ReminderController import ReminderController
 from Tripcomponent import *
+import transaction
 
 from typing import TYPE_CHECKING
 
@@ -64,10 +65,11 @@ class TripController():
         self.update()
 
     def edit(self):
-        pass
+        EditController(controller=self, model=self.tripComponent)
 
     def delete(self):
-        pass
+        if type(self.tripComponent) is Trip:
+            self.mainControl.deleteTrip(self.tripComponent)
 
     def setTitle(self):
         t = type(self.tripComponent)
@@ -108,6 +110,7 @@ class TripController():
 
         self.view.addDetil(detail=detail)
 
+    # Get Information
     def tripInfo(self):
         info = f'''
         Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")} ({self.tripComponent.getDuration()} days)
@@ -115,15 +118,53 @@ class TripController():
         '''
 
         return info
-
+    
+    # Edit Component - Trip, Travel, Place, Eat, Event, Stay
+    
+    # Add Component - Travel, Place, Eat, Event, Stay
     def addComponent(self):
-        #temporary run code
-        EditController(controller=self, model=self.tripComponent)
+        EditController(controller=self)
 
+    def addTravel(self, info:dict):
+        travel = Travel(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
+                        timesensitive=info['timesensitive'], info=info['info'], ticketNeed=info['ticketNeed'], ticketPrice=info['ticketPrice'])
         
-        #temporary add component code, replace with update
-        # newComponentControl = TripController(mainControl=self)
-        # self.view.UI.componentLayout.addWidget(newComponentControl.view)
+        self.tripComponent.addComponent(component=travel)
+        transaction.commit()
+        self.update()
+
+    def addPlace(self, info:dict):
+        place = Place(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
+                      timesensitive=info['timesensitive'], info=info['info'], openTime=info['openTime'], closeTime=info['closeTime'], openInfo=info['openInfo'])
+        
+        self.tripComponent.addComponent(component=place)
+        transaction.commit()
+        self.update()
+
+    def addEat(self, info):
+        eat = Eat(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
+                  timesensitive=info['timesensitive'], info=info['info'], reservationNeed=info['reservation'])
+        
+        self.tripComponent.addComponent(component=eat)
+        transaction.commit()
+        self.update()
+
+    def addEvent(self, info):
+        event = Event(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
+                      timesensitive=info['timesensitive'], info=info['info'], type=info['type'], ticketNeed=info['ticketNeed'], ticketPrice=info['ticketPrice'])
+        
+        self.tripComponent.addComponent(component=event)
+        transaction.commit()
+        self.update()
+
+    def addStay(self, info:dict):
+        stay = Stay(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
+                      timesensitive=info['timesensitive'], info=info['info'], flatRate=info['flatRate'], pricePerNight=info['pricePerNight'], night=info['night'],
+                      flatRateCheck=info['flatRateCheck'], pricePerNightCheck=info['pricePerNightCheck'], totalPrice=info['totalPrice'])
+        
+        self.tripComponent.addComponent(component=stay)
+        transaction.commit()
+        self.update()
 
     def addReminder(self):
         #temporary run code
