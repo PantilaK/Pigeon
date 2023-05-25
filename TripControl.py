@@ -3,6 +3,7 @@ from ComponentEditControl import EditController
 from ReminderController import ReminderController
 from Tripcomponent import *
 import transaction
+from Reminder import Reminder
 
 from typing import TYPE_CHECKING
 
@@ -56,6 +57,13 @@ class TripController():
                 # trip.showInfo()
                 componentControl = TripController(tripComponent=c, mainControl=self, hasReminder=False, isExtendable=False)
                 self.view.addComponent(componentControl.view)
+
+            self.view.clearReminderList()
+            reminders: list["Reminder"] = self.tripComponent.getReminders()
+
+            for r in reminders:
+                reminderControl = ReminderController(parentController=self, model=r)
+                self.view.UI.tripReminderLayout.addWidget(reminderControl.view)
     
     def setUI(self, widget):
         self.widget = widget
@@ -67,6 +75,13 @@ class TripController():
     def delete(self):
         if type(self.tripComponent) is Trip:
             self.mainControl.deleteTrip(self.tripComponent)
+        else:
+            self.mainControl.deleteComponent(self.tripComponent)
+
+    def deleteComponent(self, component):
+        self.tripComponent.removeComponent(component=component)
+        transaction.commit()
+        self.update()
 
     def setTitle(self):
         t = type(self.tripComponent)
@@ -95,15 +110,15 @@ class TripController():
         if t == Trip:
             detail = self.tripInfo()
         elif t == Travel:
-            title = f'{self.tripComponent.getName()} (Travel)'
+            detail = self.travelInfo()
         elif t == Place:
-            title = f'{self.tripComponent.getName()} (Place)'
+            detail = self.placeInfo()
         elif t == Eat:
-            title = f'{self.tripComponent.getName()} (Eat)'
+            detail = self.eatInfo
         elif t == Event:
-            title = f'{self.tripComponent.getName()} (Event)'
+            detail = self.eventInfo()
         elif t == Stay:
-            title = f'{self.tripComponent.getName()} (Stay)'
+            detail = self.stayInfo()
 
         self.view.addDetil(detail=detail)
 
@@ -111,9 +126,52 @@ class TripController():
     def tripInfo(self):
         info = f'''
         Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")} ({self.tripComponent.getDuration()} days)
-        Info: {self.tripComponent.getInfo()}
+        Information: {self.tripComponent.getInfo()}
         '''
-
+        return info
+    
+    def travelInfo(self):
+        ticket = self.tripComponent.getTicketPrice() if self.tripComponent.getTicketNeed() else "No Ticket Needed"
+        info = f'''
+        Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")}
+        Ticket: {ticket}
+        Information: {self.tripComponent.getInfo()}
+        '''
+        return info
+    
+    def placeInfo(self):
+        info = f'''
+        Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")}
+        Open: {self.tripComponent.getOpenTime().toString("hh:mm")} - {self.tripComponent.getCloseTime().toString("hh:mm")} Extra Information: {self.tripComponent.getOpenInfo()}
+        Information: {self.tripComponent.getInfo()}
+        '''
+        return info
+    
+    def eatInfo(self):
+        reservation = "Required" if self.tripComponent.getResevationNeed() else "No Reservation Needed"
+        info = f'''
+        Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")}
+        Reservation: {reservation}
+        Information: {self.tripComponent.getInfo()}
+        '''
+        return info
+    
+    def eventInfo(self):
+        ticket = self.tripComponent.getTicketPrice() if self.tripComponent.getTicketNeed() else "No Ticket Needed"
+        info = f'''
+        Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")}
+        Type of Event: {self.tripComponent.getType()}
+        Ticket: {ticket}
+        Information: {self.tripComponent.getInfo()}
+        '''
+        return info
+    
+    def stayInfo(self):
+        info = f'''
+        Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")} ({self.tripComponent.getNight()} nights)
+        Total Price: {self.tripComponent.getTotalPrice()}
+        Information: {self.tripComponent.getInfo()}
+        '''
         return info
     
     # Edit Component - Trip, Travel, Place, Eat, Event, Stay
@@ -247,9 +305,29 @@ class TripController():
         transaction.commit()
         self.update()
 
-    def addReminder(self):
-        #temporary run code
-        newReminder = ReminderController(parentController=self)
+    # def addReminder(self):
+    #     #temporary run code
+    #     newReminder = ReminderController(parentController=self, model=self.tripComponent)
 
-        #temporary add component code, replace with update
-        self.view.UI.tripReminderLayout.addWidget(newReminder.view)
+    #     #temporary add component code, replace with update
+    #     self.view.UI.tripReminderLayout.addWidget(newReminder.view)
+
+    def addReminder(self):
+        name = self.view.UI.tripReminderLineEdit.text()
+        reminder = Reminder(name=name)
+        self.tripComponent.addReminder(reminder=reminder)
+        self.view.UI.tripReminderLineEdit.setText('')
+
+        transaction.commit()
+        self.update()
+
+    def editReminder(self, name, isChecked, reminder:"Reminder"):
+        reminder.setName(name=name)
+        reminder.setIsChecked(isChecked=isChecked)
+        
+        transaction.commit()
+        self.update()
+
+
+    def deleteReminder(self):
+        pass

@@ -9,6 +9,7 @@ class User(persistent.Persistent):
         self.__password = password
         self.__name = None
         self.__trips = persistent.list.PersistentList()
+        self.__notifications = persistent.list.PersistentList()
 
     # Username
     def getUsername(self):
@@ -40,3 +41,13 @@ class User(persistent.Persistent):
 
     def removeTrip(self, trip):
         self.__trips.remove(trip)
+
+    # Notification
+    def getNotifications(self):
+        return self.__notifications
+    
+    def addNotification(self, notification):
+        self.__notifications.append(notification)
+
+    def removeNotification(self, notification):
+        self.__notifications.remove(notification)

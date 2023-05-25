@@ -39,6 +39,7 @@ class MainController:
         #update UI with model
         self.view.clearTripList()
         trips: list["Trip"] = self.getTrips()
+        print( trips, "KOOKO")
 
         for trip in trips:
             # trip.setTitle()
@@ -67,7 +68,7 @@ class MainController:
 
     def addTrip(self, info: dict):
         trip = Trip(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
-                    timesensitive=info['timesensitive'], info=info['info'], duration=info['duration'], reminder=Reminder())
+                    timesensitive=info['timesensitive'], info=info['info'], duration=info['duration'])
         
         self.model.addTrip(trip=trip)
         transaction.commit()

@@ -21,6 +21,10 @@ class TripComponentWidget(QWidget):
         for i in reversed(range(self.UI.componentLayout.count())):
             self.UI.componentLayout.itemAt(i).widget().setParent(None)
 
+    def clearReminderList(self):
+        for i in reversed(range(self.UI.tripReminderLayout.count())):
+            self.UI.tripReminderLayout.itemAt(i).widget().setParent(None)
+
     def expandButtonClicked(self):
         self.controller.expand()
 
@@ -40,7 +44,7 @@ class TripComponentWidget(QWidget):
         self.controller.addReminder()
     
     # Add detail
-    def addDetil(self, detail):
+    def addDetil(self, detail:str):
         self.UI.label.setText(detail)
 
     def setTitle(self, title):

@@ -16,6 +16,7 @@ class Tripcomponent(ABC):
         self.__timeTo:"QDateTime" = timeTo
         self.__remind:bool = remind
         self.__timesensitive = timesensitive # Important
+        self.__notification = False
         self.__briefInfo = info # Brief information
 
     # Name
@@ -58,12 +59,19 @@ class Tripcomponent(ABC):
     def writeInfo(self, info):
         self.__briefInfo = info
 
+    # Notification - False, True
+    def getNotification(self):
+        return self.__notification
+    
+    def setNotification(self, noti):
+        self.__notification = noti
+
 class Trip(Tripcomponent, persistent.Persistent):
     
-    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, duration, reminder):
+    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, duration):
         super().__init__(name, timeFrom, timeTo, remind, timesensitive, info)
         self.__duration = duration
-        self.reminder:"Reminder" = reminder
+        self.__reminder: list["Reminder"] = persistent.list.PersistentList()
         self.__componentList = persistent.list.PersistentList()
 
     # Duration
@@ -82,6 +90,16 @@ class Trip(Tripcomponent, persistent.Persistent):
 
     def removeComponent(self, component):
         self.__componentList.remove(component)
+
+    # Reminder List
+    def getReminders(self):
+        return self.__reminder
+    
+    def addReminder(self, reminder:"Reminder"):
+        self.__reminder.append(reminder)
+
+    def removeReminder(self, reminder):
+        self.__reminder.remove(reminder)
 
 
 class Travel(Tripcomponent, persistent.Persistent):
