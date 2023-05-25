@@ -20,7 +20,8 @@ class NotificationController:
 
     def dismiss(self):
         #delete notification
-        pass
+        print("J")
+        self.parentController.deleteNoti(self.model)
 
     def setNoti(self):
         name = self.model.getName()

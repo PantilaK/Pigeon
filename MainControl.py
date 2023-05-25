@@ -137,16 +137,6 @@ class MainController:
         #go to settings
         SettingController(mainController=self)
 
-    # def addNotification(self):
-    #     trips: list["Trip"] = self.getTrips(ShowMode.currentTrip)
-    #     trips.extend(self.getTrips(ShowMode.futureTrip))
-
-    #     for t in trips:
-    #         if t.getRemind() and not t.getNotification():
-    #             if self.timeDifference(t.getTimesensitive()):
-    #                 noti = Notification(name=t.get)
-    #                 self.model.addNotification()
-
     def checkNoti(self):
         trips: list["Trip"] = self.getTrips()
 
@@ -180,6 +170,12 @@ class MainController:
     def addNoti(self, detail):
         noti = Notification(name=detail)
         self.model.addNotification(noti)
+
+        transaction.commit()
+        self.update()
+
+    def deleteNoti(self, noti:"Notification"):
+        self.model.removeNotification(noti)
 
         transaction.commit()
         self.update()
