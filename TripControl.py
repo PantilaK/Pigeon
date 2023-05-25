@@ -97,8 +97,10 @@ class TripController():
             title = f'{self.tripComponent.getName()} (Eat)'
         elif t == Event:
             title = f'{self.tripComponent.getName()} (Event)'
+        elif t == CheckIn:
+            title = f'{self.tripComponent.getName()} (Check In)'
         elif t == Stay:
-            title = f'{self.tripComponent.getName()} (Stay)'
+            title = f'{self.tripComponent.getName()} (Check Out)'
         print(t)
         print(title)
         self.view.setTitle(title)
@@ -114,7 +116,7 @@ class TripController():
         elif t == Place:
             detail = self.placeInfo()
         elif t == Eat:
-            detail = self.eatInfo
+            detail = self.eatInfo()
         elif t == Event:
             detail = self.eventInfo()
         elif t == Stay:
@@ -243,6 +245,41 @@ class TripController():
         transaction.commit()
         self.update()
 
+    def editCheckIn(self, info:dict):
+        self.tripComponent.setName(info['name'])
+        self.tripComponent.setTimeFrom(info['timeFrom'])
+        self.tripComponent.setTimeTo(info['timeTo'])
+        self.tripComponent.setRemind(info['remind'])
+        self.tripComponent.setTimesensitive(info['timesensitive'])
+        self.tripComponent.writeInfo(info['info'])
+        self.tripComponent.setFlatRate(info['flatRate'])
+        self.tripComponent.setFlatRateCheck(info['flatRateCheck'])
+        self.tripComponent.setPricePerNight(info['pricePerNight'])
+        self.tripComponent.setPPNCheck(info['pricePerNightCheck'])
+        self.tripComponent.setNight(info['night'])
+        self.tripComponent.setTotalPrice(info['totalPrice'])
+
+        transaction.commit()
+        self.update()
+
+    def editCheckOut(self, info:dict):
+        self.tripComponent.setName(info['name'])
+        self.tripComponent.setTimeFrom(info['timeTo'])
+        self.tripComponent.setTimeTo(info['timeTo'])
+        self.tripComponent.setRemind(info['remind'])
+        self.tripComponent.setTimesensitive(info['timesensitive'])
+        self.tripComponent.writeInfo(info['info'])
+        self.tripComponent.setFlatRate(info['flatRate'])
+        self.tripComponent.setFlatRateCheck(info['flatRateCheck'])
+        self.tripComponent.setPricePerNight(info['pricePerNight'])
+        self.tripComponent.setPPNCheck(info['pricePerNightCheck'])
+        self.tripComponent.setNight(info['night'])
+        self.tripComponent.setTotalPrice(info['totalPrice'])
+        self.tripComponent.setCheckInDate(info['timeFrom'])
+
+        transaction.commit()
+        self.update()
+
     def editStay(self, info:dict):
         self.tripComponent.setName(info['name'])
         self.tripComponent.setTimeFrom(info['timeFrom'])
@@ -293,6 +330,24 @@ class TripController():
                       timesensitive=info['timesensitive'], info=info['info'], type=info['type'], ticketNeed=info['ticketNeed'], ticketPrice=info['ticketPrice'])
         
         self.tripComponent.addComponent(component=event)
+        transaction.commit()
+        self.update()
+
+    def addCheckIn(self, info:dict):
+        checkIn = CheckIn(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
+                      timesensitive=info['timesensitive'], info=info['info'], flatRate=info['flatRate'], pricePerNight=info['pricePerNight'], night=info['night'],
+                      flatRateCheck=info['flatRateCheck'], pricePerNightCheck=info['pricePerNightCheck'], totalPrice=info['totalPrice'])
+        
+        self.tripComponent.addComponent(component=checkIn)
+        transaction.commit()
+        self.update()
+
+    def addCheckOut(self, info:dict):
+        checkOut = CheckOut(name=info['name'], timeFrom=info['timeTo'], timeTo=info['timeTo'], remind=info['remind'],
+                      timesensitive=info['timesensitive'], info=info['info'], flatRate=info['flatRate'], pricePerNight=info['pricePerNight'], night=info['night'],
+                      flatRateCheck=info['flatRateCheck'], pricePerNightCheck=info['pricePerNightCheck'], totalPrice=info['totalPrice'], checkInDate=info['timeFrom'])
+        
+        self.tripComponent.addComponent(component=checkOut)
         transaction.commit()
         self.update()
 

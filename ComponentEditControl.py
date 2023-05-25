@@ -21,9 +21,9 @@ class TypeIndex(IntEnum):
     trip = 0
     travel = 1
     place = 2
-    stay = 2
-    eat = 3
-    event = 4  
+    stay = 3
+    eat = 4
+    event = 5  
 
     #default placeholder
     none = -1
@@ -32,7 +32,8 @@ typeStringToIndexDict:dict[str,int] = {TypeString.trip:TypeIndex.trip,
                                         TypeString.travel:TypeIndex.travel,
                                         TypeString.place:TypeIndex.place,
                                         TypeString.stay:TypeIndex.stay,
-                                        TypeString.event:TypeIndex.event}
+                                        TypeString.event:TypeIndex.event,
+                                        TypeString.eat:TypeIndex.eat}
 
 
 
@@ -59,9 +60,11 @@ class EditController:
                 self.currentShowMode = TypeString.place
                 self.setTextPlaceEdit()
             elif t == Eat:
+                print("Ea")
                 self.currentShowMode = TypeString.eat
                 self.setTextEatEdit()
             elif t == Event:
+                print("E")
                 self.currentShowMode = TypeString.event
                 self.setTextEventEdit()
             elif t == Stay:
@@ -151,9 +154,12 @@ class EditController:
             info = self.getStayInfo()
 
             if self.model is None:
-                self.controller.addStay(info=info)
+                # self.controller.addStay(info=info)
+                self.controller.addCheckIn(info=info)
+                self.controller.addCheckOut(info=info)
             else:
-                self.controller.editStay(info=info)
+                self.controller.editCheckIn(info=info)
+                self.controller.editCheckOut(info=info)
 
         self.view.close()
 
@@ -340,7 +346,7 @@ class EditController:
 
         stayInfo =  {'name': name, 'timeFrom': timeFrom, 'timeTo': timeTo, 'remind': remind,
                      'timesensitive': timesensitive, 'info': info, 'flatRate': flatRate,
-                     'pricePerNight': pricePerNight, 'flatRateChecked': flatRateChecked, 'pricePerNightChecked': pricePNChecked,
+                     'pricePerNight': pricePerNight, 'flatRateCheck': flatRateChecked, 'pricePerNightCheck': pricePNChecked,
                      'night': night, 'totalPrice': totalPrice}
         
         return stayInfo

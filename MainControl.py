@@ -32,7 +32,7 @@ class MainController:
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.checkNoti)
-        self.timer.start(30000)
+        self.timer.start(1000)
 
     def enterMainProcess(self):
         self.update()
@@ -146,26 +146,27 @@ class MainController:
                 detail = f'Trip: {t.getName()} start on {t.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
                 self.addNoti(detail=detail)
 
-                components: list["Tripcomponent"] = t.getComponents()
-                for c in components:
-                    if c.getRemind() and not c.getNotification() and self.checkTime(c.getTimesensitive()):
-                        c.setNotification(True)
-                        detail = ''
+            components: list["Tripcomponent"] = t.getComponents()
+            for c in components:
+                if c.getRemind() and not c.getNotification() and self.checkTime(c.getTimesensitive()):
+                    c.setNotification(True)
+                    detail = ''
+                    print("lolo")
                         
-                        if type(c) == Travel:
-                            detail = f'Travel: {t.getName()} on {t.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
-                        elif type(c) == Place:
-                            detail = f'Place: {t.getName()} on {t.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
-                        elif type(c) == Eat:
-                            detail = f'Travel: {t.getName()} on {t.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
-                        elif type(c) == Event:
-                            detail = f'Travel: {t.getName()} on {t.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
-                        elif type(c) == CheckIn:
-                            detail = f'Check In: {t.getName()} on {t.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
-                        elif type(c) == CheckOut:
-                            detail = f'Check Out: {t.getName()} on {t.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
-                        
-                        self.addNoti(detail=detail)
+                    if type(c) == Travel:
+                        detail = f'Travel: {c.gecName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                    elif type(c) == Place:
+                        detail = f'Place: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                    elif type(c) == Eat:
+                        detail = f'Travel: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                    elif type(c) == Event:
+                        detail = f'Travel: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                    elif type(c) == CheckIn:
+                        detail = f'Check In: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                    elif type(c) == CheckOut:
+                        detail = f'Check Out: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+
+                    self.addNoti(detail=detail)
 
     def addNoti(self, detail):
         noti = Notification(name=detail)
@@ -185,4 +186,4 @@ class MainController:
         today = datetime(year=t.year, month=t.month, day=t.day, hour=t.hour, minute=t.minute)
         d = datetime(year=d1.date().year(), month=d1.date().month(), day=d1.date().day(), hour=d1.time().hour(), minute=d1.time().minute())
 
-        return today == d
+        return today >= d

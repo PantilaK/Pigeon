@@ -11,6 +11,27 @@ class ComponentEditUI(QDialog):
 
         self.UI.tripFromDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
         self.UI.tripToDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.UI.tripTimeSensitiveDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+
+        self.UI.travelFromDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.UI.travelToDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.UI.travelTimeSensitiveDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+
+        self.UI.placeFromDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.UI.placeToDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.UI.placeTimeSensitiveDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+
+        self.UI.eventFromDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.UI.eventToDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.UI.eventTimeSensitiveDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+
+        self.UI.eatFromDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.UI.eatToDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.UI.eatTimeSensitiveDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+
+        self.UI.stayFromDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.UI.stayToDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.UI.stayTimeSensitiveDateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
 
         self.UI.typeComboBox.currentTextChanged.connect(self.typeComboBoxChanged)
         self.UI.okButton.clicked.connect(self.okButtonClicked)
