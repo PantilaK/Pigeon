@@ -88,6 +88,14 @@ class EditController:
             self.addTrip()
         elif source == 'Travel':
             self.addTravel()
+        elif source == 'Place':
+            self.addPlace()
+        elif source == 'Eat':
+            self.addEat()
+        elif source == 'Event':
+            self.addEvent()
+        elif source == 'Stay':
+            self.addStay()
 
         transaction.commit()
         self.controller.update()
@@ -105,16 +113,64 @@ class EditController:
     def addTravel(self):
         info = self.view.getTravelInfo()
         travel = Travel(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
-                    timesensitive=info['timesensitive'], info=info['info'], ticketNeed=info['ticketNeed'], ticketPrice=info['ticketPrice'])
+                        timesensitive=info['timesensitive'], info=info['info'], ticketNeed=info['ticketNeed'], ticketPrice=info['ticketPrice'])
         
         self.model.addComponent(component=travel)
+
+    def addPlace(self):
+        info = self.view.getPlaceInfo()
+        place = Place(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
+                      timesensitive=info['timesensitive'], info=info['info'], openTime=info['openTime'], closeTime=info['closeTime'], openInfo=info['openInfo'])
+        
+        self.model.addComponent(component=place)
+
+    def addEat(self):
+        info = self.view.getEatInfo()
+        eat = Eat(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
+                  timesensitive=info['timesensitive'], info=info['info'], reservationNeed=info['reservation'])
+        
+        self.model.addComponent(component=eat)
+
+    def addEvent(self):
+        info = self.view.getEventInfo()
+        event = Event(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
+                      timesensitive=info['timesensitive'], info=info['info'], type=info['type'], ticketNeed=info['ticketNeed'], ticketPrice=info['ticketPrice'])
+        
+        self.model.addComponent(component=event)
+
+    def addStay(self):
+        info = self.view.getStayInfo()
+        flatRate = info['flatRate']
+        pricePerNight = info['pricePerNight']
+        night = self.daysBetweenDates(info['timeFrom'], info['timeTo'])
+
+        flatRate = self.toFloat(flatRate)
+        pricePerNight = self.toFloat(pricePerNight)
+
+        totalPrice = flatRate + (night * pricePerNight)
+        
+        stay = Stay(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
+                      timesensitive=info['timesensitive'], info=info['info'], flatRate=flatRate, pricePerNight=pricePerNight, night=night, totalPrice=totalPrice)
+        
+        self.model.addComponent(component=stay)
+        
+    # Check if str can be converted to float
+    def toFloat(self, s):
+        if s is None: 
+            return 0
+
+        try:
+            return float(s)
+        except ValueError:
+            return 0
 
     # Find days between dates
     def daysBetweenDates(self, d1:"QDateTime", d2:"QDateTime"):
         day1 = date(year=d1.date().year(), month=d1.date().month(), day=d1.date().day())
         day2 = date(year=d2.date().year(), month=d2.date().month(), day=d2.date().day())
 
-        return day2 - day1  
+        d = day2 - day1
+        return d.days
 
     # Get Info
     # def getinfo(self):

@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 
 class TripController():
     def __init__(self, tripComponent=None, mainControl=None, isExpanded=False, hasReminder=True, isExtendable=True):
-        self.tripComponent:"Trip" = tripComponent
+        self.tripComponent:"Tripcomponent" = tripComponent
         self.isExpanded:bool = isExpanded
         self.hasReminder:bool = hasReminder
         self.isExtendable:bool = isExtendable
@@ -42,15 +42,18 @@ class TripController():
             self.view.UI.tripComponentControlWidget.setVisible(False)
             self.view.UI.componentWidget.setVisible(False)
 
+        self.setTitle()
+        self.showInfo()
+
         if type(self.tripComponent) == Trip:
-            self.setTitle()
+            # self.setTitle()
             self.view.clearComponentLists()
             components: list["Tripcomponent"] = self.tripComponent.getComponents()
 
             for c in components:
                 # trip.setTitle()
                 # trip.showInfo()
-                componentControl = TripController(tripComponent=components, mainControl=self, hasReminder=False, isExtendable=False)
+                componentControl = TripController(tripComponent=c, mainControl=self, hasReminder=False, isExtendable=False)
                 self.view.addComponent(componentControl.view)
     
     def setUI(self, widget):
@@ -68,11 +71,50 @@ class TripController():
 
     def setTitle(self):
         t = type(self.tripComponent)
+        title = ''
 
         if t == Trip:
             title = f'{self.tripComponent.getName()} (Trip)'
+        elif t == Travel:
+            title = f'{self.tripComponent.getName()} (Travel)'
+        elif t == Place:
+            title = f'{self.tripComponent.getName()} (Place)'
+        elif t == Eat:
+            title = f'{self.tripComponent.getName()} (Eat)'
+        elif t == Event:
+            title = f'{self.tripComponent.getName()} (Event)'
+        elif t == Stay:
+            title = f'{self.tripComponent.getName()} (Stay)'
+        print(t)
+        print(title)
+        self.view.setTitle(title)
 
-        self.view.setTitle(title=title)
+    def showInfo(self):
+        t = type(self.tripComponent)
+        detail = ''
+
+        if t == Trip:
+            detail = self.tripInfo()
+        elif t == Travel:
+            title = f'{self.tripComponent.getName()} (Travel)'
+        elif t == Place:
+            title = f'{self.tripComponent.getName()} (Place)'
+        elif t == Eat:
+            title = f'{self.tripComponent.getName()} (Eat)'
+        elif t == Event:
+            title = f'{self.tripComponent.getName()} (Event)'
+        elif t == Stay:
+            title = f'{self.tripComponent.getName()} (Stay)'
+
+        self.view.addDetil(detail=detail)
+
+    def tripInfo(self):
+        info = f'''
+        Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")} ({self.tripComponent.getDuration()} days)
+        Info: {self.tripComponent.getInfo()}
+        '''
+
+        return info
 
     def addComponent(self):
         #temporary run code
