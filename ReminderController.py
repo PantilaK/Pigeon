@@ -44,7 +44,7 @@ class ReminderController:
 
     def delete(self):
         #delete reminder
-        pass
+        self.parentController.deleteReminder(self.model)
 
     def editFinished(self):
         #get values

@@ -328,6 +328,8 @@ class TripController():
         transaction.commit()
         self.update()
 
+    def deleteReminder(self, reminder:"Reminder"):
+        self.tripComponent.removeReminder(reminder)
 
-    def deleteReminder(self):
-        pass
+        transaction.commit()
+        self.update()
