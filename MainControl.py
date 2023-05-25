@@ -112,25 +112,6 @@ class MainController:
                 trips.append(trip)
 
         return trips
-    
-    def before(self, d: "QDateTime"):
-        today = datetime.today()
-        dTime = d.time()
-        dDate = d.date()
-
-        if dDate.year() == today.year and dDate.month() == today.month and dDate.day() == today.day:
-            if dTime.hour() > today.hour: return False
-            if dTime.minute() > today.minute: return False
-
-        if dDate.year() > today.year: return False
-        if dDate.year() < today.year: return True
-        
-        if dDate.month() > today.month: return False
-        if dDate.month() < today.month: return True
-        
-        if dDate.day() > today.day: return False
-
-        return True
 
     # Call Setting
     def settings(self):
@@ -141,14 +122,14 @@ class MainController:
         trips: list["Trip"] = self.getTrips()
 
         for t in trips:
-            if t.getRemind() and not t.getNotification() and self.checkTime(t.getTimesensitive()):
+            if t.getRemind() and not t.getNotification() and self.before(t.getTimesensitive()):
                 t.setNotification(True)
                 detail = f'Trip: {t.getName()} start on {t.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
                 self.addNoti(detail=detail)
 
             components: list["Tripcomponent"] = t.getComponents()
             for c in components:
-                if c.getRemind() and not c.getNotification() and self.checkTime(c.getTimesensitive()):
+                if c.getRemind() and not c.getNotification() and self.before(c.getTimesensitive()):
                     c.setNotification(True)
                     detail = ''
                     print("lolo")
@@ -181,7 +162,7 @@ class MainController:
         transaction.commit()
         self.update()
 
-    def checkTime(self, d1:"QDateTime"):
+    def before(self, d1:"QDateTime"):
         t = datetime.today()
         today = datetime(year=t.year, month=t.month, day=t.day, hour=t.hour, minute=t.minute)
         d = datetime(year=d1.date().year(), month=d1.date().month(), day=d1.date().day(), hour=d1.time().hour(), minute=d1.time().minute())

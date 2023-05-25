@@ -64,7 +64,6 @@ class EditController:
                 self.currentShowMode = TypeString.eat
                 self.setTextEatEdit()
             elif t == Event:
-                print("E")
                 self.currentShowMode = TypeString.event
                 self.setTextEventEdit()
             elif t == Stay:
@@ -154,12 +153,9 @@ class EditController:
             info = self.getStayInfo()
 
             if self.model is None:
-                # self.controller.addStay(info=info)
-                self.controller.addCheckIn(info=info)
-                self.controller.addCheckOut(info=info)
+                self.controller.addStay(info=info)
             else:
-                self.controller.editCheckIn(info=info)
-                self.controller.editCheckOut(info=info)
+                self.controller.editStay(info=info)
 
         self.view.close()
 
