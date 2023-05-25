@@ -105,7 +105,4 @@ class MainController:
     # Call Setting
     def settings(self):
         #go to settings
-        SettingController(self)
-
-    def changeUsername(self, username, newUsername):
-        self.loginController.changeUsername(username=username, newUsername=newUsername)
+        SettingController(mainController=self)

@@ -1,5 +1,4 @@
 from settingUI import settingUI
-import globals
 import hashlib
 
 from typing import TYPE_CHECKING
@@ -12,8 +11,8 @@ class SettingController:
         self.mainController: "MainController" = mainController
         self.view:settingUI = settingUI(self, self.mainController.view)
 
-        self.usernameErrorMessage = " "
-        self.passwordErrorMessage = " "
+        self.usernameErrorMessage = ""
+        self.passwordErrorMessage = ""
         self.updateUI()
 
         self.view.exec()
@@ -22,32 +21,47 @@ class SettingController:
     def updateUI(self):
         self.view.UI.passwordErrorLabel.setText(self.passwordErrorMessage)
         self.view.UI.usernameErrorLabel.setText(self.usernameErrorMessage)
-        self.view.setUsername()
+
+        username = self.mainController.model.getUsername()
+        print(username)
+        self.view.setUsername(username=username)
 
     def changeUsername(self):
         # change username button is clicked from UI
-        username = globals.currentUser.username
-        newUsername = self.view.getNewUsername()
-        self.mainController.changeUsername(username=username, newUsername=newUsername)
-        self.view.setUsername()
+        username = self.mainController.model.getUsername()
+        newUsername = self.view.getNewUsername().strip()
+
+        m = self.mainController.loginController.model.changeUsername(username=username, newUsername=newUsername)
+        self.usernameErrorMessage = m
+        self.updateUI()
 
     def changePassword(self):
         # change password button is clicked from UI
-        username = globals.currentUser.username
-        password = globals.currentUser.password
+        username = self.mainController.model.getUsername()
+        password = self.mainController.model.getPassword()
         previousPassword = self.view.getPassword()
         newPassword = self.view.getNewPassword()
         hash = hashlib.sha256(previousPassword.encode()).hexdigest()
         print(previousPassword, password)
         
         if self.mainController.loginController.model.isPasswordMatched(hash, password)[0]:
-            print("MMMM")
-            self.mainController.loginController.model.changePassword(username=username, password=newPassword)
+            m = self.mainController.loginController.model.changePassword(username=username, password=newPassword)
+            self.passwordErrorMessage = m
+
+        self.updateUI()
 
     def checkPassword(self):
         password = self.view.getNewPassword()
         confirmPassword = self.view.getNewPasswordConfirm()
 
-        isMatched = self.mainController.loginController.model.isPasswordMatched(password, confirmPassword)[0]
+        r = self.mainController.loginController.model.isPasswordMatched(password, confirmPassword)
+        isMatched = r[0]
+        m = r[1]
+        self.passwordErrorMessage = m
 
         self.view.setEnableChangePasswordButton(isMatched)
+
+        self.updateUI()
+
+    def done(self):
+        self.view.close()

@@ -72,8 +72,5 @@ class LoginController:
     def setErrorFieldTextCA(self, text:str):
         self.view.UI.CAerrorLabel.setText(text)
 
-    def changeUsername(self, username, newUsername):
-        self.model.changeUsername(username=username, newUsername=newUsername)
-    
 
     

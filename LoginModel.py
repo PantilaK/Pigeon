@@ -74,8 +74,7 @@ class LoginModel:
         return user
     
     def changeUsername(self, newUsername: str, username: str):
-        ruser = newUsername.strip()
-        newUsername = ruser
+        newUsername = newUsername
 
         if newUsername == "":
             return "Invalid username"
@@ -84,14 +83,14 @@ class LoginModel:
             return "Username already exists"
         
         self.storingNewUsername(username=username, newUsername=newUsername)
-        return "Username Sucesfully Changed"
+        return "Username Change Sucessfully"
     
     def storingNewUsername(self, username, newUsername):
         tmp = self.root['username']
 
         user:User = tmp[username]
         del tmp[username]
-        user.username = newUsername
+        user.setUsername(username=newUsername)
 
         tmp[newUsername] = user
         self.root['username'] = tmp
@@ -107,12 +106,13 @@ class LoginModel:
         tmp = self.root['username']
 
         user:User = tmp[username]
-        user.password = hash
+        user.setPassword(hash)
 
         tmp[username] = user
         self.root['username'] = tmp
 
         transaction.commit()
+        return "Password Changed Sucessfully"
 
 
 
