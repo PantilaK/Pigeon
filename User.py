@@ -5,35 +5,38 @@ import persistent, persistent.list
 class User(persistent.Persistent):
     
     def __init__(self, username, password):
-        self.username = username
-        self.password = password
-        self.name = None
-        self.trips = persistent.list.PersistentList()
+        self.__username = username
+        self.__password = password
+        self.__name = None
+        self.__trips = persistent.list.PersistentList()
 
     # Username
     def getUsername(self):
-        return self.username
+        return self.__username
     
     def setUsername(self, username):
-        self.username = username
+        self.__username = username
 
     # Password
     def getPassword(self):
-        return self.password
+        return self.__password
     
     def setPassword(self, password):
-        self.password = password
+        self.__password = password
 
     # Name
     def getName(self):
-        return self.name
+        return self.__name
     
     def setName(self, name):
-        self.name = name
+        self.__name = name
 
     # Trips
+    def getTrips(self):
+        return self.__trips
+
     def addTrip(self, trip):
-        self.trips.append(trip)
+        self.__trips.append(trip)
 
     def removeTrip(self, trip):
-        self.trips.remove(trip)
+        self.__trips.remove(trip)

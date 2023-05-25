@@ -1,4 +1,3 @@
-from Trip import Trip
 from TripControl import TripController
 import transaction
 import globals

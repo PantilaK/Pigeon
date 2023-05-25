@@ -1,11 +1,14 @@
 from ComponentEditUI import *
-from ComponentEditModel import *
 from enum import IntEnum, Enum
+from Reminder import Reminder
+from datetime import date
+from Tripcomponent import *
+import transaction
 
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from Trip import Trip
+    from User import User
 
 class TypeString(str, Enum):
     trip = "Trip"
@@ -38,9 +41,9 @@ class EditController:
     
     def __init__(self, model=None, typeEdit:str=TypeString.trip, canChangeType:bool = True, controller = None):
         self.view:ComponentEditUI = ComponentEditUI(self)
-        self.model:ComponentEditModel = ComponentEditModel(self) #replace this with model constructor
         self.currentShowMode:str = typeEdit
         self.canChangeType:bool = canChangeType
+        self.model = model
 
         self.controller = controller
 
@@ -80,26 +83,55 @@ class EditController:
 
     def ok(self):
         source = self.view.getSelectedType()
-        self.model.ok(source, self.controller)
+
+        if source == 'Trip':
+            self.addTrip()
+        elif source == 'Travel':
+            self.addTravel()
+
+        transaction.commit()
+        self.controller.update()
 
         self.view.close()
 
+    def addTrip(self):
+        info = self.view.getTripInfo()
+        duration = self.daysBetweenDates(info['timeFrom'], info['timeTo'])
+        trip = Trip(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
+                    timesensitive=info['timesensitive'], info=info['info'], duration=duration, reminder=Reminder())
+        
+        self.model.addTrip(trip=trip)
+
+    def addTravel(self):
+        info = self.view.getTravelInfo()
+        travel = Travel(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
+                    timesensitive=info['timesensitive'], info=info['info'], ticketNeed=info['ticketNeed'], ticketPrice=info['ticketPrice'])
+        
+        self.model.addComponent(component=travel)
+
+    # Find days between dates
+    def daysBetweenDates(self, d1:"QDateTime", d2:"QDateTime"):
+        day1 = date(year=d1.date().year(), month=d1.date().month(), day=d1.date().day())
+        day2 = date(year=d2.date().year(), month=d2.date().month(), day=d2.date().day())
+
+        return day2 - day1  
+
     # Get Info
-    def getTripInfo(self):
-        return self.view.getTripInfo()
+    # def getinfo(self):
+    #     return self.view.getTripInfo()
     
-    def getTravelInfo(self):
-        return self.view.getTravelInfo()
+    # def getTravelInfo(self):
+    #     return self.view.getTravelInfo()
     
-    def getPlaceInfo(self):
-        return self.view.getPlaceInfo()
+    # def getPlaceInfo(self):
+    #     return self.view.getPlaceInfo()
     
-    def getEatInfo(self):
-        return self.view.getEatInfo()
+    # def getEatInfo(self):
+    #     return self.view.getEatInfo()
     
-    def getEventInfo(self):
-        return self.view.getEventInfo()
+    # def getEventInfo(self):
+    #     return self.view.getEventInfo()
     
-    def getStayInfo(self):
-        return self.view.getStayInfo()
+    # def getStayInfo(self):
+    #     return self.view.getStayInfo()
     

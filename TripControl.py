@@ -1,30 +1,23 @@
 from TripComponentWidget import TripComponentWidget
 from ComponentEditControl import EditController
 from ReminderController import ReminderController
-import globals
-from TripModel import TripModel
+from Tripcomponent import *
 
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from Trip import Trip
-    from User import User
-    from Tripcomponent import Tripcomponent
+    pass
 
 class TripController():
-    def __init__(self,  trip: "Trip"=None, component=None, mainControl=None, tripComponent=None, isExpanded=False, hasReminder=True, isExtendable=True, mainUI=None):
-        self.tripComponent = tripComponent
+    def __init__(self, tripComponent=None, mainControl=None, isExpanded=False, hasReminder=True, isExtendable=True):
+        self.tripComponent:"Trip" = tripComponent
         self.isExpanded:bool = isExpanded
         self.hasReminder:bool = hasReminder
         self.isExtendable:bool = isExtendable
         self.mainControl = mainControl
-        self.view:TripComponentWidget = TripComponentWidget(self, self.mainControl.view)
-        self.trip = trip
-        self.component:"Tripcomponent" = component
-        self.model = TripModel(tripController=self)
 
+        self.view:TripComponentWidget = TripComponentWidget(self, self.mainControl.view)
         self.update()
-        self.updateComponent()
 
     def update(self):
         # if isExpanded make the subwidget visible
@@ -48,6 +41,17 @@ class TripController():
         else:
             self.view.UI.tripComponentControlWidget.setVisible(False)
             self.view.UI.componentWidget.setVisible(False)
+
+        if type(self.tripComponent) == Trip:
+            self.setTitle()
+            self.view.clearComponentLists()
+            components: list["Tripcomponent"] = self.tripComponent.getComponents()
+
+            for c in components:
+                # trip.setTitle()
+                # trip.showInfo()
+                componentControl = TripController(tripComponent=components, mainControl=self, hasReminder=False, isExtendable=False)
+                self.view.addComponent(componentControl.view)
     
     def setUI(self, widget):
         self.widget = widget
@@ -57,80 +61,31 @@ class TripController():
         self.update()
 
     def edit(self):
-        EditController(controller=self, typeEdit="Trip",canChangeType=None)
-
-    def editTripInfo(self, tripName, startDate, endDate):
-        self.model.editTripInfo(tripName=tripName, startDate=startDate, endDate=endDate)
+        pass
 
     def delete(self):
-        self.model.deleteTrip(self.trip)
-
-    def setTripName(self, tripName):
-        self.view.UI.tripTitle.setText(tripName)
-
-    def setTripTime(self, startTime):
-        self.view.UI.tripTime.setText(startTime)
+        pass
 
     def setTitle(self):
-        title = self.model.getTitle()
+        t = type(self.tripComponent)
+
+        if t == Trip:
+            title = f'{self.tripComponent.getName()} (Trip)'
+
         self.view.setTitle(title=title)
 
-    def updateComponent(self):
-        if self.trip != None:
-            self.view.clearComponentLists()
-            components: list[TripController] = self.model.getComponents()
-
-            print(len(components))
-
-            for c in components:
-                c.setTitle()
-                c.showInfo()
-                self.view.addComponent(c.view)
-
-    # Call editController
     def addComponent(self):
         #temporary run code
-        EditController(typeEdit="Travel" ,controller=self)
+        EditController(controller=self, model=self.tripComponent)
+
         
-    # Add Component
-    def addTravel(self, travelInfo, trip):
-        self.model.addTravel(trip=trip, travelInfo=travelInfo)
-        self.updateComponent()
+        #temporary add component code, replace with update
+        # newComponentControl = TripController(mainControl=self)
+        # self.view.UI.componentLayout.addWidget(newComponentControl.view)
 
-    def addPlace(self, placeInfo, trip):
-        self.model.addPlace(trip=trip, placeInfo=placeInfo)
-        self.updateComponent()
-
-    def addEat(self, eatInfo, trip):
-        self.model.addEat(trip=trip, eatInfo=eatInfo)
-        self.updateComponent()
-
-    def addEvent(self, eventInfo, trip):
-        self.model.addEvent(trip=trip, eventInfo=eventInfo)
-        self.updateComponent()
-
-    def addCheckIn(self, stayInfo, trip):
-        self.model.addCheckIn(trip=trip, stayInfo=stayInfo)
-
-    def addCheckOut(self, stayInfo, trip):
-        self.model.addCheckOut(trip=trip, stayInfo=stayInfo)
-
-    # Show information
-    def showInfo(self):
-        detail = self.model.showInfo()
-        self.view.addDetil(detail=detail)
-
-
-    # Reminder
     def addReminder(self):
         #temporary run code
         newReminder = ReminderController(parentController=self)
 
         #temporary add component code, replace with update
         self.view.UI.tripReminderLayout.addWidget(newReminder.view)
-
-        #temporary add component code
-        # newComponentControl = TripController(self, None)
-        # newComponentControl.createUI()
-        # self.UI.widget.componentLayout.addWidget(newComponentControl.UI)
-

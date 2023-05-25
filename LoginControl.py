@@ -1,7 +1,6 @@
 from LoginUI import LoginUI
 from LoginModel import LoginModel
 
-import globals
 import sys
 from MainControl import MainController
 
@@ -36,13 +35,12 @@ class LoginController:
         else:
             # Send user information to another window
             self.view.close()
-            globals.currentUser = self.model.getUser(username)
-            self.transferToMain()
+            # globals.currentUser = self.model.getUser(username)
+            self.transferToMain(username=username)
 
-    def transferToMain(self):
+    def transferToMain(self, username):
         # temporary main startup
-        mainControl = MainController(self)
-        globals.mainController = mainControl
+        mainControl = MainController(self, user=self.model.getUser(username=username))
         mainControl.enterMainProcess()
 
 

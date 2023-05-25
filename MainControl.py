@@ -1,14 +1,17 @@
 from MainUI import *
-from TripControl import *
 from settingController import SettingController
 from enum import Enum
-from MainModel import *
+from TripControl import TripController
+import transaction
+from ComponentEditControl import EditController
+from Tripcomponent import *
 
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from LoginControl import LoginController
     from TripControl import TripController
+    from User import User
 
 
 class ShowMode(Enum):
@@ -17,9 +20,9 @@ class ShowMode(Enum):
     futureTrip = 2
 
 class MainController:
-    def __init__(self, loginController):
+    def __init__(self, loginController, user):
         self.view = MainUI(controller=self)
-        self.model = MainModel(controller=self)
+        self.model:"User" = user
         self.loginController: "LoginController" = loginController
         self.goToCurrentTrip()
 
@@ -34,12 +37,13 @@ class MainController:
     def update(self):
         #update UI with model
         self.view.clearTripList()
-        trips: list[TripController] = self.model.getTrips(tripMode=self.currentShowMode)
-        
+        trips: list["Trip"] = self.getTrips()
+
         for trip in trips:
-            trip.setTitle()
-            trip.showInfo()
-            self.view.addTrip(trip.view)
+            # trip.setTitle()
+            # trip.showInfo()
+            tripControl = TripController(tripComponent=trip, mainControl=self)
+            self.view.addTrip(tripControl.view)
         
 
     def goToCurrentTrip(self):
@@ -58,12 +62,45 @@ class MainController:
         self.update()
 
     def newTrip(self):
-        EditController(canChangeType=False, controller=self) 
+        EditController(canChangeType=False, controller=self, model=self.model) 
 
-    # Add Component
-    def addTrip(self, tripInfo):
-        self.model.addTrip(tripInfo=tripInfo)
-        self.update()
+    def getTrips(self):
+        trips = []
+
+        trip: Trip
+        for trip in self.model.getTrips():
+            sDate = trip.getTimeFrom()
+            eDate = trip.getTimeTo()
+
+            if self.before(sDate) and self.before(eDate):
+                if self.currentShowMode == ShowMode.pastTrip:
+                    trips.append(trip)
+            elif self.before(sDate):
+                if self.currentShowMode == ShowMode.currentTrip:
+                    trips.append(trip)
+            elif self.currentShowMode == ShowMode.futureTrip:
+                trips.append(trip)
+
+        return trips
+    
+    def before(self, d: "QDateTime"):
+        today = datetime.today()
+        dTime = d.time()
+        dDate = d.date()
+
+        if dDate.year() == today.year and dDate.month() == today.month and dDate.day() == today.day:
+            if dTime.hour() > today.hour: return False
+            if dTime.minute() > today.minute: return False
+
+        if dDate.year() > today.year: return False
+        if dDate.year() < today.year: return True
+        
+        if dDate.month() > today.month: return False
+        if dDate.month() < today.month: return True
+        
+        if dDate.day() > today.day: return False
+
+        return True
 
     # Call Setting
     def settings(self):
