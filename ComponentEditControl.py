@@ -3,12 +3,11 @@ from enum import IntEnum, Enum
 from Reminder import Reminder
 from datetime import date
 from Tripcomponent import *
-import transaction
 
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from User import User
+    from TripControl import TripController
 
 class TypeString(str, Enum):
     trip = "Trip"
@@ -110,25 +109,51 @@ class EditController:
 
         if source == TypeString.trip:
             info = self.getTripInfo()
+
             if self.model is None:
                 self.controller.addTrip(info=info)
             else:
-                pass
+                self.controller.editTrip(info=info)
+
         elif source == TypeString.travel:
             info = self.getTravelInfo()
-            self.controller.addTravel(info=info)
+
+            if self.model is None:
+                self.controller.addTravel(info=info)
+            else:
+                self.controller.editTravel(info=info)
+
         elif source == TypeString.place:
             info = self.getPlaceInfo()
-            self.controller.addPlace(info=info)
+
+            if self.model is None:
+                self.controller.addPlace(info=info)
+            else:
+                self.controller.editPlace(info=info)
+
         elif source == TypeString.eat:
             info = self.getEatInfo()
-            self.controller.addEat(info=info)
+
+            if self.model is None:
+                self.controller.addEat(info=info)
+            else:
+                self.controller.editEat(info=info)
+
         elif source == TypeString.event:
             info = self.getEventInfo()
-            self.controller.addEvent(info=info)
+
+            if self.model is None:
+                self.controller.addEvent(info=info)
+            else:
+                self.controller.editEvent(info=info)
+
         elif source == TypeString.stay:
             info = self.getStayInfo()
-            self.controller.addStay(info=info)
+
+            if self.model is None:
+                self.controller.addStay(info=info)
+            else:
+                self.controller.editStay(info=info)
 
         self.view.close()
 

@@ -64,9 +64,6 @@ class TripController():
         self.isExpanded = not self.isExpanded
         self.update()
 
-    def edit(self):
-        EditController(controller=self, model=self.tripComponent)
-
     def delete(self):
         if type(self.tripComponent) is Trip:
             self.mainControl.deleteTrip(self.tripComponent)
@@ -120,6 +117,90 @@ class TripController():
         return info
     
     # Edit Component - Trip, Travel, Place, Eat, Event, Stay
+    def edit(self):
+        EditController(controller=self, model=self.tripComponent)
+
+    def editTrip(self, info:dict):
+        self.tripComponent.setName(info['name'])
+        self.tripComponent.setTimeFrom(info['timeFrom'])
+        self.tripComponent.setTimeTo(info['timeTo'])
+        self.tripComponent.setRemind(info['remind'])
+        self.tripComponent.setTimesensitive(info['timesensitive'])
+        self.tripComponent.writeInfo(info['info'])
+        self.tripComponent.setDuration(info['duration'])
+
+        transaction.commit()
+        self.update()
+
+    def editTravel(self, info:dict):
+        self.tripComponent.setName(info['name'])
+        self.tripComponent.setTimeFrom(info['timeFrom'])
+        self.tripComponent.setTimeTo(info['timeTo'])
+        self.tripComponent.setRemind(info['remind'])
+        self.tripComponent.setTimesensitive(info['timesensitive'])
+        self.tripComponent.writeInfo(info['info'])
+        self.tripComponent.setTicketNeed(info['ticketNeed'])
+        self.tripComponent.setTicketPrice(info['ticketPrice'])
+
+        transaction.commit()
+        self.update()
+
+    def editPlace(self, info:dict):
+        self.tripComponent.setName(info['name'])
+        self.tripComponent.setTimeFrom(info['timeFrom'])
+        self.tripComponent.setTimeTo(info['timeTo'])
+        self.tripComponent.setRemind(info['remind'])
+        self.tripComponent.setTimesensitive(info['timesensitive'])
+        self.tripComponent.writeInfo(info['info'])
+        self.tripComponent.setOpenTime(info['openTime'])
+        self.tripComponent.setCloseTime(info['closeTime'])
+        self.tripComponent.setOpenInfo(info['openInfo'])
+
+        transaction.commit()
+        self.update()
+
+    def editEat(self, info:dict):
+        self.tripComponent.setName(info['name'])
+        self.tripComponent.setTimeFrom(info['timeFrom'])
+        self.tripComponent.setTimeTo(info['timeTo'])
+        self.tripComponent.setRemind(info['remind'])
+        self.tripComponent.setTimesensitive(info['timesensitive'])
+        self.tripComponent.writeInfo(info['info'])
+        self.tripComponent.setReservationNeed(info['reservation'])
+
+        transaction.commit()
+        self.update()
+
+    def editEvent(self, info:dict):
+        self.tripComponent.setName(info['name'])
+        self.tripComponent.setTimeFrom(info['timeFrom'])
+        self.tripComponent.setTimeTo(info['timeTo'])
+        self.tripComponent.setRemind(info['remind'])
+        self.tripComponent.setTimesensitive(info['timesensitive'])
+        self.tripComponent.writeInfo(info['info'])
+        self.tripComponent.setType(info['type'])
+        self.tripComponent.setTicketNeed(info['ticketNeed'])
+        self.tripComponent.setTicketPrice(info['ticketPrice'])
+
+        transaction.commit()
+        self.update()
+
+    def editStay(self, info:dict):
+        self.tripComponent.setName(info['name'])
+        self.tripComponent.setTimeFrom(info['timeFrom'])
+        self.tripComponent.setTimeTo(info['timeTo'])
+        self.tripComponent.setRemind(info['remind'])
+        self.tripComponent.setTimesensitive(info['timesensitive'])
+        self.tripComponent.writeInfo(info['info'])
+        self.tripComponent.setFlatRate(info['flatRate'])
+        self.tripComponent.setFlatRateCheck(info['flatRateCheck'])
+        self.tripComponent.setPricePerNight(info['pricePerNight'])
+        self.tripComponent.setPPNCheck(info['pricePerNightCheck'])
+        self.tripComponent.setNight(info['night'])
+        self.tripComponent.setTotalPrice(info['totalPrice'])
+
+        transaction.commit()
+        self.update()
     
     # Add Component - Travel, Place, Eat, Event, Stay
     def addComponent(self):
