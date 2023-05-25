@@ -29,7 +29,11 @@ class MainUI(QWidget):
 
     def clearTripList(self):
         for i in reversed(range(self.UI.tripListLayout.count())):
-            self.UI.tripListLayout.itemAt(i).widget().setParent(None)
+            self.UI.tripListLayout.itemAt(i).widget().deleteLater()
+
+    def clearNotificationList(self):
+        for i in reversed(range(self.UI.notificationLayout.count())):
+            self.UI.notificationLayout.itemAt(i).widget().deleteLater()
 
     def currentTripButtonPressed(self):
         self.controller.goToCurrentTrip()

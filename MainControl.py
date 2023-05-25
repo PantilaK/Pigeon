@@ -5,7 +5,9 @@ from TripControl import TripController
 import transaction
 from ComponentEditControl import EditController
 from Tripcomponent import *
-from Reminder import Reminder
+from Reminder import Reminder, Notification
+from PySide6.QtCore import QTimer
+from NotificationController import NotificationController
 
 from typing import TYPE_CHECKING
 
@@ -21,17 +23,23 @@ class ShowMode(Enum):
     futureTrip = 2
 
 class MainController:
+
     def __init__(self, loginController, user):
         self.view = MainUI(controller=self)
         self.model:"User" = user
         self.loginController: "LoginController" = loginController
         self.goToCurrentTrip()
 
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.checkNoti)
+        self.timer.start(30000)
+
     def enterMainProcess(self):
         self.update()
         self.view.show()
 
     def transferToLogin(self):
+        self.timer.stop()
         self.view.close()
         self.loginController.enterLoginProcess()
 
@@ -46,6 +54,13 @@ class MainController:
             # trip.showInfo()
             tripControl = TripController(tripComponent=trip, mainControl=self)
             self.view.addTrip(tripControl.view)
+
+        self.view.clearNotificationList()
+        noti: list["Notification"] = self.model.getNotifications()
+
+        for n in noti:
+            notiControl = NotificationController(parentController=self, model=n)
+            self.view.UI.notificationLayout.addWidget(notiControl.view)
         
 
     def goToCurrentTrip(self):
@@ -121,3 +136,57 @@ class MainController:
     def settings(self):
         #go to settings
         SettingController(mainController=self)
+
+    # def addNotification(self):
+    #     trips: list["Trip"] = self.getTrips(ShowMode.currentTrip)
+    #     trips.extend(self.getTrips(ShowMode.futureTrip))
+
+    #     for t in trips:
+    #         if t.getRemind() and not t.getNotification():
+    #             if self.timeDifference(t.getTimesensitive()):
+    #                 noti = Notification(name=t.get)
+    #                 self.model.addNotification()
+
+    def checkNoti(self):
+        trips: list["Trip"] = self.getTrips()
+
+        for t in trips:
+            if t.getRemind() and not t.getNotification() and self.checkTime(t.getTimesensitive()):
+                t.setNotification(True)
+                detail = f'Trip: {t.getName()} start on {t.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                self.addNoti(detail=detail)
+
+                components: list["Tripcomponent"] = t.getComponents()
+                for c in components:
+                    if c.getRemind() and not c.getNotification() and self.checkTime(c.getTimesensitive()):
+                        c.setNotification(True)
+                        detail = ''
+                        
+                        if type(c) == Travel:
+                            detail = f'Travel: {t.getName()} on {t.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                        elif type(c) == Place:
+                            detail = f'Place: {t.getName()} on {t.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                        elif type(c) == Eat:
+                            detail = f'Travel: {t.getName()} on {t.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                        elif type(c) == Event:
+                            detail = f'Travel: {t.getName()} on {t.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                        elif type(c) == CheckIn:
+                            detail = f'Check In: {t.getName()} on {t.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                        elif type(c) == CheckOut:
+                            detail = f'Check Out: {t.getName()} on {t.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                        
+                        self.addNoti(detail=detail)
+
+    def addNoti(self, detail):
+        noti = Notification(name=detail)
+        self.model.addNotification(noti)
+
+        transaction.commit()
+        self.update()
+
+    def checkTime(self, d1:"QDateTime"):
+        t = datetime.today()
+        today = datetime(year=t.year, month=t.month, day=t.day, hour=t.hour, minute=t.minute)
+        d = datetime(year=d1.date().year(), month=d1.date().month(), day=d1.date().day(), hour=d1.time().hour(), minute=d1.time().minute())
+
+        return today == d

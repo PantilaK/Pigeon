@@ -19,3 +19,15 @@ class Reminder(persistent.Persistent):
     
     def setIsChecked(self, isChecked):
         self.__isChecked = isChecked
+
+class Notification(persistent.Persistent):
+
+    def __init__(self, name):
+        self.__name = name
+
+    # Name
+    def getName(self):
+        return self.__name
+    
+    def setName(self, name):
+        self.__name = name
