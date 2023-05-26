@@ -8,6 +8,7 @@ from Tripcomponent import *
 from Reminder import Reminder, Notification
 from PySide6.QtCore import QTimer
 from NotificationController import NotificationController
+from copy import deepcopy
 
 from typing import TYPE_CHECKING
 
@@ -34,6 +35,7 @@ class MainController:
         self.timer.timeout.connect(self.checkNoti)
         self.timer.start(1000)
 
+
     def enterMainProcess(self):
         self.update()
         self.view.show()
@@ -50,11 +52,8 @@ class MainController:
         #update UI with model
         self.view.clearTripList()
         trips: list["Trip"] = self.getTrips()
-        print( trips, "KOOKO")
 
         for trip in trips:
-            # trip.setTitle()
-            # trip.showInfo()
             tripControl = TripController(tripComponent=trip, mainControl=self)
             self.view.addTrip(tripControl.view)
 
@@ -63,6 +62,12 @@ class MainController:
     def updateNoti(self):
         self.view.clearNotificationList()
         noti: list["Notification"] = self.model.getNotifications()
+
+        if noti:
+            # if list is not empty
+            self.view.UI.noNotificationLabel.setVisible(False)
+        else:
+            self.view.UI.noNotificationLabel.setVisible(True)
 
         for n in noti:
             notiControl = NotificationController(parentController=self, model=n)

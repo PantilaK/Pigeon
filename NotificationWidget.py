@@ -1,4 +1,4 @@
-from ui_notification import *
+from notification_ui import *
 
 class NotificationWidget(QWidget):
     def __init__(self, controller=None, parentUI=None):

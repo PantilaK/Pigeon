@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'notificationjBcPdx.ui'
+## Form generated from reading UI file 'notificationKuhzDb.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.2
 ##
@@ -28,8 +28,7 @@ class Ui_notificationUI(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(notificationUI.sizePolicy().hasHeightForWidth())
         notificationUI.setSizePolicy(sizePolicy)
-        notificationUI.setStyleSheet(u"\n"
-"QWidget#notification{\n"
+        notificationUI.setStyleSheet(u"QWidget#notification{\n"
 "  background-color: #e7e7e7;\n"
 "  border-radius: 20px;\n"
 "  border: 0px;\n"
@@ -39,6 +38,7 @@ class Ui_notificationUI(object):
 "  border: 0px;\n"
 "  padding: 2px 2px;\n"
 "  color: #ffffff;\n"
+"  background-color: #e7e7e7;\n"
 "  font-weight: 1000}\n"
 "\n"
 "QLabel {\n"
@@ -51,6 +51,9 @@ class Ui_notificationUI(object):
         self.notification.setObjectName(u"notification")
         sizePolicy.setHeightForWidth(self.notification.sizePolicy().hasHeightForWidth())
         self.notification.setSizePolicy(sizePolicy)
+        self.notification.setStyleSheet(u"QWidget {\n"
+"background-color: #e7e7e7;\n"
+"}")
         self.horizontalLayout = QHBoxLayout(self.notification)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.notificationLabel = QLabel(self.notification)

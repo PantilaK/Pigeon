@@ -47,6 +47,15 @@ class ComponentEditUI(QDialog):
         self.UI.stayPricingPricePerNightCheckBox.stateChanged.connect(self.setTotalPrice)
         self.UI.stayPricePerNightLineEdit.textChanged.connect(self.setTotalPrice)
 
+        self.UI.placeOpenHoursFromTimeEdit.timeChanged.connect(self.placeOpenHoursFromChanged)
+
+        self.UI.tripFromDateTimeEdit.dateTimeChanged.connect(self.tripFromDateChanged)
+        self.UI.travelFromDateTimeEdit.dateTimeChanged.connect(self.travelFromDateChanged)
+        self.UI.placeFromDateTimeEdit.dateTimeChanged.connect(self.placeFromDateChanged)
+        self.UI.eventFromDateTimeEdit.dateTimeChanged.connect(self.eventFromDateChanged)
+        self.UI.eatFromDateTimeEdit.dateTimeChanged.connect(self.eatFromDateChanged)
+        self.UI.stayFromDateTimeEdit.dateTimeChanged.connect(self.stayFromDateChanged)
+
         self.UI.tripAddReminderButton.clicked.connect(self.addReminderButtonClicked)
 
     def typeComboBoxChanged(self):
@@ -69,4 +78,24 @@ class ComponentEditUI(QDialog):
 
     def setTotalPrice(self):
         self.controller.setTotalPrice()
+
+    def tripFromDateChanged(self):
+        self.controller.tripSetMinimumFinish()
+
+    def travelFromDateChanged(self):
+        self.controller.travelSetMinimumFinish()
+
+    def placeFromDateChanged(self):
+        self.controller.placeSetMinimumFinish()
+
+    def eventFromDateChanged(self):
+        self.controller.eventSetMinimumFinish()
+
+    def eatFromDateChanged(self):
+        self.controller.eatSetMinimumFinish()
+
+    def stayFromDateChanged(self):
+        self.controller.staySetMinimumFinish()
     
+    def placeOpenHoursFromChanged(self):
+        self.controller.placeSetMinimumOpenHoursTo()

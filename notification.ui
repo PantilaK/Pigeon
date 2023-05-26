@@ -20,8 +20,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-QWidget#notification{
+   <string notr="true">QWidget#notification{
   background-color: #e7e7e7;
   border-radius: 20px;
   border: 0px;
@@ -31,6 +30,7 @@ QPushButton{
   border: 0px;
   padding: 2px 2px;
   color: #ffffff;
+  background-color: #e7e7e7;
   font-weight: 1000}
 
 QLabel {
@@ -46,6 +46,11 @@ QLabel {
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QWidget {
+background-color: #e7e7e7;
+}</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>

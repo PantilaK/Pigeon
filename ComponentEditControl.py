@@ -3,6 +3,7 @@ from enum import IntEnum, Enum
 from Reminder import Reminder
 from datetime import date
 from Tripcomponent import *
+from PySide6.QtGui import QDoubleValidator
 
 from typing import TYPE_CHECKING
 
@@ -43,31 +44,53 @@ class EditController:
         self.view:ComponentEditUI = ComponentEditUI(self)
         self.currentShowMode:str = typeEdit
         self.canChangeType:bool = canChangeType
-        self.model:"Stay" = model
+        self.model = model
 
         self.controller = controller
 
         if self.model is not None:
+            # editing
             t = type(self.model)
 
             if t == Trip:
                 self.currentShowMode = TypeString.trip
+                #if notification is fired, collapse
+                if self.model.getNotification():
+                    self.view.UI.tripTimeSensitiveWidget.setVisible(False)
+                    self.view.UI.tripTimeSensitiveLabel.setVisible(False)
+
                 self.setTextEditTrip()
             elif t == Travel:
                 self.currentShowMode = TypeString.travel
+                if self.model.getNotification():
+                    self.view.UI.travelTimeSensitiveWidget.setVisible(False)
+                    self.view.UI.travelTimeSensitiveLabel.setVisible(False)
+
                 self.setTextEditTravel()
             elif t == Place:
                 self.currentShowMode = TypeString.place
+                if self.model.getNotification():
+                    self.view.UI.placeTimeSensitiveWidget.setVisible(False)
+                    self.view.UI.placeTimeSensitiveLabel.setVisible(False)
+
                 self.setTextPlaceEdit()
             elif t == Eat:
-                print("Ea")
                 self.currentShowMode = TypeString.eat
+                if self.model.getNotification():
+                    self.view.UI.eatTimeSensitiveWidget.setVisible(False)
+                    self.view.UI.eatTimeSensitiveLabel.setVisible(False)
                 self.setTextEatEdit()
             elif t == Event:
                 self.currentShowMode = TypeString.event
+                if self.model.getNotification():
+                    self.view.UI.eventTimeSensitiveWidget.setVisible(False)
+                    self.view.UI.eventimeSensitiveLabel.setVisible(False)
                 self.setTextEventEdit()
             elif t == Stay:
                 self.currentShowMode = TypeString.stay
+                if self.model.getNotification():
+                    self.view.UI.stayTimeSensitiveWidget.setVisible(False)
+                    self.view.UI.stayTimeSensitiveLabel.setVisible(False)
                 self.setTextStayEdit()
             
             self.canChangeType = False
@@ -83,6 +106,8 @@ class EditController:
         self.updateComboBox()
         self.toggleComboBox()
         self.updateUIType()
+        self.lockReminderTime()
+        self.lockDoubleOnly()
 
         self.view.exec()
 
@@ -107,6 +132,27 @@ class EditController:
         for k in self.subUIDict:
             self.subUIDict[k].setVisible(False)
         self.subUIDict[self.currentShowMode].setVisible(True)
+
+    def lockReminderTime(self):
+        timeNow = QDateTime.currentDateTime()
+        self.view.UI.tripTimeSensitiveDateTimeEdit.setMinimumDateTime(timeNow)
+        self.view.UI.travelTimeSensitiveDateTimeEdit.setMinimumDateTime(timeNow)
+        self.view.UI.placeTimeSensitiveDateTimeEdit.setMinimumDateTime(timeNow)
+        self.view.UI.stayTimeSensitiveDateTimeEdit.setMinimumDateTime(timeNow)
+        self.view.UI.eatTimeSensitiveDateTimeEdit.setMinimumDateTime(timeNow)
+        self.view.UI.eventTimeSensitiveDateTimeEdit.setMinimumDateTime(timeNow)
+
+    def lockDoubleOnly(self):
+        validator = QDoubleValidator(bottom=0, parent=self.view)
+        self.view.UI.travelTicketPriceLineEdit.setValidator(validator)
+        self.view.UI.eventTicketPriceLineEdit.setValidator(validator)
+        self.view.UI.stayPricePerNightLineEdit.setValidator(validator)
+        self.view.UI.stayFlatPriceLineEdit.setValidator(validator)
+
+    def placeSetMinimumOpenHoursTo(self):
+        opensAt = self.view.UI.placeOpenHoursFromTimeEdit.time()
+        self.view.UI.placeOpenHoursToTimeEdit.setTime(opensAt)
+        self.view.UI.placeOpenHoursToTimeEdit.setMinimumTime(opensAt)
 
     def clearErrorField(self):
         self.view.UI.errorLabel.setText(" ")
@@ -197,7 +243,7 @@ class EditController:
         self.view.UI.travelTimeSensitiveDateTimeEdit.setDateTime(self.model.getTimesensitive())
         self.view.UI.travelInfoTextEdit.setText(self.model.getInfo())
         self.view.UI.travelTicketCheckBox.setChecked(self.model.getTicketNeed())
-        self.view.UI.travelTicketPriceLineEdit.setText(self.model.getTicketPrice())
+        self.view.UI.travelTicketPriceLineEdit.setText(str(self.model.getTicketPrice()))
 
     def setTextPlaceEdit(self):
         self.view.UI.placeNameLineEdit.setText(self.model.getName())
@@ -229,7 +275,7 @@ class EditController:
         self.view.UI.eventInfoTextEdit.setText(self.model.getInfo())
         self.view.UI.eventTypeLineEdit.setText(self.model.getType())
         self.view.UI.eventTicketCheckBox.setChecked(self.model.getTicketNeed())
-        self.view.UI.eventTicketPriceLineEdit.setText(self.model.getTicketPrice())
+        self.view.UI.eventTicketPriceLineEdit.setText(str(self.model.getTicketPrice()))
 
     def setTextStayEdit(self):
         self.view.UI.stayNameLineEdit.setText(self.model.getName())
@@ -243,7 +289,7 @@ class EditController:
         self.view.UI.stayFlatPriceLineEdit.setText(str(self.model.getFlatRate()))
         self.view.UI.stayPricePerNightLineEdit.setText(str(self.model.getPricePerNight()))
         self.view.UI.stayNumberOfNightLabel.setText(str(self.model.getNight()))
-        self.view.UI.stayTotalPriceLabel.setText(str(self.model.getTotalPrice()))
+        self.view.UI.stayTotalPriceLabel.setText(str(self.model.getTotalPrice()))  
         
     # Check if str can be converted to float
     def toFloat(self, s):
@@ -261,12 +307,7 @@ class EditController:
         dayTo = timeTo.date()
 
         return dayFrom.daysTo(dayTo)
-    # def daysBetweenDates(self, d1:"QDateTime", d2:"QDateTime"):
-    #     day1 = date(year=d1.date().year(), month=d1.date().month(), day=d1.date().day())
-    #     day2 = date(year=d2.date().year(), month=d2.date().month(), day=d2.date().day())
 
-    #     d = day2 - day1
-    #     return d.days
 
     # Trip Info
     def getTripInfo(self):
@@ -293,7 +334,7 @@ class EditController:
         timesensitive = self.view.UI.travelTimeSensitiveDateTimeEdit.dateTime()
         info = self.view.UI.travelInfoTextEdit.toPlainText()
         ticketNeed = self.view.UI.travelTicketCheckBox.isChecked()
-        ticketPrice = self.view.UI.travelTicketPriceLineEdit.text()
+        ticketPrice = self.toFloat(self.view.UI.travelTicketPriceLineEdit.text())
 
         travelInfo = {'name': name, 'timeFrom': timeFrom, 'timeTo': timeTo, 'remind': remind,
                       'timesensitive': timesensitive, 'info': info,'ticketNeed': ticketNeed, 
@@ -349,12 +390,12 @@ class EditController:
         remind = self.view.UI.eventTimeSensitiveCheckBox.isChecked()
         timesensitive = self.view.UI.eventTimeSensitiveDateTimeEdit.dateTime()
         info = self.view.UI.eventInfoTextEdit.toPlainText()
-        type = self.view.UI.eventTypeLineEdit.text()
+        eventType = self.view.UI.eventTypeLineEdit.text()
         ticketNeed = self.view.UI.eventTicketCheckBox.isChecked()
-        ticketPrice = self.view.UI.eventTicketPriceLineEdit.text()
+        ticketPrice = self.toFloat(self.view.UI.eventTicketPriceLineEdit.text())
 
         eventInfo = {'name': name, 'timeFrom': timeFrom, 'timeTo': timeTo, 'remind': remind,
-                     'timesensitive': timesensitive, 'info': info, 'type': type,
+                     'timesensitive': timesensitive, 'info': info, 'type': eventType,
                      'ticketNeed': ticketNeed, 'ticketPrice': ticketPrice}
         
         return eventInfo
@@ -412,3 +453,35 @@ class EditController:
         totalPrice = flatRate + (night * pricePerNight)
 
         self.view.UI.stayTotalPriceLabel.setText(str(totalPrice))
+
+    def tripSetMinimumFinish(self):
+        fromDate = self.view.UI.tripFromDateTimeEdit.dateTime()
+        self.view.UI.tripToDateTimeEdit.setDateTime(fromDate)
+        self.view.UI.tripToDateTimeEdit.setMinimumDateTime(fromDate)
+
+    def travelSetMinimumFinish(self):
+        fromDate = self.view.UI.travelFromDateTimeEdit.dateTime()
+        self.view.UI.travelToDateTimeEdit.setDateTime(fromDate)
+        self.view.UI.travelToDateTimeEdit.setMinimumDateTime(fromDate)
+
+    def eatSetMinimumFinish(self):
+        fromDate = self.view.UI.eatFromDateTimeEdit.dateTime()
+        self.view.UI.eatToDateTimeEdit.setDateTime(fromDate)
+        self.view.UI.eatToDateTimeEdit.setMinimumDateTime(fromDate)
+
+    def eventSetMinimumFinish(self):
+        fromDate = self.view.UI.eventFromDateTimeEdit.dateTime()
+        self.view.UI.eventToDateTimeEdit.setDateTime(fromDate)
+        self.view.UI.eventToDateTimeEdit.setMinimumDateTime(fromDate)
+
+    def staySetMinimumFinish(self):
+        fromDate = self.view.UI.stayFromDateTimeEdit.dateTime()
+        self.view.UI.stayToDateTimeEdit.setDateTime(fromDate)
+        self.view.UI.stayToDateTimeEdit.setMinimumDateTime(fromDate)
+
+    def placeSetMinimumFinish(self):
+        fromDate = self.view.UI.placeFromDateTimeEdit.dateTime()
+        self.view.UI.placeToDateTimeEdit.setDateTime(fromDate)
+        self.view.UI.placeToDateTimeEdit.setMinimumDateTime(fromDate)
+
+    
