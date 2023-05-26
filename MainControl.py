@@ -81,9 +81,12 @@ class MainController:
     def newTrip(self):
         EditController(canChangeType=False, controller=self)
 
-    def addTrip(self, info: dict):
+    def addTrip(self, info: dict, reminders: list['Reminder']):
         trip = Trip(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
                     timesensitive=info['timesensitive'], info=info['info'], duration=info['duration'])
+        
+        for r in reminders:
+            trip.addReminder(r)
         
         self.model.addTrip(trip=trip)
         transaction.commit()

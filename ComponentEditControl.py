@@ -43,7 +43,7 @@ class EditController:
         self.view:ComponentEditUI = ComponentEditUI(self)
         self.currentShowMode:str = typeEdit
         self.canChangeType:bool = canChangeType
-        self.model = model
+        self.model:"Stay" = model
 
         self.controller = controller
 
@@ -72,6 +72,8 @@ class EditController:
             
             self.canChangeType = False
 
+        self.reminders = []
+
         self.subUIDict:dict[str,QWidget] = {TypeString.trip:self.view.UI.tripEditWidget,
                                             TypeString.travel:self.view.UI.travelEditWidget,
                                             TypeString.place:self.view.UI.placeEditWidget,
@@ -87,6 +89,10 @@ class EditController:
 
     def typeChange(self):
         self.currentShowMode = self.view.UI.typeComboBox.currentText()
+        
+        if self.currentShowMode == TypeString.trip:
+            self.reminders = []
+
         self.updateUIType()
 
     def updateComboBox(self):
@@ -106,6 +112,10 @@ class EditController:
     def clearErrorField(self):
         self.view.UI.errorLabel.setText(" ")
 
+    def cancel(self):
+        self.view.close()
+        self.controller.update()
+
     def ok(self):
         source = self.view.getSelectedType()
 
@@ -113,9 +123,9 @@ class EditController:
             info = self.getTripInfo()
 
             if self.model is None:
-                self.controller.addTrip(info=info)
+                self.controller.addTrip(info=info, reminders=self.reminders)
             else:
-                self.controller.editTrip(info=info)
+                self.controller.editTrip(info=info, reminders=self.reminders)
 
         elif source == TypeString.travel:
             info = self.getTravelInfo()
@@ -158,6 +168,13 @@ class EditController:
                 self.controller.editStay(info=info)
 
         self.view.close()
+
+    def addReminder(self):
+        name = self.view.UI.tripAddReminderLineEdit.text()
+        reminder= Reminder(name=name)
+
+        self.reminders.append(reminder)
+        self.view.UI.tripAddReminderLineEdit.setText("")
 
     def setTextEditTrip(self):
         self.view.UI.tripNameLineEdit.setText(self.model.getName())
@@ -217,6 +234,10 @@ class EditController:
         self.view.UI.tripInfoTextEdit_4.setText(self.model.getInfo())
         self.view.UI.stayPricingFlatRateCheckBox.setChecked(self.model.getFlatRateCheck())
         self.view.UI.stayPricingPricePerNightCheckBox.setChecked(self.model.getPPNCheck())
+        self.view.UI.stayFlatPriceLineEdit.setText(str(self.model.getFlatRate()))
+        self.view.UI.stayPricePerNightLineEdit.setText(str(self.model.getPricePerNight()))
+        self.view.UI.stayNumberOfNightLabel.setText(str(self.model.getNight()))
+        self.view.UI.stayTotalPriceLabel.setText(str(self.model.getTotalPrice()))
         
     # Check if str can be converted to float
     def toFloat(self, s):

@@ -179,7 +179,7 @@ class TripController():
     def edit(self):
         EditController(controller=self, model=self.tripComponent)
 
-    def editTrip(self, info:dict):
+    def editTrip(self, info:dict, reminders:list["Reminder"]):
         self.tripComponent.setName(info['name'])
         self.tripComponent.setTimeFrom(info['timeFrom'])
         self.tripComponent.setTimeTo(info['timeTo'])
@@ -187,6 +187,9 @@ class TripController():
         self.tripComponent.setTimesensitive(info['timesensitive'])
         self.tripComponent.writeInfo(info['info'])
         self.tripComponent.setDuration(info['duration'])
+
+        for r in reminders:
+            self.tripComponent.addReminder(r)
 
         transaction.commit()
         self.update()
@@ -321,6 +324,12 @@ class TripController():
 
         transaction.commit()
         self.update()
+
+    def addReminderNoUpdate(self, name):
+        reminder = Reminder(name=name)
+        self.tripComponent.addReminder(reminder=reminder)
+
+        transaction.commit()
 
     def editReminder(self, name, isChecked, reminder:"Reminder"):
         reminder.setName(name=name)
