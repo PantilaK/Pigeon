@@ -5,6 +5,7 @@ from datetime import date
 from Tripcomponent import *
 from PySide6.QtGui import QDoubleValidator
 
+
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -41,6 +42,8 @@ typeStringToIndexDict:dict[str,int] = {TypeString.trip:TypeIndex.trip,
 class EditController:
     
     def __init__(self, model=None, typeEdit:str=TypeString.trip, canChangeType:bool = True, controller = None):
+        from TripControl import TripController
+
         self.view:ComponentEditUI = ComponentEditUI(self)
         self.currentShowMode:str = typeEdit
         self.canChangeType:bool = canChangeType
@@ -48,9 +51,40 @@ class EditController:
 
         self.controller = controller
 
+
         if self.model is not None:
             # editing
             t = type(self.model)
+
+            # if not main trip
+            if isinstance(self.controller.mainControl, TripController):
+                timeLimitFrom = self.controller.mainControl.tripComponent.getTimeFrom()
+                timeLimitTo = self.controller.mainControl.tripComponent.getTimeTo()
+                self.view.UI.eatFromDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.placeFromDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.stayFromDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.tripFromDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.travelFromDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.eventFromDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.eatToDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.placeToDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.stayToDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.tripToDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.travelToDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.eventToDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+
+                self.view.UI.eatFromDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.placeFromDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.stayFromDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.tripFromDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.travelFromDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.eventFromDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.eatToDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.placeToDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.stayToDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.tripToDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.travelToDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.eventToDateTimeEdit.setMaximumDateTime(timeLimitTo)
 
             if t == Trip:
                 self.currentShowMode = TypeString.trip
@@ -94,6 +128,38 @@ class EditController:
                 self.setTextStayEdit()
             
             self.canChangeType = False
+
+        else:
+            # creating 
+            # if not main trip
+            if isinstance(self.controller, TripController):
+                timeLimitFrom = self.controller.tripComponent.getTimeFrom()
+                timeLimitTo = self.controller.tripComponent.getTimeTo()
+                self.view.UI.eatFromDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.placeFromDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.stayFromDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.tripFromDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.travelFromDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.eventFromDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.eatToDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.placeToDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.stayToDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.tripToDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.travelToDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+                self.view.UI.eventToDateTimeEdit.setMinimumDateTime(timeLimitFrom)
+
+                self.view.UI.eatFromDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.placeFromDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.stayFromDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.tripFromDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.travelFromDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.eventFromDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.eatToDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.placeToDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.stayToDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.tripToDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.travelToDateTimeEdit.setMaximumDateTime(timeLimitTo)
+                self.view.UI.eventToDateTimeEdit.setMaximumDateTime(timeLimitTo)
 
 
         self.subUIDict:dict[str,QWidget] = {TypeString.trip:self.view.UI.tripEditWidget,
