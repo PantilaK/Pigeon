@@ -33,13 +33,13 @@ class LoginModel:
         username = ruser
 
         if username == "" or password == "":
-            return "Invalid username or password"
+            return (False, "Invalid username or password")
         
         if username in self.root['username']:
-            return "Username already exists"
+            return (False, "Username already exists")
         
         self.storingPassword(username, password)
-        return "Account Succesfully Created"
+        return (True, "Account Succesfully Created")
 
     def verifyPassword(self, username:str, password:str):
         # Check if username exists

@@ -21,9 +21,13 @@ class LoginController:
     def CAcreateAccount(self):
         username = self.view.CAgetUsername()
         password = self.view.CAgetPassword()
-        message = self.model.createAccount(username, password)
+        create = self.model.createAccount(username, password)
+        message = create[1]
         
         self.setErrorFieldTextCA(message)
+
+        if create[0]:
+            self.login()
 
     def login(self):
         username = self.view.getUsername()
