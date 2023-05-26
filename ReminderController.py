@@ -48,19 +48,11 @@ class ReminderController:
         name = self.view.UI.editReminderLineEdit.text()
         isChecked = self.view.UI.editReminderCheckBox.isChecked()
 
-        # self.edit(name=name, isChecked=isChecked)
         self.parentController.editReminder(name=name, isChecked=isChecked, reminder=self.model)
 
         #change UI back
         self.operatingMode = ReminderController.UIMode.normal
         self.updateUI()
-
-    # def edit(self, name, isChecked):
-    #     self.model.setName(name=name)
-    #     self.model.setIsChecked(isChecked=isChecked)
-
-    #     transaction.commit()
-    #     self.updateUI()
 
     def showCheck(self):
         showIsChecked = self.view.UI.showReminderCheckbox.isChecked()
@@ -85,7 +77,6 @@ class ReminderController:
     def setReminder(self):
         name = self.model.getName()
         isChecked = self.model.getIsChecked()
-        print(name , isChecked)
 
         # Set Name
         self.view.UI.showReminderLabel.setText(name)

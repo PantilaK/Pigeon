@@ -8,14 +8,11 @@ class LoginUI(QWidget):
         self.UI = Ui_Form()
         self.UI.setupUi(self)
         self.UI.createAccountWidget.setVisible(False)
-        # self.controller.clearErrorFields()
-        # self.controller.clearErrorFieldCA()
         self.resize(500, 600)
         
 
         self.UI.cancelButton.clicked.connect(self.cancelButtonClicked)
         self.UI.loginButton.clicked.connect(self.loginButtonClicked)
-        # self.UI.createAccountButton.clicked.connect(self.createAccountButtonClicked)
         self.UI.CAconfirmPasswordLineEdit.textChanged.connect(self.passwordLineEditChanged)
         self.UI.CAcreateAccountButton.clicked.connect(self.CACreateAccountButtonClicked)      
         self.UI.CApasswordLineEdit.textChanged.connect(self.passwordLineEditChanged)    
@@ -41,9 +38,6 @@ class LoginUI(QWidget):
 
     def loginButtonClicked(self) -> None:
         self.controller.login()
-
-    # def createAccountButtonClicked(self) -> None:
-    #     self.controller.createAccount()
 
     def passwordLineEditChanged(self) -> None:
         self.controller.CAcheckPassword()

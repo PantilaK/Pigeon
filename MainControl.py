@@ -58,6 +58,7 @@ class MainController:
             self.view.addTrip(tripControl.view)
 
         self.updateNoti()
+        self.updateUsername()
 
     def updateNoti(self):
         self.view.clearNotificationList()
@@ -72,6 +73,10 @@ class MainController:
         for n in noti:
             notiControl = NotificationController(parentController=self, model=n)
             self.view.UI.notificationLayout.addWidget(notiControl.view)
+
+    def updateUsername(self):
+        username = self.model.getUsername()
+        self.view.UI.acountDetailsLabel.setText(username)
         
 
     def goToCurrentTrip(self):

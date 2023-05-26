@@ -42,17 +42,6 @@ class LoginModel:
         if username not in self.root['username']:
             return (False, "Username does not exists")
         
-        # temp = self.root['username']
-        # user:User = temp[username]
-        # print(user.currentTrips[2].getTripName(), user.currentTrips[4].getTripName())
-        # temp = self.root['username']
-        # user:User = temp[username]
-        # t1 = Trip("Trip 3")
-        # t2 = Trip("Trip 4")
-        # user.addCurrentTrip(t1)
-        # user.addCurrentTrip(t2)
-        # transaction.commit()
-        
         hash = hashlib.sha256(password.encode()).hexdigest()
 
         if hash == self.getPassword(username):

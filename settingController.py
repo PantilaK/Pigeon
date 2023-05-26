@@ -22,10 +22,6 @@ class SettingController:
         self.view.UI.passwordErrorLabel.setText(self.passwordErrorMessage)
         self.view.UI.usernameErrorLabel.setText(self.usernameErrorMessage)
 
-        username = self.mainController.model.getUsername()
-        print(username)
-        self.view.setUsername(username=username)
-
     def changeUsername(self):
         # change username button is clicked from UI
         username = self.mainController.model.getUsername()
@@ -34,6 +30,7 @@ class SettingController:
         m = self.mainController.loginController.model.changeUsername(username=username, newUsername=newUsername)
         self.usernameErrorMessage = m
         self.updateUI()
+        self.mainController.updateUsername()
 
     def changePassword(self):
         # change password button is clicked from UI

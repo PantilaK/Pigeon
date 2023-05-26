@@ -51,13 +51,10 @@ class TripController():
         if type(self.tripComponent) == Trip:
             # sort components
             self.tripComponent.componentList.sort(key=lambda x: x.getTimeFrom())
-            # self.setTitle()
             self.view.clearComponentLists()
             components: list["Tripcomponent"] = self.tripComponent.getComponents()
 
             for c in components:
-                # trip.setTitle()
-                # trip.showInfo()
                 if type(c) == Trip:
                     componentControl = TripController(tripComponent=c, mainControl=self)
                 else:
@@ -112,8 +109,6 @@ class TripController():
         elif t == Stay:
             title = f'{self.tripComponent.getName()} (Stay)'
 
-        print(t)
-        print(title)
         self.view.setTitle(title)
 
     def setDate(self):

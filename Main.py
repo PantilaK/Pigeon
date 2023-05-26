@@ -12,8 +12,6 @@ if __name__ == '__main__':
     root = connection.root()
     if 'username' not in root:
         root['username'] = {}
-    else:
-        print(root['username'])
 
     app = QApplication(sys.argv)
     loginControl = LoginController(LoginModel(root))

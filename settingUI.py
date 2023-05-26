@@ -29,9 +29,6 @@ class settingUI(QDialog):
     def changePasswordButtonClicked(self):
         self.controller.changePassword()
 
-    def setUsername(self, username):
-        self.UI.usernameHeaderLabel.setText(username)
-
     def getNewUsername(self):
         return self.UI.usernameLineEdit.text()
     

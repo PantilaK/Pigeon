@@ -14,6 +14,9 @@ class LoginController:
     def enterLoginProcess(self):
         self.view.show()
         self.clearErrorFields()
+        
+    def createAccount(self):
+        pass
 
     def CAcreateAccount(self):
         username = self.view.CAgetUsername()
@@ -39,11 +42,9 @@ class LoginController:
         else:
             # Send user information to another window
             self.view.close()
-            # globals.currentUser = self.model.getUser(username)
             self.transferToMain(username=username)
 
     def transferToMain(self, username):
-        # temporary main startup
         mainControl = MainController(self, user=self.model.getUser(username=username))
         mainControl.enterMainProcess()
 
