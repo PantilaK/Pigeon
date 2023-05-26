@@ -250,12 +250,17 @@ class EditController:
             return 0
 
     # Find days between dates
-    def daysBetweenDates(self, d1:"QDateTime", d2:"QDateTime"):
-        day1 = date(year=d1.date().year(), month=d1.date().month(), day=d1.date().day())
-        day2 = date(year=d2.date().year(), month=d2.date().month(), day=d2.date().day())
+    def daysBetweenDates(self, timeFrom:"QDateTime", timeTo:"QDateTime"):
+        dayFrom = timeFrom.date()
+        dayTo = timeTo.date()
 
-        d = day2 - day1
-        return d.days
+        return dayFrom.daysTo(dayTo)
+    # def daysBetweenDates(self, d1:"QDateTime", d2:"QDateTime"):
+    #     day1 = date(year=d1.date().year(), month=d1.date().month(), day=d1.date().day())
+    #     day2 = date(year=d2.date().year(), month=d2.date().month(), day=d2.date().day())
+
+    #     d = day2 - day1
+    #     return d.days
 
     # Trip Info
     def getTripInfo(self):
@@ -368,3 +373,29 @@ class EditController:
         
         return stayInfo
     
+
+    def setNight(self):
+        night = self.getNight()
+        if night < 0:
+            night = ""
+
+        self.view.UI.stayNumberOfNightLabel.setText(str(night))
+
+    def getNight(self):
+        timeFrom = self.view.UI.stayFromDateTimeEdit.dateTime()
+        timeTo = self.view.UI.stayToDateTimeEdit.dateTime()
+
+        return self.daysBetweenDates(timeFrom, timeTo)
+
+
+    def setTotalPrice(self):
+        flatRateChecked = self.view.UI.stayPricingFlatRateCheckBox.isChecked()
+        pricePNChecked = self.view.UI.stayPricingPricePerNightCheckBox.isChecked()
+
+        flatRate = self.toFloat(self.view.UI.stayFlatPriceLineEdit.text()) if flatRateChecked else 0
+        pricePerNight = self.toFloat(self.view.UI.stayPricePerNightLineEdit.text()) if pricePNChecked else 0
+        night = self.getNight()
+
+        totalPrice = flatRate + (night * pricePerNight)
+
+        self.view.UI.stayTotalPriceLabel.setText(str(totalPrice))

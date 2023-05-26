@@ -37,6 +37,16 @@ class ComponentEditUI(QDialog):
         self.UI.okButton.clicked.connect(self.okButtonClicked)
         self.UI.cancelButton.clicked.connect(self.cancelButtonClicked)
 
+        self.UI.stayNumberOfNightLabel.setText('')
+        self.UI.stayFromDateTimeEdit.dateChanged.connect(self.setNight)
+        self.UI.stayToDateTimeEdit.dateChanged.connect(self.setNight)
+
+        self.UI.stayTotalPriceLabel.setText('0')
+        self.UI.stayPricingFlatRateCheckBox.stateChanged.connect(self.setTotalPrice)
+        self.UI.stayFlatPriceLineEdit.textChanged.connect(self.setTotalPrice)
+        self.UI.stayPricingPricePerNightCheckBox.stateChanged.connect(self.setTotalPrice)
+        self.UI.stayPricePerNightLineEdit.textChanged.connect(self.setTotalPrice)
+
         self.UI.tripAddReminderButton.clicked.connect(self.addReminderButtonClicked)
 
     def typeComboBoxChanged(self):
@@ -53,4 +63,10 @@ class ComponentEditUI(QDialog):
 
     def addReminderButtonClicked(self):
         self.controller.addReminder()
+
+    def setNight(self):
+        self.controller.setNight()
+
+    def setTotalPrice(self):
+        self.controller.setTotalPrice()
     
