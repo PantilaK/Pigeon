@@ -57,7 +57,11 @@ class TripController():
             for c in components:
                 # trip.setTitle()
                 # trip.showInfo()
-                componentControl = TripController(tripComponent=c, mainControl=self, hasReminder=False, isExtendable=False)
+                if type(c) == Trip:
+                    componentControl = TripController(tripComponent=c, mainControl=self)
+                else:
+                    componentControl = TripController(tripComponent=c, mainControl=self, hasReminder=False, isExtendable=False)
+                    
                 self.view.addComponent(componentControl.view)
 
             self.view.clearReminderList()
@@ -79,6 +83,11 @@ class TripController():
             self.mainControl.deleteTrip(self.tripComponent)
         else:
             self.mainControl.deleteComponent(self.tripComponent)
+
+    def deleteTrip(self, trip:"Trip"):
+        self.tripComponent.removeComponent(component=trip)
+        transaction.commit()
+        self.update()
 
     def deleteComponent(self, component):
         self.tripComponent.removeComponent(component=component)
@@ -271,6 +280,18 @@ class TripController():
     # Add Component - Travel, Place, Eat, Event, Stay
     def addComponent(self):
         EditController(controller=self)
+
+    def addTrip(self, info: dict, reminders: list['Reminder']):
+        trip = Trip(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
+                    timesensitive=info['timesensitive'], info=info['info'], duration=info['duration'])
+        
+        for r in reminders:
+            trip.addReminder(r)
+        
+        self.tripComponent.addComponent(component=trip)
+        self.tripComponent.componentList.sort(key=lambda x: x.getTimeFrom())
+        transaction.commit()
+        self.update()
 
     def addTravel(self, info:dict):
         travel = Travel(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
