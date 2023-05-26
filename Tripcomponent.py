@@ -72,7 +72,7 @@ class Trip(Tripcomponent, persistent.Persistent):
         super().__init__(name, timeFrom, timeTo, remind, timesensitive, info)
         self.__duration = duration
         self.__reminder: list["Reminder"] = persistent.list.PersistentList()
-        self.__componentList = persistent.list.PersistentList()
+        self.componentList = persistent.list.PersistentList()
 
     # Duration
     def getDuration(self):
@@ -83,13 +83,13 @@ class Trip(Tripcomponent, persistent.Persistent):
 
     # Component List
     def getComponents(self):
-        return self.__componentList
+        return self.componentList
     
     def addComponent(self, component):
-        self.__componentList.append(component)
+        self.componentList.append(component)
 
     def removeComponent(self, component):
-        self.__componentList.remove(component)
+        self.componentList.remove(component)
 
     # Reminder List
     def getReminders(self):
@@ -247,29 +247,29 @@ class Stay(Tripcomponent, persistent.Persistent):
     def setTotalPrice(self, totalPrice):
         self.__totalPrice = totalPrice
 
-class CheckIn(Stay, persistent.Persistent):
+# class CheckIn(Stay, persistent.Persistent):
 
-    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, flatRate, flatRateCheck, pricePerNight, pricePerNightCheck, night, totalPrice):
-        super().__init__(name, timeFrom, timeTo, remind, timesensitive, info, flatRate, flatRateCheck, pricePerNight, pricePerNightCheck, night, totalPrice)
+#     def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, flatRate, flatRateCheck, pricePerNight, pricePerNightCheck, night, totalPrice):
+#         super().__init__(name, timeFrom, timeTo, remind, timesensitive, info, flatRate, flatRateCheck, pricePerNight, pricePerNightCheck, night, totalPrice)
 
-    # Check in date and time
-    def getCheckInDate(self):
-        return super().getTimeFrom()
+#     # Check in date and time
+#     def getCheckInDate(self):
+#         return super().getTimeFrom()
     
-class CheckOut(Stay, persistent.Persistent):
+# class CheckOut(Stay, persistent.Persistent):
 
-    # timeFrom = timeTo = Checkout date
-    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, flatRate, flatRateCheck, pricePerNight, pricePerNightCheck, night, totalPrice, checkInDate):
-        super().__init__(name, timeFrom, timeTo, remind, timesensitive, info, flatRate, flatRateCheck, pricePerNight, pricePerNightCheck, night, totalPrice)
-        self.__checkInDate = checkInDate
+#     # timeFrom = timeTo = Checkout date
+#     def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, flatRate, flatRateCheck, pricePerNight, pricePerNightCheck, night, totalPrice):
+#         super().__init__(name, timeTo, timeTo, remind, timesensitive, info, flatRate, flatRateCheck, pricePerNight, pricePerNightCheck, night, totalPrice)
+#         self.__checkInDate = timeFrom
 
-    # Check out date and time
-    def getCheckOut(self):
-        return super().getTimeTo()
+#     # Check out date and time
+#     def getCheckOut(self):
+#         return super().getTimeTo()
     
-    # Check in date:
-    def getCheckInDate(self):
-        return self.__checkInDate
+#     # Check in date:
+#     def getCheckInDate(self):
+#         return self.__checkInDate
     
-    def setCheckInDate(self, checkInDate):
-        self.__checkInDate = checkInDate
+#     def setCheckInDate(self, checkInDate):
+#         self.__checkInDate = checkInDate

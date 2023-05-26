@@ -44,6 +44,9 @@ class MainController:
         self.loginController.enterLoginProcess()
 
     def update(self):
+        #sort trips
+        self.model.trips.sort(key=lambda x: x.getTimeFrom())
+        
         #update UI with model
         self.view.clearTripList()
         trips: list["Trip"] = self.getTrips()
@@ -89,6 +92,7 @@ class MainController:
             trip.addReminder(r)
         
         self.model.addTrip(trip=trip)
+
         transaction.commit()
         self.update()
 

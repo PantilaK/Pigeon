@@ -48,6 +48,8 @@ class TripController():
         self.showInfo()
 
         if type(self.tripComponent) == Trip:
+            # sort components
+            self.tripComponent.componentList.sort(key=lambda x: x.getTimeFrom())
             # self.setTitle()
             self.view.clearComponentLists()
             components: list["Tripcomponent"] = self.tripComponent.getComponents()
@@ -273,6 +275,7 @@ class TripController():
                         timesensitive=info['timesensitive'], info=info['info'], ticketNeed=info['ticketNeed'], ticketPrice=info['ticketPrice'])
         
         self.tripComponent.addComponent(component=travel)
+        self.tripComponent.componentList.sort(key=lambda x: x.getTimeFrom())
         transaction.commit()
         self.update()
 
@@ -281,6 +284,7 @@ class TripController():
                       timesensitive=info['timesensitive'], info=info['info'], openTime=info['openTime'], closeTime=info['closeTime'], openInfo=info['openInfo'])
         
         self.tripComponent.addComponent(component=place)
+        self.tripComponent.componentList.sort(key=lambda x: x.getTimeFrom())
         transaction.commit()
         self.update()
 
@@ -289,6 +293,7 @@ class TripController():
                   timesensitive=info['timesensitive'], info=info['info'], reservationNeed=info['reservation'])
         
         self.tripComponent.addComponent(component=eat)
+        self.tripComponent.componentList.sort(key=lambda x: x.getTimeFrom())
         transaction.commit()
         self.update()
 
@@ -297,6 +302,7 @@ class TripController():
                       timesensitive=info['timesensitive'], info=info['info'], type=info['type'], ticketNeed=info['ticketNeed'], ticketPrice=info['ticketPrice'])
         
         self.tripComponent.addComponent(component=event)
+        self.tripComponent.componentList.sort(key=lambda x: x.getTimeFrom())
         transaction.commit()
         self.update()
 
@@ -306,6 +312,7 @@ class TripController():
                       flatRateCheck=info['flatRateCheck'], pricePerNightCheck=info['pricePerNightCheck'], totalPrice=info['totalPrice'])
         
         self.tripComponent.addComponent(component=stay)
+        self.tripComponent.componentList.sort(key=lambda x: x.getTimeFrom())
         transaction.commit()
         self.update()
 

@@ -126,6 +126,7 @@ class EditController:
                 self.controller.addTrip(info=info, reminders=self.reminders)
             else:
                 self.controller.editTrip(info=info, reminders=self.reminders)
+                self.controller.mainControl.update()
 
         elif source == TypeString.travel:
             info = self.getTravelInfo()
@@ -134,6 +135,7 @@ class EditController:
                 self.controller.addTravel(info=info)
             else:
                 self.controller.editTravel(info=info)
+                self.controller.mainControl.update()
 
         elif source == TypeString.place:
             info = self.getPlaceInfo()
@@ -142,6 +144,7 @@ class EditController:
                 self.controller.addPlace(info=info)
             else:
                 self.controller.editPlace(info=info)
+                self.controller.mainControl.update()
 
         elif source == TypeString.eat:
             info = self.getEatInfo()
@@ -150,6 +153,7 @@ class EditController:
                 self.controller.addEat(info=info)
             else:
                 self.controller.editEat(info=info)
+                self.controller.mainControl.update()
 
         elif source == TypeString.event:
             info = self.getEventInfo()
@@ -158,6 +162,7 @@ class EditController:
                 self.controller.addEvent(info=info)
             else:
                 self.controller.editEvent(info=info)
+                self.controller.mainControl.update()
 
         elif source == TypeString.stay:
             info = self.getStayInfo()
@@ -166,6 +171,7 @@ class EditController:
                 self.controller.addStay(info=info)
             else:
                 self.controller.editStay(info=info)
+                self.controller.mainControl.update()
 
         self.view.close()
 
