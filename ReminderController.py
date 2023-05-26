@@ -34,9 +34,6 @@ class ReminderController:
                 self.view.UI.reminderShowWidget.setVisible(False)
                 self.view.UI.reminderEditWidget.setVisible(True)
                 return
-            
-    def getView(self):
-        return self.view
     
     def UIedit(self):
         self.operatingMode = ReminderController.UIMode.editting
@@ -66,8 +63,21 @@ class ReminderController:
     #     self.updateUI()
 
     def showCheck(self):
-        isChecked = self.view.UI.showReminderCheckbox.isChecked()
-        self.model.setIsChecked(isChecked=isChecked)
+        showIsChecked = self.view.UI.showReminderCheckbox.isChecked()
+        editIsChecked = self.view.UI.editReminderCheckBox.isChecked()
+        
+        if showIsChecked != editIsChecked:
+            self.model.setIsChecked(isChecked=showIsChecked)
+
+        transaction.commit()
+        self.updateUI()
+
+    def editCheck(self):
+        showIsChecked = self.view.UI.showReminderCheckbox.isChecked()
+        editIsChecked = self.view.UI.editReminderCheckBox.isChecked()
+        
+        if showIsChecked != editIsChecked:
+            self.model.setIsChecked(isChecked=editIsChecked)
 
         transaction.commit()
         self.updateUI()

@@ -7,7 +7,6 @@ class User(persistent.Persistent):
     def __init__(self, username, password):
         self.__username = username
         self.__password = password
-        self.__name = None
         self.trips = persistent.list.PersistentList()
         self.__notifications = persistent.list.PersistentList()
 
@@ -24,13 +23,6 @@ class User(persistent.Persistent):
     
     def setPassword(self, password):
         self.__password = password
-
-    # Name
-    def getName(self):
-        return self.__name
-    
-    def setName(self, name):
-        self.__name = name
 
     # Trips
     def getTrips(self):

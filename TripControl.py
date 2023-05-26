@@ -340,13 +340,6 @@ class TripController():
         transaction.commit()
         self.update()
 
-    # def addReminder(self):
-    #     #temporary run code
-    #     newReminder = ReminderController(parentController=self, model=self.tripComponent)
-
-    #     #temporary add component code, replace with update
-    #     self.view.UI.tripReminderLayout.addWidget(newReminder.view)
-
     def addReminder(self):
         name = self.view.UI.tripReminderLineEdit.text()
         reminder = Reminder(name=name)

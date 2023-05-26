@@ -14,9 +14,6 @@ class LoginController:
     def enterLoginProcess(self):
         self.view.show()
         self.clearErrorFields()
-        
-    def createAccount(self):
-        pass
 
     def CAcreateAccount(self):
         username = self.view.CAgetUsername()
