@@ -58,6 +58,9 @@ class MainController:
             tripControl = TripController(tripComponent=trip, mainControl=self)
             self.view.addTrip(tripControl.view)
 
+        self.updateNoti()
+
+    def updateNoti(self):
         self.view.clearNotificationList()
         noti: list["Notification"] = self.model.getNotifications()
 
@@ -126,29 +129,28 @@ class MainController:
         SettingController(mainController=self)
 
     def checkNoti(self):
-        trips: list["Trip"] = self.getTrips()
+        trips: list["Trip"] = self.model.getTrips()
 
         for t in trips:
-            if t.getRemind() and not t.getNotification() and self.before(t.getTimesensitive()):
+            if t.getRemind() and not t.getNotification() and self.beforeEqual(t.getTimesensitive()):
                 t.setNotification(True)
                 detail = f'Trip: {t.getName()} start on {t.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
                 self.addNoti(detail=detail)
 
             components: list["Tripcomponent"] = t.getComponents()
             for c in components:
-                if c.getRemind() and not c.getNotification() and self.before(c.getTimesensitive()):
+                if c.getRemind() and not c.getNotification() and self.beforeEqual(c.getTimesensitive()):
                     c.setNotification(True)
                     detail = ''
-                    print("lolo")
                         
                     if type(c) == Travel:
-                        detail = f'Travel: {c.gecName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                        detail = f'Travel: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
                     elif type(c) == Place:
                         detail = f'Place: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
                     elif type(c) == Eat:
-                        detail = f'Travel: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                        detail = f'Eat: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
                     elif type(c) == Event:
-                        detail = f'Travel: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                        detail = f'Event: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
                     elif type(c) == Stay:
                         detail = f'Stay: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
                     
@@ -159,13 +161,13 @@ class MainController:
         self.model.addNotification(noti)
 
         transaction.commit()
-        self.update()
+        self.updateNoti()
 
     def deleteNoti(self, noti:"Notification"):
         self.model.removeNotification(noti)
 
         transaction.commit()
-        self.update()
+        self.updateNoti()
 
     def before(self, d1:"QDateTime"):
         t = datetime.today()
@@ -173,3 +175,10 @@ class MainController:
         d = datetime(year=d1.date().year(), month=d1.date().month(), day=d1.date().day(), hour=d1.time().hour(), minute=d1.time().minute())
 
         return today >= d
+    
+    def beforeEqual(self, d1:"QDateTime"):
+        t = datetime.today()
+        today = datetime(year=t.year, month=t.month, day=t.day, hour=t.hour, minute=t.minute)
+        d = datetime(year=d1.date().year(), month=d1.date().month(), day=d1.date().day(), hour=d1.time().hour(), minute=d1.time().minute())
+
+        return d <= today
