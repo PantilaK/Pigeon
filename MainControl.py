@@ -46,7 +46,7 @@ class MainController:
     def update(self):
         #sort trips
         self.model.trips.sort(key=lambda x: x.getTimeFrom())
-        
+
         #update UI with model
         self.view.clearTripList()
         trips: list["Trip"] = self.getTrips()
@@ -149,11 +149,9 @@ class MainController:
                         detail = f'Travel: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
                     elif type(c) == Event:
                         detail = f'Travel: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
-                    elif type(c) == CheckIn:
-                        detail = f'Check In: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
-                    elif type(c) == CheckOut:
-                        detail = f'Check Out: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
-
+                    elif type(c) == Stay:
+                        detail = f'Stay: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                    
                     self.addNoti(detail=detail)
 
     def addNoti(self, detail):
