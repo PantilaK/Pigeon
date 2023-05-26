@@ -45,6 +45,7 @@ class TripController():
             self.view.UI.componentWidget.setVisible(False)
 
         self.setTitle()
+        self.setDate()
         self.showInfo()
 
         if type(self.tripComponent) == Trip:
@@ -114,6 +115,10 @@ class TripController():
         print(t)
         print(title)
         self.view.setTitle(title)
+
+    def setDate(self):
+        d = self.tripComponent.getTimeFrom().date().toString("dd MMMM yy")
+        self.view.UI.tripTime.setText(d)
 
     def showInfo(self):
         t = type(self.tripComponent)
