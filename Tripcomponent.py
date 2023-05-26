@@ -125,11 +125,12 @@ class Travel(Tripcomponent, persistent.Persistent):
 
 class Place(Tripcomponent, persistent.Persistent):
 
-    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, openTime:"QDateTime", closeTime:"QDateTime", openInfo):
+    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, openTime:"QDateTime", closeTime:"QDateTime", openInfo, addOpen):
         super().__init__(name, timeFrom, timeTo, remind, timesensitive, info)
         self.__openTime = openTime
         self.__closeTime = closeTime
         self.__openInfo = openInfo
+        self.__addOpen = addOpen
 
     # Open time
     def getOpenTime(self):
@@ -151,6 +152,13 @@ class Place(Tripcomponent, persistent.Persistent):
     
     def setOpenInfo(self, openInfo):
         self.__openInfo = openInfo
+
+    # Add open
+    def getAddOpen(self):
+        return self.__addOpen
+    
+    def setAddOpen(self, addOpen):
+        self.__addOpen = addOpen
 
 class Eat(Tripcomponent, persistent.Persistent):
 

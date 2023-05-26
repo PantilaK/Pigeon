@@ -210,6 +210,7 @@ class EditController:
         self.view.UI.placeOpenHoursFromTimeEdit.setDateTime(self.model.getOpenTime())
         self.view.UI.placeOpenHoursToTimeEdit.setDateTime(self.model.getCloseTime())
         self.view.UI.placeOpenHoursInfoLineEdit.setText(self.model.getOpenInfo())
+        self.view.UI.checkBox_5.setChecked(self.model.getAddOpen())
 
     def setTextEatEdit(self):
         self.view.UI.eatNameLineEdit.setText(self.model.getName())
@@ -312,10 +313,17 @@ class EditController:
         openTime = self.view.UI.placeOpenHoursFromTimeEdit.dateTime()
         closeTime = self.view.UI.placeOpenHoursToTimeEdit.dateTime()
         openInfo = self.view.UI.placeOpenHoursInfoLineEdit.text()
+        addOpen = self.view.UI.checkBox_5.isChecked()
+
+        if not addOpen:
+            d = QDateTime(QDate(0,0,0), QTime(0,0,0))
+            openTime = d
+            closeTime = d
+            openInfo = ''
 
         placeInfo = {'name': name, 'timeFrom': timeFrom, 'timeTo': timeTo, 'remind': remind,
                      'timesensitive': timesensitive, 'info': info, 'openTime': openTime,
-                     'closeTime': closeTime, 'openInfo': openInfo}
+                     'closeTime': closeTime, 'openInfo': openInfo, 'addOpen': addOpen}
         
         return placeInfo
 

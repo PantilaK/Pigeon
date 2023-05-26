@@ -13,7 +13,7 @@ class LoginController:
 
     def enterLoginProcess(self):
         self.view.show()
-        self.clearErrorField()
+        self.clearErrorFields()
         
     def createAccount(self):
         pass
@@ -27,7 +27,10 @@ class LoginController:
         self.setErrorFieldTextCA(message)
 
         if create[0]:
-            self.login()
+            self.view.close()
+            self.view.UI.createAccountWidget.setVisible(False)
+            self.view.UI.loginWidget.setVisible(True)
+            self.transferToMain(username=username)
 
     def login(self):
         username = self.view.getUsername()
@@ -63,6 +66,11 @@ class LoginController:
     def clearErrorFields(self):
         self.clearErrorFieldCA()
         self.clearErrorField()
+        self.view.UI.usernameLineEdit.setText('')
+        self.view.UI.passwordLineEdit.setText('')
+        self.view.UI.CAusernameLineEdit.setText('')
+        self.view.UI.CApasswordLineEdit.setText('')
+        self.view.UI.CAconfirmPasswordLineEdit.setText('')
     
     def clearErrorFieldCA(self):
         self.view.UI.errorLabel.setText(" ")

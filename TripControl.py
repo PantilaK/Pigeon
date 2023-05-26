@@ -143,9 +143,10 @@ class TripController():
         return info
     
     def placeInfo(self):
+        openTime = f'{self.tripComponent.getOpenTime().toString("hh:mm")} - {self.tripComponent.getCloseTime().toString("hh:mm")}, Extra Information: {self.tripComponent.getOpenInfo()}' if self.tripComponent.getAddOpen() else 'No Data'
         info = f'''
         Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")}
-        Open: {self.tripComponent.getOpenTime().toString("hh:mm")} - {self.tripComponent.getCloseTime().toString("hh:mm")} Extra Information: {self.tripComponent.getOpenInfo()}
+        Open: {openTime}
         Information: {self.tripComponent.getInfo()}
         '''
         return info
@@ -219,6 +220,7 @@ class TripController():
         self.tripComponent.setOpenTime(info['openTime'])
         self.tripComponent.setCloseTime(info['closeTime'])
         self.tripComponent.setOpenInfo(info['openInfo'])
+        self.tripComponent.setAddOpen(info['addOpen'])
 
         transaction.commit()
         self.update()
@@ -281,7 +283,8 @@ class TripController():
 
     def addPlace(self, info:dict):
         place = Place(name=info['name'], timeFrom=info['timeFrom'], timeTo=info['timeTo'], remind=info['remind'],
-                      timesensitive=info['timesensitive'], info=info['info'], openTime=info['openTime'], closeTime=info['closeTime'], openInfo=info['openInfo'])
+                      timesensitive=info['timesensitive'], info=info['info'], openTime=info['openTime'], closeTime=info['closeTime'], 
+                      openInfo=info['openInfo'], addOpen=info['addOpen']) 
         
         self.tripComponent.addComponent(component=place)
         self.tripComponent.componentList.sort(key=lambda x: x.getTimeFrom())
