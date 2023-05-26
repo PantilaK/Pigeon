@@ -72,7 +72,6 @@ class EditController:
             
             self.canChangeType = False
 
-        self.reminders = []
 
         self.subUIDict:dict[str,QWidget] = {TypeString.trip:self.view.UI.tripEditWidget,
                                             TypeString.travel:self.view.UI.travelEditWidget,
