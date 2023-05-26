@@ -6,200 +6,252 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from PySide6.QtCore import QDateTime
+    from Reminder import Reminder
 
 class Tripcomponent(ABC):
 
     def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info):
-        self.name = name # Hotel, Train, Place name
-        self.timeFrom:"QDateTime"= timeFrom
-        self.timeTo:"QDateTime" = timeTo
-        self.remind:bool = remind
-        self.timesensitive = timesensitive # Important
-        self.briefInfo = info # Brief information
+        self.__name = name # Hotel, Train, Place name
+        self.__timeFrom:"QDateTime"= timeFrom
+        self.__timeTo:"QDateTime" = timeTo
+        self.__remind:bool = remind
+        self.__timesensitive = timesensitive # Important
+        self.__notification = False
+        self.__briefInfo = info # Brief information
 
     # Name
     def getName(self):
-        return self.name
+        return self.__name
     
     def setName(self, name):
-        self.name = name
+        self.__name = name
 
     # Time From, To
     def getTimeFrom(self):
-        return self.timeFrom
+        return self.__timeFrom
     
     def setTimeFrom(self, timeFrom):
-        self.timeFrom = timeFrom
+        self.__timeFrom = timeFrom
 
     def getTimeTo(self):
-        return self.timeTo
+        return self.__timeTo
     
     def setTimeTo(self, timeTo):
-        self.timeTo = timeTo
+        self.__timeTo = timeTo
     
     # Timesensitive remind and timesensitive
     def getRemind(self):
-        return self.remind
+        return self.__remind
     
     def setRemind(self, remind):
-        self.remind = remind
+        self.__remind = remind
 
     def getTimesensitive(self):
-        return self.timesensitive
+        return self.__timesensitive
     
     def setTimesensitive(self, timesensitive):
-        self.timesensitive = timesensitive
+        self.__timesensitive = timesensitive
 
     # Info
     def getInfo(self):
-        return self.briefInfo
+        return self.__briefInfo
     
     def writeInfo(self, info):
-        self.briefInfo = info
+        self.__briefInfo = info
+
+    # Notification - False, True
+    def getNotification(self):
+        return self.__notification
+    
+    def setNotification(self, noti):
+        self.__notification = noti
+
+class Trip(Tripcomponent, persistent.Persistent):
+    
+    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, duration):
+        super().__init__(name, timeFrom, timeTo, remind, timesensitive, info)
+        self.__duration = duration
+        self.__reminder: list["Reminder"] = persistent.list.PersistentList()
+        self.componentList = persistent.list.PersistentList()
+
+    # Duration
+    def getDuration(self):
+        return self.__duration
+    
+    def setDuration(self, duration):
+        self.__duration = duration
+
+    # Component List
+    def getComponents(self):
+        return self.componentList
+    
+    def addComponent(self, component):
+        self.componentList.append(component)
+
+    def removeComponent(self, component):
+        self.componentList.remove(component)
+
+    # Reminder List
+    def getReminders(self):
+        return self.__reminder
+    
+    def addReminder(self, reminder:"Reminder"):
+        self.__reminder.append(reminder)
+
+    def removeReminder(self, reminder):
+        self.__reminder.remove(reminder)
+
 
 class Travel(Tripcomponent, persistent.Persistent):
 
     def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, ticketNeed, ticketPrice):
         super().__init__(name, timeFrom, timeTo, remind, timesensitive, info)
-        self.ticketNeed:bool = ticketNeed # Ticket require
-        self.ticketPrice = ticketPrice # Price of the ticket
+        self.__ticketNeed:bool = ticketNeed # Ticket require
+        self.__ticketPrice = ticketPrice # Price of the ticket
 
     # Ticket needed
     def getTicketNeed(self):
-        return self.ticketNeed
+        return self.__ticketNeed
     
     def setTicketNeed(self, ticketNeed):
-        self.ticketNeed = ticketNeed
+        self.__ticketNeed = ticketNeed
 
     # Ticket price
     def getTicketPrice(self):
-        return self.ticketPrice
+        return self.__ticketPrice
     
     def setTicketPrice(self, ticketPrice):
-        self.ticketPrice = ticketPrice
+        self.__ticketPrice = ticketPrice
 
 class Place(Tripcomponent, persistent.Persistent):
 
-    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, openTime:"QDateTime", closeTime:"QDateTime", openInfo):
+    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, openTime:"QDateTime", closeTime:"QDateTime", openInfo, addOpen):
         super().__init__(name, timeFrom, timeTo, remind, timesensitive, info)
-        self.openTime = openTime
-        self.closeTime = closeTime
-        self.openInfo = openInfo
+        self.__openTime = openTime
+        self.__closeTime = closeTime
+        self.__openInfo = openInfo
+        self.__addOpen = addOpen
 
     # Open time
     def getOpenTime(self):
-        return self.openTime
+        return self.__openTime
     
     def setOpenTime(self, openTime):
-        self.openTime = openTime
+        self.__openTime = openTime
 
     # Close time
     def getCloseTime(self):
-        return self.closeTime
+        return self.__closeTime
     
     def setCloseTime(self, closeTime):
-        self.closeTime = closeTime
+        self.__closeTime = closeTime
 
     # Open info -> weekend, holiday period
     def getOpenInfo(self):
-        return self.openInfo
+        return self.__openInfo
     
     def setOpenInfo(self, openInfo):
-        self.openInfo = openInfo
+        self.__openInfo = openInfo
 
-class Restaurant(Tripcomponent, persistent.Persistent):
+    # Add open
+    def getAddOpen(self):
+        return self.__addOpen
+    
+    def setAddOpen(self, addOpen):
+        self.__addOpen = addOpen
+
+class Eat(Tripcomponent, persistent.Persistent):
 
     def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, reservationNeed):
         super().__init__(name, timeFrom, timeTo, remind, timesensitive, info)
-        self.reservationNeed = reservationNeed
+        self.__reservationNeed = reservationNeed
 
     # Need reservation
     def getResevationNeed(self):
-        return self.reservationNeed
+        return self.__reservationNeed
     
     def setReservationNeed(self, reservationNeed):
-        self.reservationNeed = reservationNeed
+        self.__reservationNeed = reservationNeed
 
 class Event(Tripcomponent, persistent.Persistent):
 
     def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, type, ticketNeed, ticketPrice):
         super().__init__(name, timeFrom, timeTo, remind, timesensitive, info)
-        self.type = type
-        self.ticketNeed = ticketNeed
-        self.ticketPrice = ticketPrice  
+        self.__type = type
+        self.__ticketNeed = ticketNeed
+        self.__ticketPrice = ticketPrice  
 
     # Type of event -> movie, play, show
     def getType(self):
-        return self.type
+        return self.__type
 
     def setType(self, type):
-        self.type = type
+        self.__type = type
 
     # Ticket needed
     def getTicketNeed(self):
-        return self.ticketNeed
+        return self.__ticketNeed
     
     def setTicketNeed(self, ticketNeed):
-        self.ticketNeed = ticketNeed
+        self.__ticketNeed = ticketNeed
 
     # Ticket price
     def getTicketPrice(self):
-        return self.ticketPrice
+        return self.__ticketPrice
     
     def setTicketPrice(self, ticketPrice):
-        self.ticketPrice = ticketPrice
+        self.__ticketPrice = ticketPrice
 
 class Stay(Tripcomponent, persistent.Persistent):
 
-    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, flatRate, pricePerNight, period, totalPrice):
+    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, flatRate, flatRateCheck, pricePerNight, pricePerNightCheck, night, totalPrice):
         super().__init__(name, timeFrom, timeTo, remind, timesensitive, info)
-        self.flatRate = flatRate
-        self.pricePerNight = pricePerNight
-        self.period = period
-        self.totalPrice =  totalPrice
+        self.__flatRate = flatRate
+        self.__flatRateCheck = flatRateCheck
+        self.__pricePerNightCheck = pricePerNightCheck
+        self.__pricePerNight = pricePerNight
+        self.__night = night
+        self.__totalPrice =  totalPrice
 
     # Flat rate
     def getFlatRate(self):
-        return self.flatRate
+        return self.__flatRate
     
     def setFlatRate(self, flatRate):
-        self.flatRate = flatRate
+        self.__flatRate = flatRate
+
+    # Flat rate checked
+    def getFlatRateCheck(self):
+        return self.__flatRateCheck
+    
+    def setFlatRateCheck(self, flatRateCheck):
+        self.__flatRateCheck = flatRateCheck
 
     # Price per night
     def getPricePerNight(self):
-        return self.pricePerNight
+        return self.__pricePerNight
     
     def setPricePerNight(self, pricePerNight):
-        self.pricePerNight = pricePerNight
+        self.__pricePerNight = pricePerNight
 
-    # period
-    def getPeriod(self):
-        return self.period
+    # Price per night check
+    def getPPNCheck(self):
+        return self.__pricePerNightCheck
     
-    def setPeriod(self, period):
-        self.period = period
+    def setPPNCheck(self, pPN):
+        self.__pricePerNightCheck = pPN
+
+    # Night
+    def getNight(self):
+        return self.__night
+    
+    def setNight(self, night):
+        self.__night = night
 
     # Total price
     def getTotalPrice(self):
-        return self.totalPrice
+        return self.__totalPrice
     
     def setTotalPrice(self, totalPrice):
-        self.totalPrice = totalPrice
+        self.__totalPrice = totalPrice
 
-class CheckIn(Stay, persistent.Persistent):
-
-    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, flatRate, pricePerNight, period, totalPrice):
-        super().__init__(name, timeFrom, timeTo, remind, timesensitive, info, flatRate, pricePerNight, period, totalPrice)
-
-    # Check in date and time
-    def getCheckInDate(self):
-        return super().getTimeFrom()
-    
-class CheckOut(Stay, persistent.Persistent):
-
-    def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, flatRate, pricePerNight, period, totalPrice):
-        super().__init__(name, timeFrom, timeTo, remind, timesensitive, info, flatRate, pricePerNight, period, totalPrice)
-
-    # Check in date and time
-    def getCheckOut(self):
-        return super().getTimeTo()

@@ -15,6 +15,8 @@ class ReminderUI(QWidget):
         self.UI.editReminderLineEdit.editingFinished.connect(self.reminderEditFinished)
         self.UI.editOKButton.clicked.connect(self.editOKButtonClicked)
         self.UI.editDeleteButton.clicked.connect(self.deleteButtonClicked)
+        self.UI.showReminderCheckbox.stateChanged.connect(self.showCheck)
+        self.UI.editReminderCheckBox.stateChanged.connect(self.editCheck)
 
     def editButtonClicked(self):
         self.controller.UIedit()
@@ -27,5 +29,11 @@ class ReminderUI(QWidget):
 
     def editOKButtonClicked(self):
         self.controller.editFinished()
+
+    def showCheck(self):
+        self.controller.showCheck()
+
+    def editCheck(self):
+        self.controller.editCheck()
 
 

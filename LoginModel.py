@@ -7,12 +7,6 @@ class LoginModel:
     def __init__(self, root):
         self.root = root
 
-    def isPasswordMatched(self, password1:str, passowrd2:str):
-        if (password1 == passowrd2) and (password1 != "" or password1 != " "):
-            return (True, "")
-        
-        return (False, "Passwords do not match")
-
     
     def getPassword(self, username:str):
         if username in self.root['username']:
@@ -33,13 +27,13 @@ class LoginModel:
         username = ruser
 
         if username == "" or password == "":
-            return "Invalid username or password"
+            return (False, "Invalid username or password")
         
         if username in self.root['username']:
-            return "Username already exists"
+            return (False, "Username already exists")
         
         self.storingPassword(username, password)
-        return "Account Succesfully Created"
+        return (True, "Account Succesfully Created")
 
     def verifyPassword(self, username:str, password:str):
         # Check if username exists
@@ -74,8 +68,7 @@ class LoginModel:
         return user
     
     def changeUsername(self, newUsername: str, username: str):
-        ruser = newUsername.strip()
-        newUsername = ruser
+        newUsername = newUsername
 
         if newUsername == "":
             return "Invalid username"
@@ -84,14 +77,14 @@ class LoginModel:
             return "Username already exists"
         
         self.storingNewUsername(username=username, newUsername=newUsername)
-        return "Username Sucesfully Changed"
+        return "Username Change Sucessfully"
     
     def storingNewUsername(self, username, newUsername):
         tmp = self.root['username']
 
         user:User = tmp[username]
         del tmp[username]
-        user.username = newUsername
+        user.setUsername(username=newUsername)
 
         tmp[newUsername] = user
         self.root['username'] = tmp
@@ -107,12 +100,13 @@ class LoginModel:
         tmp = self.root['username']
 
         user:User = tmp[username]
-        user.password = hash
+        user.setPassword(hash)
 
         tmp[username] = user
         self.root['username'] = tmp
 
         transaction.commit()
+        return "Password Changed Sucessfully"
 
 
 

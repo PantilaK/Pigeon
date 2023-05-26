@@ -1,7 +1,6 @@
 from LoginUI import LoginUI
 from LoginModel import LoginModel
 
-import globals
 import sys
 from MainControl import MainController
 
@@ -14,17 +13,21 @@ class LoginController:
 
     def enterLoginProcess(self):
         self.view.show()
-        self.clearErrorField()
-        
-    def createAccount(self):
-        pass
+        self.clearErrorFields()
 
     def CAcreateAccount(self):
         username = self.view.CAgetUsername()
         password = self.view.CAgetPassword()
-        message = self.model.createAccount(username, password)
+        create = self.model.createAccount(username, password)
+        message = create[1]
         
         self.setErrorFieldTextCA(message)
+
+        if create[0]:
+            self.view.close()
+            self.view.UI.createAccountWidget.setVisible(False)
+            self.view.UI.loginWidget.setVisible(True)
+            self.transferToMain(username=username)
 
     def login(self):
         username = self.view.getUsername()
@@ -36,13 +39,12 @@ class LoginController:
         else:
             # Send user information to another window
             self.view.close()
-            globals.currentUser = self.model.getUser(username)
-            self.transferToMain()
+            # globals.currentUser = self.model.getUser(username)
+            self.transferToMain(username=username)
 
-    def transferToMain(self):
+    def transferToMain(self, username):
         # temporary main startup
-        mainControl = MainController(self)
-        globals.mainController = mainControl
+        mainControl = MainController(self, user=self.model.getUser(username=username))
         mainControl.enterMainProcess()
 
 
@@ -53,7 +55,7 @@ class LoginController:
         password = self.view.CAgetPassword()
         confirmPassword = self.view.CAgetComfirmPassword()
 
-        isMatched = self.model.isPasswordMatched(password, confirmPassword)
+        isMatched = self.isPasswordMatched(password, confirmPassword)
 
         self.setErrorFieldTextCA(isMatched[1])
         self.view.setEnabledCACreateAccountButton(isMatched[0])
@@ -61,6 +63,11 @@ class LoginController:
     def clearErrorFields(self):
         self.clearErrorFieldCA()
         self.clearErrorField()
+        self.view.UI.usernameLineEdit.setText('')
+        self.view.UI.passwordLineEdit.setText('')
+        self.view.UI.CAusernameLineEdit.setText('')
+        self.view.UI.CApasswordLineEdit.setText('')
+        self.view.UI.CAconfirmPasswordLineEdit.setText('')
     
     def clearErrorFieldCA(self):
         self.view.UI.errorLabel.setText(" ")
@@ -74,8 +81,11 @@ class LoginController:
     def setErrorFieldTextCA(self, text:str):
         self.view.UI.CAerrorLabel.setText(text)
 
-    def changeUsername(self, username, newUsername):
-        self.model.changeUsername(username=username, newUsername=newUsername)
-    
+    def isPasswordMatched(self, password1:str, passowrd2:str):
+        if (password1 == passowrd2) and (password1 != "" or password1 != " "):
+            return (True, "")
+        
+        return (False, "Passwords do not match")
+
 
     

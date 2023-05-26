@@ -2,7 +2,6 @@ from typing import Optional
 import PySide6.QtCore
 from settingUI_ui import *
 from PySide6.QtWidgets import QDialog
-import globals
 
 from typing import TYPE_CHECKING
 
@@ -21,6 +20,7 @@ class settingUI(QDialog):
         self.UI.changePasswordButton.clicked.connect(self.changePasswordButtonClicked)
         self.UI.enterNewPasswordLineEdit.textChanged.connect(self.passwordLineEditChange)
         self.UI.reEnterNewPasswordLineEdit.textChanged.connect(self.passwordLineEditChange)
+        self.UI.doneButton.clicked.connect(self.doneButtonClicked)
 
     
     def changeUsernameButtonClicked(self):
@@ -29,8 +29,7 @@ class settingUI(QDialog):
     def changePasswordButtonClicked(self):
         self.controller.changePassword()
 
-    def setUsername(self):
-        username = globals.currentUser.username
+    def setUsername(self, username):
         self.UI.usernameHeaderLabel.setText(username)
 
     def getNewUsername(self):
@@ -50,4 +49,7 @@ class settingUI(QDialog):
 
     def setEnableChangePasswordButton(self, enable):
         self.UI.changePasswordButton.setEnabled(enable)
+
+    def doneButtonClicked(self):
+        self.controller.done()
                  
