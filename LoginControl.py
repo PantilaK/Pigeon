@@ -58,7 +58,7 @@ class LoginController:
         password = self.view.CAgetPassword()
         confirmPassword = self.view.CAgetComfirmPassword()
 
-        isMatched = self.model.isPasswordMatched(password, confirmPassword)
+        isMatched = self.isPasswordMatched(password, confirmPassword)
 
         self.setErrorFieldTextCA(isMatched[1])
         self.view.setEnabledCACreateAccountButton(isMatched[0])
@@ -83,6 +83,12 @@ class LoginController:
     
     def setErrorFieldTextCA(self, text:str):
         self.view.UI.CAerrorLabel.setText(text)
+
+    def isPasswordMatched(self, password1:str, passowrd2:str):
+        if (password1 == passowrd2) and (password1 != "" or password1 != " "):
+            return (True, "")
+        
+        return (False, "Passwords do not match")
 
 
     

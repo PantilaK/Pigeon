@@ -44,7 +44,7 @@ class SettingController:
         hash = hashlib.sha256(previousPassword.encode()).hexdigest()
         print(previousPassword, password)
         
-        if self.mainController.loginController.model.isPasswordMatched(hash, password)[0]:
+        if self.mainController.loginController.isPasswordMatched(hash, password)[0]:
             m = self.mainController.loginController.model.changePassword(username=username, password=newPassword)
             self.passwordErrorMessage = m
 
@@ -54,7 +54,7 @@ class SettingController:
         password = self.view.getNewPassword()
         confirmPassword = self.view.getNewPasswordConfirm()
 
-        r = self.mainController.loginController.model.isPasswordMatched(password, confirmPassword)
+        r = self.mainController.loginController.isPasswordMatched(password, confirmPassword)
         isMatched = r[0]
         m = r[1]
         self.passwordErrorMessage = m

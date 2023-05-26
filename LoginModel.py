@@ -7,12 +7,6 @@ class LoginModel:
     def __init__(self, root):
         self.root = root
 
-    def isPasswordMatched(self, password1:str, passowrd2:str):
-        if (password1 == passowrd2) and (password1 != "" or password1 != " "):
-            return (True, "")
-        
-        return (False, "Passwords do not match")
-
     
     def getPassword(self, username:str):
         if username in self.root['username']:
