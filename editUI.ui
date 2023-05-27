@@ -343,7 +343,7 @@ border: 0px;
             <property name="geometry">
              <rect>
               <x>0</x>
-              <y>0</y>
+              <y>-1601</y>
               <width>589</width>
               <height>2264</height>
              </rect>
@@ -427,7 +427,7 @@ border: 0px;
                  </widget>
                 </item>
                 <item row="3" column="0">
-                 <widget class="QLabel" name="label_7">
+                 <widget class="QLabel" name="tripTimeSensitiveLabel">
                   <property name="text">
                    <string>Time Sensitive:</string>
                   </property>
@@ -490,6 +490,16 @@ border: 0px;
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
+                    <property name="minimumDateTime">
+                     <datetime>
+                      <hour>0</hour>
+                      <minute>0</minute>
+                      <second>0</second>
+                      <year>1752</year>
+                      <month>9</month>
+                      <day>15</day>
+                     </datetime>
+                    </property>
                     <property name="calendarPopup">
                      <bool>true</bool>
                     </property>
@@ -524,7 +534,7 @@ border: 0px;
                  </layout>
                 </item>
                 <item row="3" column="1">
-                 <widget class="QWidget" name="widget_4" native="true">
+                 <widget class="QWidget" name="tripTimeSensitiveWidget" native="true">
                   <layout class="QVBoxLayout" name="verticalLayout_6">
                    <item>
                     <widget class="QCheckBox" name="tripTimeSensitiveCheckBox">
@@ -576,7 +586,7 @@ border: 0px;
                  </widget>
                 </item>
                 <item row="4" column="2" colspan="2">
-                 <widget class="QWidget" name="widget_5" native="true">
+                 <widget class="QWidget" name="travelTimeSensitiveWidget" native="true">
                   <layout class="QVBoxLayout" name="verticalLayout_7">
                    <item>
                     <widget class="QCheckBox" name="travelTimeSensitiveCheckBox">
@@ -679,7 +689,7 @@ border: 0px;
                  </widget>
                 </item>
                 <item row="4" column="0">
-                 <widget class="QLabel" name="label_15">
+                 <widget class="QLabel" name="travelTimeSensitiveLabel">
                   <property name="text">
                    <string>Time Sensitive:</string>
                   </property>
@@ -888,7 +898,7 @@ border: 0px;
                  </layout>
                 </item>
                 <item row="6" column="1">
-                 <widget class="QLabel" name="label_24">
+                 <widget class="QLabel" name="placeTimeSensitiveLabel">
                   <property name="text">
                    <string>Time Sensitive:</string>
                   </property>
@@ -971,7 +981,7 @@ border: 0px;
                  </widget>
                 </item>
                 <item row="5" column="0">
-                 <widget class="QLabel" name="label_38">
+                 <widget class="QLabel" name="eventTimeSensitiveLabel">
                   <property name="text">
                    <string>Time Sensitive:</string>
                   </property>
@@ -1203,7 +1213,7 @@ border: 0px;
                  </layout>
                 </item>
                 <item row="4" column="0">
-                 <widget class="QLabel" name="label_44">
+                 <widget class="QLabel" name="eatTimeSensitiveLabel">
                   <property name="text">
                    <string>Time Sensitive:</string>
                   </property>
@@ -1372,7 +1382,7 @@ border: 0px;
                  </widget>
                 </item>
                 <item row="6" column="0">
-                 <widget class="QLabel" name="label_31">
+                 <widget class="QLabel" name="stayTimeSensitiveLabel">
                   <property name="text">
                    <string>Time Sensitive:</string>
                   </property>
@@ -1479,7 +1489,11 @@ border: 0px;
                        </widget>
                       </item>
                       <item row="0" column="1">
-                       <widget class="QLineEdit" name="stayFlatPriceLineEdit"/>
+                       <widget class="QLineEdit" name="stayFlatPriceLineEdit">
+                        <property name="inputMask">
+                         <string/>
+                        </property>
+                       </widget>
                       </item>
                      </layout>
                     </widget>
@@ -1488,7 +1502,11 @@ border: 0px;
                     <widget class="QWidget" name="stayPricingPricePerNightWidget" native="true">
                      <layout class="QGridLayout" name="gridLayout_10">
                       <item row="0" column="1">
-                       <widget class="QLineEdit" name="stayPricePerNightLineEdit"/>
+                       <widget class="QLineEdit" name="stayPricePerNightLineEdit">
+                        <property name="inputMask">
+                         <string/>
+                        </property>
+                       </widget>
                       </item>
                       <item row="0" column="0">
                        <widget class="QLabel" name="label_50">
