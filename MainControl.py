@@ -144,7 +144,7 @@ class MainController:
         for t in trips:
             if t.getRemind() and not t.getNotification() and self.beforeEqual(t.getTimesensitive()):
                 t.setNotification(True)
-                detail = f'Trip: {t.getName()} start on {t.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                detail = f'Trip: {t.getName()} start on {t.getTimeFrom().toString("dd/MM/yyyy hh:mm")}'
                 self.addNoti(detail=detail)
 
             components: list["Tripcomponent"] = t.getComponents()
@@ -154,15 +154,15 @@ class MainController:
                     detail = ''
                         
                     if type(c) == Travel:
-                        detail = f'Travel: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                        detail = f'Travel: {c.getName()} on {c.getTimeFrom().toString("dd/MM/yyyy hh:mm")}'
                     elif type(c) == Place:
-                        detail = f'Place: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                        detail = f'Place: {c.getName()} on {c.getTimeFrom().toString("dd/MM/yyyy hh:mm")}'
                     elif type(c) == Eat:
-                        detail = f'Eat: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                        detail = f'Eat: {c.getName()} on {c.getTimeFrom().toString("dd/MM/yyyy hh:mm")}'
                     elif type(c) == Event:
-                        detail = f'Event: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                        detail = f'Event: {c.getName()} on {c.getTimeFrom().toString("dd/MM/yyyy hh:mm")}'
                     elif type(c) == Stay:
-                        detail = f'Stay: {c.getName()} on {c.getTimeFrom().toString("dd/mm/yyyy hh:mm")}'
+                        detail = f'Stay: {c.getName()} on {c.getTimeFrom().toString("dd/MM/yyyy hh:mm")}'
                     
                     self.addNoti(detail=detail)
 

@@ -136,55 +136,67 @@ class TripController():
 
     # Get Information
     def tripInfo(self):
-        info = f'''
-        Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")} ({self.tripComponent.getDuration()} days)
-        Information: {self.tripComponent.getInfo()}
-        '''
+        info = f'Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")} ({self.tripComponent.getDuration()} days)\n'
+        info += f'Information:'
+        otherInfo = self.tripComponent.getInfo().split('\n')
+        for i in otherInfo:
+            info += f'\n    {i}'
+
         return info
     
     def travelInfo(self):
         ticket = self.tripComponent.getTicketPrice() if self.tripComponent.getTicketNeed() else "No Ticket Needed"
-        info = f'''
-        Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")}
-        Ticket: {ticket}
-        Information: {self.tripComponent.getInfo()}
-        '''
+        info = f'Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")}\n'
+        info += f'Ticket: {ticket}\n'
+        info += f'Information:'
+        otherInfo = self.tripComponent.getInfo().split('\n')
+        for i in otherInfo:
+            info += f'\n    {i}'
+
         return info
     
     def placeInfo(self):
-        openTime = f'{self.tripComponent.getOpenTime().toString("hh:mm")} - {self.tripComponent.getCloseTime().toString("hh:mm")}, Extra Information: {self.tripComponent.getOpenInfo()}' if self.tripComponent.getAddOpen() else 'No Data'
-        info = f'''
-        Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")}
-        Open: {openTime}
-        Information: {self.tripComponent.getInfo()}
-        '''
+        openTime = f'{self.tripComponent.getOpenTime().toString("hh:mm")} to {self.tripComponent.getCloseTime().toString("hh:mm")}, Extra Information: {self.tripComponent.getOpenInfo()}' if self.tripComponent.getAddOpen() else 'No Data'
+        info = f'Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")}\n'
+        info += f'Open: {openTime}\n'
+        info += f'Information:'
+        otherInfo = self.tripComponent.getInfo().split('\n')
+        for i in otherInfo:
+            info += f'\n    {i}'
+
         return info
     
     def eatInfo(self):
         reservation = "Required" if self.tripComponent.getResevationNeed() else "No Reservation Needed"
-        info = f'''
-        Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")}
-        Reservation: {reservation}
-        Information: {self.tripComponent.getInfo()}
-        '''
+        info = f'Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")}\n'
+        info += f'Reservation: {reservation}\n'
+        info += f'Information:'
+        otherInfo = self.tripComponent.getInfo().split('\n')
+        for i in otherInfo:
+            info += f'\n    {i}'
+
         return info
     
     def eventInfo(self):
         ticket = self.tripComponent.getTicketPrice() if self.tripComponent.getTicketNeed() else "No Ticket Needed"
-        info = f'''
-        Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")}
-        Type of Event: {self.tripComponent.getType()}
-        Ticket: {ticket}
-        Information: {self.tripComponent.getInfo()}
-        '''
+        info = f'Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")}\n'
+        info += f'Type of Event: {self.tripComponent.getType()}\n'
+        info += f'Ticket: {ticket}\n'
+        info += f'Information:'
+        otherInfo = self.tripComponent.getInfo().split('\n')
+        for i in otherInfo:
+            info += f'\n    {i}'
+
         return info
     
     def stayInfo(self):
-        info = f'''
-        Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")} ({self.tripComponent.getNight()} nights)
-        Total Price: {self.tripComponent.getTotalPrice()}
-        Information: {self.tripComponent.getInfo()}
-        '''
+        info = f'Date: {self.tripComponent.getTimeFrom().toString("dd/MM/yyyy hh:mm")} - {self.tripComponent.getTimeTo().toString("dd/MM/yyyy hh:mm")} ({self.tripComponent.getNight()} nights)\n'
+        info += f'Total Price: {self.tripComponent.getTotalPrice()}\n'
+        info += f'Information:'
+        otherInfo = self.tripComponent.getInfo().split('\n')
+        for i in otherInfo:
+            info += f'\n    {i}'
+
         return info
     
     # Edit Component - Trip, Travel, Place, Eat, Event, Stay
