@@ -23,7 +23,7 @@ class Ui_tripWidget(object):
     def setupUi(self, tripWidget):
         if not tripWidget.objectName():
             tripWidget.setObjectName(u"tripWidget")
-        tripWidget.resize(551, 415)
+        tripWidget.resize(516, 530)
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -160,6 +160,11 @@ class Ui_tripWidget(object):
 "  font-weight: 600;\n"
 "  font-size: 20px\n"
 "}\n"
+"QLabel#budgetHeaderLabel{\n"
+"  color: #464d55;\n"
+"  font-weight: 600;\n"
+"  font-size: 20px\n"
+"}\n"
 "QLabel{\n"
 "  color: #464d55;\n"
 "  font-weight: 400;\n"
@@ -246,6 +251,63 @@ class Ui_tripWidget(object):
 
         self.verticalLayout_3.addWidget(self.tripComponentControlWidget)
 
+        self.budgetWidget = QWidget(self.tripDetailWidget)
+        self.budgetWidget.setObjectName(u"budgetWidget")
+        self.budgetWidget.setStyleSheet(u"QLabel#budgetTotalLabel{\n"
+"font-weight: 600\n"
+"}\n"
+"QLabel#budgetTotalBudgetLabel{\n"
+"font-weight: 600\n"
+"}")
+        self.verticalLayout_6 = QVBoxLayout(self.budgetWidget)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.budgetHeaderLabel = QLabel(self.budgetWidget)
+        self.budgetHeaderLabel.setObjectName(u"budgetHeaderLabel")
+        self.budgetHeaderLabel.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.verticalLayout_6.addWidget(self.budgetHeaderLabel)
+
+        self.widget = QWidget(self.budgetWidget)
+        self.widget.setObjectName(u"widget")
+        self.horizontalLayout_6 = QHBoxLayout(self.widget)
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.budgetNameListLabel = QLabel(self.widget)
+        self.budgetNameListLabel.setObjectName(u"budgetNameListLabel")
+
+        self.horizontalLayout_6.addWidget(self.budgetNameListLabel)
+
+        self.budgetPriceListLabel = QLabel(self.widget)
+        self.budgetPriceListLabel.setObjectName(u"budgetPriceListLabel")
+        self.budgetPriceListLabel.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.horizontalLayout_6.addWidget(self.budgetPriceListLabel)
+
+
+        self.verticalLayout_6.addWidget(self.widget)
+
+        self.horizontalLayout_8 = QHBoxLayout()
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.horizontalLayout_8.setContentsMargins(-1, 0, -1, -1)
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_8.addItem(self.horizontalSpacer_2)
+
+        self.budgetTotalLabel = QLabel(self.budgetWidget)
+        self.budgetTotalLabel.setObjectName(u"budgetTotalLabel")
+
+        self.horizontalLayout_8.addWidget(self.budgetTotalLabel)
+
+        self.budgetTotalBudgetLabel = QLabel(self.budgetWidget)
+        self.budgetTotalBudgetLabel.setObjectName(u"budgetTotalBudgetLabel")
+
+        self.horizontalLayout_8.addWidget(self.budgetTotalBudgetLabel)
+
+
+        self.verticalLayout_6.addLayout(self.horizontalLayout_8)
+
+
+        self.verticalLayout_3.addWidget(self.budgetWidget)
+
         self.componentWidget = QWidget(self.tripDetailWidget)
         self.componentWidget.setObjectName(u"componentWidget")
         self.horizontalLayout_5 = QHBoxLayout(self.componentWidget)
@@ -285,5 +347,10 @@ class Ui_tripWidget(object):
         self.tripReminderLineEdit.setPlaceholderText(QCoreApplication.translate("tripWidget", u"Add reminder text here", None))
         self.tripReminderAddButton.setText(QCoreApplication.translate("tripWidget", u"Add Reminders", None))
         self.addComponentButton.setText(QCoreApplication.translate("tripWidget", u"Add Components", None))
+        self.budgetHeaderLabel.setText(QCoreApplication.translate("tripWidget", u"Budget", None))
+        self.budgetNameListLabel.setText(QCoreApplication.translate("tripWidget", u"list", None))
+        self.budgetPriceListLabel.setText(QCoreApplication.translate("tripWidget", u"money", None))
+        self.budgetTotalLabel.setText(QCoreApplication.translate("tripWidget", u"Total: ", None))
+        self.budgetTotalBudgetLabel.setText(QCoreApplication.translate("tripWidget", u"#totalBudget", None))
     # retranslateUi
 

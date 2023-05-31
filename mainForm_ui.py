@@ -15,9 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QHBoxLayout, QLabel,
-    QLayout, QPushButton, QScrollArea, QSizePolicy,
-    QSpacerItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QDateEdit, QHBoxLayout,
+    QLabel, QLayout, QPushButton, QScrollArea,
+    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
+import main_rc
 
 class Ui_mainWidget(object):
     def setupUi(self, mainWidget):
@@ -371,18 +372,6 @@ class Ui_mainWidget(object):
 
         self.verticalLayout_3.addWidget(self.notificationWidget)
 
-        self.hLineSplitWidget = QWidget(self.tripListScrollWidget)
-        self.hLineSplitWidget.setObjectName(u"hLineSplitWidget")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
-        sizePolicy4.setHorizontalStretch(0)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.hLineSplitWidget.sizePolicy().hasHeightForWidth())
-        self.hLineSplitWidget.setSizePolicy(sizePolicy4)
-        self.hLineSplitWidget.setMinimumSize(QSize(0, 3))
-        self.hLineSplitWidget.setStyleSheet(u"")
-
-        self.verticalLayout_3.addWidget(self.hLineSplitWidget)
-
         self.horizontalLayout_4 = QHBoxLayout()
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.horizontalLayout_4.setContentsMargins(-1, 5, -1, 5)
@@ -393,6 +382,87 @@ class Ui_mainWidget(object):
 
 
         self.verticalLayout_3.addLayout(self.horizontalLayout_4)
+
+        self.pastTripSearchWidget = QWidget(self.tripListScrollWidget)
+        self.pastTripSearchWidget.setObjectName(u"pastTripSearchWidget")
+        self.pastTripSearchWidget.setStyleSheet(u"QDateTimeEdit{\n"
+"  color: #464d55;\n"
+"  font-weight: 600;\n"
+"  border-radius: 8px;\n"
+"  border: 1px solid #e0e4e7;\n"
+"  padding: 5px 15px;}\n"
+"QDateTimeEdit::on{\n"
+"   border: 3px solid #d0e3ff;\n"
+"}\n"
+"QDateTimeEdit::drop-down{\n"
+"   border: 0px;\n"
+"}\n"
+"QDateTimeEdit::down-arrow{\n"
+"   image: url(:/dropdown/dropdownPNG.png);\n"
+"   width: 12px;\n"
+"   height: 12px;\n"
+"   margin-right: 15px;\n"
+"}\n"
+"\n"
+"QTextEdit {\n"
+"  color: #464d55;\n"
+"  font-weight: 600;\n"
+"  border-radius: 8px;\n"
+"  border: 1px solid #e0e4e7;\n"
+"  padding: 5px 15px;\n"
+"}\n"
+"\n"
+"QTextEdit:focus {\n"
+"  border: 1px solid #d0e3ff;\n"
+"}\n"
+"\n"
+"QTextEdit::placeholder {\n"
+"  color: #767e89;\n"
+"}\n"
+"\n"
+"QCalendarWidget QAbstractItemView\n"
+"{ \n"
+"selection-background-color: #042944; \n"
+"selection-color: white;\n"
+"}\n"
+"QCalendarWidget QWidget \n"
+"{\n"
+"  color:grey;\n"
+"}\n"
+"QCalendarWidget QTableView{\n"
+"border-width:0px;\n"
+"background-color:lightgrey;\n"
+"}\n"
+"")
+        self.horizontalLayout_5 = QHBoxLayout(self.pastTripSearchWidget)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_5.addItem(self.horizontalSpacer)
+
+        self.label = QLabel(self.pastTripSearchWidget)
+        self.label.setObjectName(u"label")
+
+        self.horizontalLayout_5.addWidget(self.label)
+
+        self.searchDateEdit = QDateEdit(self.pastTripSearchWidget)
+        self.searchDateEdit.setObjectName(u"searchDateEdit")
+        self.searchDateEdit.setCalendarPopup(True)
+
+        self.horizontalLayout_5.addWidget(self.searchDateEdit)
+
+        self.searchButton = QPushButton(self.pastTripSearchWidget)
+        self.searchButton.setObjectName(u"searchButton")
+
+        self.horizontalLayout_5.addWidget(self.searchButton)
+
+        self.showAllButton = QPushButton(self.pastTripSearchWidget)
+        self.showAllButton.setObjectName(u"showAllButton")
+
+        self.horizontalLayout_5.addWidget(self.showAllButton)
+
+
+        self.verticalLayout_3.addWidget(self.pastTripSearchWidget)
 
         self.tripListLayout = QVBoxLayout()
         self.tripListLayout.setObjectName(u"tripListLayout")
@@ -428,5 +498,8 @@ class Ui_mainWidget(object):
         self.notificationHeaderLabel.setText(QCoreApplication.translate("mainWidget", u"Alerts", None))
         self.noNotificationLabel.setText(QCoreApplication.translate("mainWidget", u"No notifications", None))
         self.newTripButton.setText(QCoreApplication.translate("mainWidget", u"New Trip", None))
+        self.label.setText(QCoreApplication.translate("mainWidget", u"Date:", None))
+        self.searchButton.setText(QCoreApplication.translate("mainWidget", u"Search", None))
+        self.showAllButton.setText(QCoreApplication.translate("mainWidget", u"Show All", None))
     # retranslateUi
 

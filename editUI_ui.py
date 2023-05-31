@@ -176,9 +176,8 @@ class Ui_Form(object):
 "{ \n"
 "selection-background-color: #042944; \n"
 "selection-color: white;\n"
-"selection-border:10px solid red;\n"
-"\n"
 "}\n"
+"\n"
 "QCalendarWidget QWidget \n"
 "{\n"
 "  color:grey;\n"
@@ -191,10 +190,10 @@ class Ui_Form(object):
 "\n"
 "QScrollBar:vertical {\n"
 "\n"
-"  border-color: rgb(227, 227, 227);"
-                        "\n"
+"  border-color: rgb(227, 227, 227);\n"
 "  border-width: 1px;\n"
-"  border-style: solid;\n"
+"  borde"
+                        "r-style: solid;\n"
 "  border-radius: 8px;\n"
 "\n"
 "  background-color: rgb(240, 240, 240);\n"
@@ -263,7 +262,31 @@ class Ui_Form(object):
         self.editWidget.setSizePolicy(sizePolicy1)
         self.editWidget.setStyleSheet(u"QWidget#editWidget{\n"
 "border: 2px solid #464d55;\n"
-"border-radius: 12px;}")
+"border-radius: 12px;}\n"
+"\n"
+"QLabel#tripHeaderLabel{\n"
+"font-size: 30px;\n"
+"}\n"
+"\n"
+"QLabel#eatHeaderLabel{\n"
+"font-size: 30px;\n"
+"}\n"
+"\n"
+"QLabel#stayHeaderLabel{\n"
+"font-size: 30px;\n"
+"}\n"
+"\n"
+"QLabel#placeHeaderLabel{\n"
+"font-size: 30px;\n"
+"}\n"
+"\n"
+"QLabel#eventHeaderLabel{\n"
+"font-size: 30px;\n"
+"}\n"
+"\n"
+"QLabel#travelHeaderLabel{\n"
+"font-size: 30px;\n"
+"}")
         self.horizontalLayout_2 = QHBoxLayout(self.editWidget)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.scrollArea = QScrollArea(self.editWidget)
@@ -281,7 +304,7 @@ class Ui_Form(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContent = QWidget()
         self.scrollAreaWidgetContent.setObjectName(u"scrollAreaWidgetContent")
-        self.scrollAreaWidgetContent.setGeometry(QRect(0, -1880, 589, 2264))
+        self.scrollAreaWidgetContent.setGeometry(QRect(0, 0, 589, 2540))
         self.verticalLayout_4 = QVBoxLayout(self.scrollAreaWidgetContent)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.tripEditWidget = QWidget(self.scrollAreaWidgetContent)
@@ -296,7 +319,46 @@ class Ui_Form(object):
         self.tripNameLineEdit = QLineEdit(self.tripEditWidget)
         self.tripNameLineEdit.setObjectName(u"tripNameLineEdit")
 
-        self.gridLayout.addWidget(self.tripNameLineEdit, 0, 1, 1, 1)
+        self.gridLayout.addWidget(self.tripNameLineEdit, 1, 1, 1, 1)
+
+        self.tripTimeSensitiveWidget = QWidget(self.tripEditWidget)
+        self.tripTimeSensitiveWidget.setObjectName(u"tripTimeSensitiveWidget")
+        self.verticalLayout_6 = QVBoxLayout(self.tripTimeSensitiveWidget)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.tripTimeSensitiveCheckBox = QCheckBox(self.tripTimeSensitiveWidget)
+        self.tripTimeSensitiveCheckBox.setObjectName(u"tripTimeSensitiveCheckBox")
+
+        self.verticalLayout_6.addWidget(self.tripTimeSensitiveCheckBox)
+
+        self.tripTimeSensitiveDateTimeEdit = QDateTimeEdit(self.tripTimeSensitiveWidget)
+        self.tripTimeSensitiveDateTimeEdit.setObjectName(u"tripTimeSensitiveDateTimeEdit")
+        self.tripTimeSensitiveDateTimeEdit.setCalendarPopup(True)
+
+        self.verticalLayout_6.addWidget(self.tripTimeSensitiveDateTimeEdit)
+
+
+        self.gridLayout.addWidget(self.tripTimeSensitiveWidget, 4, 1, 1, 1)
+
+        self.label_2 = QLabel(self.tripEditWidget)
+        self.label_2.setObjectName(u"label_2")
+
+        self.gridLayout.addWidget(self.label_2, 1, 0, 1, 1)
+
+        self.label_3 = QLabel(self.tripEditWidget)
+        self.label_3.setObjectName(u"label_3")
+
+        self.gridLayout.addWidget(self.label_3, 2, 0, 1, 1)
+
+        self.label_8 = QLabel(self.tripEditWidget)
+        self.label_8.setObjectName(u"label_8")
+        self.label_8.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.label_8, 5, 0, 1, 1)
+
+        self.label_6 = QLabel(self.tripEditWidget)
+        self.label_6.setObjectName(u"label_6")
+
+        self.gridLayout.addWidget(self.label_6, 3, 0, 1, 1)
 
         self.tripInfoTextEdit = QTextEdit(self.tripEditWidget)
         self.tripInfoTextEdit.setObjectName(u"tripInfoTextEdit")
@@ -307,7 +369,7 @@ class Ui_Form(object):
         self.tripInfoTextEdit.setSizePolicy(sizePolicy4)
         self.tripInfoTextEdit.setMinimumSize(QSize(0, 50))
 
-        self.gridLayout.addWidget(self.tripInfoTextEdit, 4, 1, 1, 1)
+        self.gridLayout.addWidget(self.tripInfoTextEdit, 5, 1, 1, 1)
 
         self.tripReminderWidget = QWidget(self.tripEditWidget)
         self.tripReminderWidget.setObjectName(u"tripReminderWidget")
@@ -341,34 +403,7 @@ class Ui_Form(object):
         self.verticalLayout_5.addLayout(self.horizontalLayout)
 
 
-        self.gridLayout.addWidget(self.tripReminderWidget, 2, 1, 1, 1)
-
-        self.tripTimeSensitiveLabel = QLabel(self.tripEditWidget)
-        self.tripTimeSensitiveLabel.setObjectName(u"tripTimeSensitiveLabel")
-        self.tripTimeSensitiveLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.tripTimeSensitiveLabel, 3, 0, 1, 1)
-
-        self.label_8 = QLabel(self.tripEditWidget)
-        self.label_8.setObjectName(u"label_8")
-        self.label_8.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.label_8, 4, 0, 1, 1)
-
-        self.label_6 = QLabel(self.tripEditWidget)
-        self.label_6.setObjectName(u"label_6")
-
-        self.gridLayout.addWidget(self.label_6, 2, 0, 1, 1)
-
-        self.label_3 = QLabel(self.tripEditWidget)
-        self.label_3.setObjectName(u"label_3")
-
-        self.gridLayout.addWidget(self.label_3, 1, 0, 1, 1)
-
-        self.label_2 = QLabel(self.tripEditWidget)
-        self.label_2.setObjectName(u"label_2")
-
-        self.gridLayout.addWidget(self.label_2, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.tripReminderWidget, 3, 1, 1, 1)
 
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
@@ -407,25 +442,20 @@ class Ui_Form(object):
         self.horizontalLayout_3.addWidget(self.tripToDateTimeEdit)
 
 
-        self.gridLayout.addLayout(self.horizontalLayout_3, 1, 1, 1, 1)
+        self.gridLayout.addLayout(self.horizontalLayout_3, 2, 1, 1, 1)
 
-        self.tripTimeSensitiveWidget = QWidget(self.tripEditWidget)
-        self.tripTimeSensitiveWidget.setObjectName(u"tripTimeSensitiveWidget")
-        self.verticalLayout_6 = QVBoxLayout(self.tripTimeSensitiveWidget)
-        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.tripTimeSensitiveCheckBox = QCheckBox(self.tripTimeSensitiveWidget)
-        self.tripTimeSensitiveCheckBox.setObjectName(u"tripTimeSensitiveCheckBox")
+        self.tripTimeSensitiveLabel = QLabel(self.tripEditWidget)
+        self.tripTimeSensitiveLabel.setObjectName(u"tripTimeSensitiveLabel")
+        self.tripTimeSensitiveLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
-        self.verticalLayout_6.addWidget(self.tripTimeSensitiveCheckBox)
+        self.gridLayout.addWidget(self.tripTimeSensitiveLabel, 4, 0, 1, 1)
 
-        self.tripTimeSensitiveDateTimeEdit = QDateTimeEdit(self.tripTimeSensitiveWidget)
-        self.tripTimeSensitiveDateTimeEdit.setObjectName(u"tripTimeSensitiveDateTimeEdit")
-        self.tripTimeSensitiveDateTimeEdit.setCalendarPopup(True)
+        self.tripHeaderLabel = QLabel(self.tripEditWidget)
+        self.tripHeaderLabel.setObjectName(u"tripHeaderLabel")
+        self.tripHeaderLabel.setLayoutDirection(Qt.LeftToRight)
+        self.tripHeaderLabel.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.verticalLayout_6.addWidget(self.tripTimeSensitiveDateTimeEdit)
-
-
-        self.gridLayout.addWidget(self.tripTimeSensitiveWidget, 3, 1, 1, 1)
+        self.gridLayout.addWidget(self.tripHeaderLabel, 0, 1, 1, 1)
 
 
         self.verticalLayout_4.addWidget(self.tripEditWidget)
@@ -434,18 +464,21 @@ class Ui_Form(object):
         self.travelEditWidget.setObjectName(u"travelEditWidget")
         self.gridLayout_2 = QGridLayout(self.travelEditWidget)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.travelInfoTextEdit = QTextEdit(self.travelEditWidget)
-        self.travelInfoTextEdit.setObjectName(u"travelInfoTextEdit")
-        sizePolicy4.setHeightForWidth(self.travelInfoTextEdit.sizePolicy().hasHeightForWidth())
-        self.travelInfoTextEdit.setSizePolicy(sizePolicy4)
-        self.travelInfoTextEdit.setMinimumSize(QSize(0, 50))
-
-        self.gridLayout_2.addWidget(self.travelInfoTextEdit, 5, 2, 1, 2)
-
         self.label_9 = QLabel(self.travelEditWidget)
         self.label_9.setObjectName(u"label_9")
 
-        self.gridLayout_2.addWidget(self.label_9, 0, 0, 1, 2)
+        self.gridLayout_2.addWidget(self.label_9, 1, 0, 1, 2)
+
+        self.label_16 = QLabel(self.travelEditWidget)
+        self.label_16.setObjectName(u"label_16")
+        self.label_16.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.gridLayout_2.addWidget(self.label_16, 6, 0, 1, 1)
+
+        self.travelNameLineEdit = QLineEdit(self.travelEditWidget)
+        self.travelNameLineEdit.setObjectName(u"travelNameLineEdit")
+
+        self.gridLayout_2.addWidget(self.travelNameLineEdit, 1, 2, 1, 2)
 
         self.travelTimeSensitiveWidget = QWidget(self.travelEditWidget)
         self.travelTimeSensitiveWidget.setObjectName(u"travelTimeSensitiveWidget")
@@ -463,7 +496,53 @@ class Ui_Form(object):
         self.verticalLayout_7.addWidget(self.travelTimeSensitiveDateTimeEdit)
 
 
-        self.gridLayout_2.addWidget(self.travelTimeSensitiveWidget, 4, 2, 1, 2)
+        self.gridLayout_2.addWidget(self.travelTimeSensitiveWidget, 5, 2, 1, 2)
+
+        self.travelTimeSensitiveLabel = QLabel(self.travelEditWidget)
+        self.travelTimeSensitiveLabel.setObjectName(u"travelTimeSensitiveLabel")
+        self.travelTimeSensitiveLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.gridLayout_2.addWidget(self.travelTimeSensitiveLabel, 5, 0, 1, 1)
+
+        self.travelInfoTextEdit = QTextEdit(self.travelEditWidget)
+        self.travelInfoTextEdit.setObjectName(u"travelInfoTextEdit")
+        sizePolicy4.setHeightForWidth(self.travelInfoTextEdit.sizePolicy().hasHeightForWidth())
+        self.travelInfoTextEdit.setSizePolicy(sizePolicy4)
+        self.travelInfoTextEdit.setMinimumSize(QSize(0, 50))
+
+        self.gridLayout_2.addWidget(self.travelInfoTextEdit, 6, 2, 1, 2)
+
+        self.label_13 = QLabel(self.travelEditWidget)
+        self.label_13.setObjectName(u"label_13")
+
+        self.gridLayout_2.addWidget(self.label_13, 3, 0, 1, 1)
+
+        self.travelTicketWidget = QWidget(self.travelEditWidget)
+        self.travelTicketWidget.setObjectName(u"travelTicketWidget")
+        self.gridLayout_3 = QGridLayout(self.travelTicketWidget)
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.label_14 = QLabel(self.travelTicketWidget)
+        self.label_14.setObjectName(u"label_14")
+
+        self.gridLayout_3.addWidget(self.label_14, 0, 0, 1, 1)
+
+        self.travelTicketPriceLineEdit = QLineEdit(self.travelTicketWidget)
+        self.travelTicketPriceLineEdit.setObjectName(u"travelTicketPriceLineEdit")
+
+        self.gridLayout_3.addWidget(self.travelTicketPriceLineEdit, 0, 1, 1, 1)
+
+
+        self.gridLayout_2.addWidget(self.travelTicketWidget, 4, 2, 1, 2)
+
+        self.travelTicketCheckBox = QCheckBox(self.travelEditWidget)
+        self.travelTicketCheckBox.setObjectName(u"travelTicketCheckBox")
+
+        self.gridLayout_2.addWidget(self.travelTicketCheckBox, 3, 2, 1, 2)
+
+        self.label_12 = QLabel(self.travelEditWidget)
+        self.label_12.setObjectName(u"label_12")
+
+        self.gridLayout_2.addWidget(self.label_12, 2, 0, 1, 1)
 
         self.horizontalLayout_4 = QHBoxLayout()
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
@@ -498,56 +577,13 @@ class Ui_Form(object):
         self.horizontalLayout_4.addWidget(self.travelToDateTimeEdit)
 
 
-        self.gridLayout_2.addLayout(self.horizontalLayout_4, 1, 2, 1, 2)
+        self.gridLayout_2.addLayout(self.horizontalLayout_4, 2, 2, 1, 2)
 
-        self.label_13 = QLabel(self.travelEditWidget)
-        self.label_13.setObjectName(u"label_13")
+        self.travelHeaderLabel = QLabel(self.travelEditWidget)
+        self.travelHeaderLabel.setObjectName(u"travelHeaderLabel")
+        self.travelHeaderLabel.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.gridLayout_2.addWidget(self.label_13, 2, 0, 1, 1)
-
-        self.travelTicketWidget = QWidget(self.travelEditWidget)
-        self.travelTicketWidget.setObjectName(u"travelTicketWidget")
-        self.gridLayout_3 = QGridLayout(self.travelTicketWidget)
-        self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.label_14 = QLabel(self.travelTicketWidget)
-        self.label_14.setObjectName(u"label_14")
-
-        self.gridLayout_3.addWidget(self.label_14, 0, 0, 1, 1)
-
-        self.travelTicketPriceLineEdit = QLineEdit(self.travelTicketWidget)
-        self.travelTicketPriceLineEdit.setObjectName(u"travelTicketPriceLineEdit")
-
-        self.gridLayout_3.addWidget(self.travelTicketPriceLineEdit, 0, 1, 1, 1)
-
-
-        self.gridLayout_2.addWidget(self.travelTicketWidget, 3, 2, 1, 2)
-
-        self.travelTimeSensitiveLabel = QLabel(self.travelEditWidget)
-        self.travelTimeSensitiveLabel.setObjectName(u"travelTimeSensitiveLabel")
-        self.travelTimeSensitiveLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-
-        self.gridLayout_2.addWidget(self.travelTimeSensitiveLabel, 4, 0, 1, 1)
-
-        self.label_16 = QLabel(self.travelEditWidget)
-        self.label_16.setObjectName(u"label_16")
-        self.label_16.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-
-        self.gridLayout_2.addWidget(self.label_16, 5, 0, 1, 1)
-
-        self.label_12 = QLabel(self.travelEditWidget)
-        self.label_12.setObjectName(u"label_12")
-
-        self.gridLayout_2.addWidget(self.label_12, 1, 0, 1, 1)
-
-        self.travelNameLineEdit = QLineEdit(self.travelEditWidget)
-        self.travelNameLineEdit.setObjectName(u"travelNameLineEdit")
-
-        self.gridLayout_2.addWidget(self.travelNameLineEdit, 0, 2, 1, 2)
-
-        self.travelTicketCheckBox = QCheckBox(self.travelEditWidget)
-        self.travelTicketCheckBox.setObjectName(u"travelTicketCheckBox")
-
-        self.gridLayout_2.addWidget(self.travelTicketCheckBox, 2, 2, 1, 2)
+        self.gridLayout_2.addWidget(self.travelHeaderLabel, 0, 2, 1, 2)
 
 
         self.verticalLayout_4.addWidget(self.travelEditWidget)
@@ -559,23 +595,31 @@ class Ui_Form(object):
         self.label_17 = QLabel(self.placeEditWidget)
         self.label_17.setObjectName(u"label_17")
 
-        self.gridLayout_4.addWidget(self.label_17, 0, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.label_17, 1, 1, 1, 1)
 
-        self.placeNameLineEdit = QLineEdit(self.placeEditWidget)
-        self.placeNameLineEdit.setObjectName(u"placeNameLineEdit")
+        self.label_18 = QLabel(self.placeEditWidget)
+        self.label_18.setObjectName(u"label_18")
 
-        self.gridLayout_4.addWidget(self.placeNameLineEdit, 0, 3, 1, 1)
+        self.gridLayout_4.addWidget(self.label_18, 4, 1, 1, 1)
 
-        self.label_25 = QLabel(self.placeEditWidget)
-        self.label_25.setObjectName(u"label_25")
-        self.label_25.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.placeTimeSensitiveLabel = QLabel(self.placeEditWidget)
+        self.placeTimeSensitiveLabel.setObjectName(u"placeTimeSensitiveLabel")
+        self.placeTimeSensitiveLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
-        self.gridLayout_4.addWidget(self.label_25, 7, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.placeTimeSensitiveLabel, 7, 1, 1, 1)
 
-        self.checkBox_5 = QCheckBox(self.placeEditWidget)
-        self.checkBox_5.setObjectName(u"checkBox_5")
+        self.label_21 = QLabel(self.placeEditWidget)
+        self.label_21.setObjectName(u"label_21")
 
-        self.gridLayout_4.addWidget(self.checkBox_5, 3, 3, 1, 1)
+        self.gridLayout_4.addWidget(self.label_21, 2, 1, 1, 1)
+
+        self.placeInfoTextEdit = QTextEdit(self.placeEditWidget)
+        self.placeInfoTextEdit.setObjectName(u"placeInfoTextEdit")
+        sizePolicy4.setHeightForWidth(self.placeInfoTextEdit.sizePolicy().hasHeightForWidth())
+        self.placeInfoTextEdit.setSizePolicy(sizePolicy4)
+        self.placeInfoTextEdit.setMinimumSize(QSize(0, 50))
+
+        self.gridLayout_4.addWidget(self.placeInfoTextEdit, 8, 3, 1, 1)
 
         self.placeOpenHoursWidget = QWidget(self.placeEditWidget)
         self.placeOpenHoursWidget.setObjectName(u"placeOpenHoursWidget")
@@ -625,7 +669,7 @@ class Ui_Form(object):
         self.verticalLayout_9.addWidget(self.placeOpenHoursInfoLineEdit)
 
 
-        self.gridLayout_4.addWidget(self.placeOpenHoursWidget, 4, 3, 1, 1)
+        self.gridLayout_4.addWidget(self.placeOpenHoursWidget, 5, 3, 1, 1)
 
         self.horizontalLayout_6 = QHBoxLayout()
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
@@ -660,18 +704,18 @@ class Ui_Form(object):
         self.horizontalLayout_6.addWidget(self.placeToDateTimeEdit)
 
 
-        self.gridLayout_4.addLayout(self.horizontalLayout_6, 1, 3, 1, 1)
+        self.gridLayout_4.addLayout(self.horizontalLayout_6, 2, 3, 1, 1)
 
-        self.placeTimeSensitiveLabel = QLabel(self.placeEditWidget)
-        self.placeTimeSensitiveLabel.setObjectName(u"placeTimeSensitiveLabel")
-        self.placeTimeSensitiveLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.label_25 = QLabel(self.placeEditWidget)
+        self.label_25.setObjectName(u"label_25")
+        self.label_25.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
-        self.gridLayout_4.addWidget(self.placeTimeSensitiveLabel, 6, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.label_25, 8, 1, 1, 1)
 
-        self.label_21 = QLabel(self.placeEditWidget)
-        self.label_21.setObjectName(u"label_21")
+        self.placeNameLineEdit = QLineEdit(self.placeEditWidget)
+        self.placeNameLineEdit.setObjectName(u"placeNameLineEdit")
 
-        self.gridLayout_4.addWidget(self.label_21, 1, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.placeNameLineEdit, 1, 3, 1, 1)
 
         self.placeTimeSensitiveWidget = QWidget(self.placeEditWidget)
         self.placeTimeSensitiveWidget.setObjectName(u"placeTimeSensitiveWidget")
@@ -689,20 +733,18 @@ class Ui_Form(object):
         self.verticalLayout_8.addWidget(self.placeTimeSensitiveDateTimeEdit)
 
 
-        self.gridLayout_4.addWidget(self.placeTimeSensitiveWidget, 6, 3, 1, 1)
+        self.gridLayout_4.addWidget(self.placeTimeSensitiveWidget, 7, 3, 1, 1)
 
-        self.placeInfoTextEdit = QTextEdit(self.placeEditWidget)
-        self.placeInfoTextEdit.setObjectName(u"placeInfoTextEdit")
-        sizePolicy4.setHeightForWidth(self.placeInfoTextEdit.sizePolicy().hasHeightForWidth())
-        self.placeInfoTextEdit.setSizePolicy(sizePolicy4)
-        self.placeInfoTextEdit.setMinimumSize(QSize(0, 50))
+        self.checkBox_5 = QCheckBox(self.placeEditWidget)
+        self.checkBox_5.setObjectName(u"checkBox_5")
 
-        self.gridLayout_4.addWidget(self.placeInfoTextEdit, 7, 3, 1, 1)
+        self.gridLayout_4.addWidget(self.checkBox_5, 4, 3, 1, 1)
 
-        self.label_18 = QLabel(self.placeEditWidget)
-        self.label_18.setObjectName(u"label_18")
+        self.placeHeaderLabel = QLabel(self.placeEditWidget)
+        self.placeHeaderLabel.setObjectName(u"placeHeaderLabel")
+        self.placeHeaderLabel.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.gridLayout_4.addWidget(self.label_18, 3, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.placeHeaderLabel, 0, 3, 1, 1)
 
 
         self.verticalLayout_4.addWidget(self.placeEditWidget)
@@ -711,28 +753,6 @@ class Ui_Form(object):
         self.eventEditWidget.setObjectName(u"eventEditWidget")
         self.gridLayout_6 = QGridLayout(self.eventEditWidget)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
-        self.label_40 = QLabel(self.eventEditWidget)
-        self.label_40.setObjectName(u"label_40")
-
-        self.gridLayout_6.addWidget(self.label_40, 2, 0, 1, 1)
-
-        self.eventTicketCheckBox = QCheckBox(self.eventEditWidget)
-        self.eventTicketCheckBox.setObjectName(u"eventTicketCheckBox")
-
-        self.gridLayout_6.addWidget(self.eventTicketCheckBox, 3, 2, 1, 2)
-
-        self.eventTimeSensitiveLabel = QLabel(self.eventEditWidget)
-        self.eventTimeSensitiveLabel.setObjectName(u"eventTimeSensitiveLabel")
-        self.eventTimeSensitiveLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-
-        self.gridLayout_6.addWidget(self.eventTimeSensitiveLabel, 5, 0, 1, 1)
-
-        self.label_39 = QLabel(self.eventEditWidget)
-        self.label_39.setObjectName(u"label_39")
-        self.label_39.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-
-        self.gridLayout_6.addWidget(self.label_39, 6, 0, 1, 1)
-
         self.eventTimeSensitiveWidget = QWidget(self.eventEditWidget)
         self.eventTimeSensitiveWidget.setObjectName(u"eventTimeSensitiveWidget")
         self.verticalLayout_11 = QVBoxLayout(self.eventTimeSensitiveWidget)
@@ -749,39 +769,7 @@ class Ui_Form(object):
         self.verticalLayout_11.addWidget(self.eventTimeSensitiveDateTimeEdit)
 
 
-        self.gridLayout_6.addWidget(self.eventTimeSensitiveWidget, 5, 2, 1, 2)
-
-        self.label_36 = QLabel(self.eventEditWidget)
-        self.label_36.setObjectName(u"label_36")
-
-        self.gridLayout_6.addWidget(self.label_36, 3, 0, 1, 1)
-
-        self.eventTicketWidget = QWidget(self.eventEditWidget)
-        self.eventTicketWidget.setObjectName(u"eventTicketWidget")
-        self.gridLayout_7 = QGridLayout(self.eventTicketWidget)
-        self.gridLayout_7.setObjectName(u"gridLayout_7")
-        self.label_37 = QLabel(self.eventTicketWidget)
-        self.label_37.setObjectName(u"label_37")
-
-        self.gridLayout_7.addWidget(self.label_37, 0, 0, 1, 1)
-
-        self.eventTicketPriceLineEdit = QLineEdit(self.eventTicketWidget)
-        self.eventTicketPriceLineEdit.setObjectName(u"eventTicketPriceLineEdit")
-
-        self.gridLayout_7.addWidget(self.eventTicketPriceLineEdit, 0, 1, 1, 1)
-
-
-        self.gridLayout_6.addWidget(self.eventTicketWidget, 4, 2, 1, 2)
-
-        self.eventNameLineEdit = QLineEdit(self.eventEditWidget)
-        self.eventNameLineEdit.setObjectName(u"eventNameLineEdit")
-
-        self.gridLayout_6.addWidget(self.eventNameLineEdit, 0, 2, 1, 2)
-
-        self.label_33 = QLabel(self.eventEditWidget)
-        self.label_33.setObjectName(u"label_33")
-
-        self.gridLayout_6.addWidget(self.label_33, 0, 0, 1, 2)
+        self.gridLayout_6.addWidget(self.eventTimeSensitiveWidget, 6, 2, 1, 2)
 
         self.eventInfoTextEdit = QTextEdit(self.eventEditWidget)
         self.eventInfoTextEdit.setObjectName(u"eventInfoTextEdit")
@@ -789,7 +777,38 @@ class Ui_Form(object):
         self.eventInfoTextEdit.setSizePolicy(sizePolicy4)
         self.eventInfoTextEdit.setMinimumSize(QSize(0, 50))
 
-        self.gridLayout_6.addWidget(self.eventInfoTextEdit, 6, 2, 1, 2)
+        self.gridLayout_6.addWidget(self.eventInfoTextEdit, 7, 2, 1, 2)
+
+        self.eventNameLineEdit = QLineEdit(self.eventEditWidget)
+        self.eventNameLineEdit.setObjectName(u"eventNameLineEdit")
+
+        self.gridLayout_6.addWidget(self.eventNameLineEdit, 1, 2, 1, 2)
+
+        self.eventTicketCheckBox = QCheckBox(self.eventEditWidget)
+        self.eventTicketCheckBox.setObjectName(u"eventTicketCheckBox")
+
+        self.gridLayout_6.addWidget(self.eventTicketCheckBox, 4, 2, 1, 2)
+
+        self.label_40 = QLabel(self.eventEditWidget)
+        self.label_40.setObjectName(u"label_40")
+
+        self.gridLayout_6.addWidget(self.label_40, 3, 0, 1, 1)
+
+        self.eventTypeLineEdit = QLineEdit(self.eventEditWidget)
+        self.eventTypeLineEdit.setObjectName(u"eventTypeLineEdit")
+
+        self.gridLayout_6.addWidget(self.eventTypeLineEdit, 2, 2, 1, 1)
+
+        self.label_36 = QLabel(self.eventEditWidget)
+        self.label_36.setObjectName(u"label_36")
+
+        self.gridLayout_6.addWidget(self.label_36, 4, 0, 1, 1)
+
+        self.label_39 = QLabel(self.eventEditWidget)
+        self.label_39.setObjectName(u"label_39")
+        self.label_39.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.gridLayout_6.addWidget(self.label_39, 7, 0, 1, 1)
 
         self.horizontalLayout_8 = QHBoxLayout()
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
@@ -824,17 +843,46 @@ class Ui_Form(object):
         self.horizontalLayout_8.addWidget(self.eventToDateTimeEdit)
 
 
-        self.gridLayout_6.addLayout(self.horizontalLayout_8, 2, 2, 1, 2)
+        self.gridLayout_6.addLayout(self.horizontalLayout_8, 3, 2, 1, 2)
+
+        self.eventTimeSensitiveLabel = QLabel(self.eventEditWidget)
+        self.eventTimeSensitiveLabel.setObjectName(u"eventTimeSensitiveLabel")
+        self.eventTimeSensitiveLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.gridLayout_6.addWidget(self.eventTimeSensitiveLabel, 6, 0, 1, 1)
+
+        self.label_33 = QLabel(self.eventEditWidget)
+        self.label_33.setObjectName(u"label_33")
+
+        self.gridLayout_6.addWidget(self.label_33, 1, 0, 1, 2)
 
         self.label_41 = QLabel(self.eventEditWidget)
         self.label_41.setObjectName(u"label_41")
 
-        self.gridLayout_6.addWidget(self.label_41, 1, 0, 1, 1)
+        self.gridLayout_6.addWidget(self.label_41, 2, 0, 1, 1)
 
-        self.eventTypeLineEdit = QLineEdit(self.eventEditWidget)
-        self.eventTypeLineEdit.setObjectName(u"eventTypeLineEdit")
+        self.eventTicketWidget = QWidget(self.eventEditWidget)
+        self.eventTicketWidget.setObjectName(u"eventTicketWidget")
+        self.gridLayout_7 = QGridLayout(self.eventTicketWidget)
+        self.gridLayout_7.setObjectName(u"gridLayout_7")
+        self.label_37 = QLabel(self.eventTicketWidget)
+        self.label_37.setObjectName(u"label_37")
 
-        self.gridLayout_6.addWidget(self.eventTypeLineEdit, 1, 2, 1, 1)
+        self.gridLayout_7.addWidget(self.label_37, 0, 0, 1, 1)
+
+        self.eventTicketPriceLineEdit = QLineEdit(self.eventTicketWidget)
+        self.eventTicketPriceLineEdit.setObjectName(u"eventTicketPriceLineEdit")
+
+        self.gridLayout_7.addWidget(self.eventTicketPriceLineEdit, 0, 1, 1, 1)
+
+
+        self.gridLayout_6.addWidget(self.eventTicketWidget, 5, 2, 1, 2)
+
+        self.eventHeaderLabel = QLabel(self.eventEditWidget)
+        self.eventHeaderLabel.setObjectName(u"eventHeaderLabel")
+        self.eventHeaderLabel.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout_6.addWidget(self.eventHeaderLabel, 0, 2, 1, 1)
 
 
         self.verticalLayout_4.addWidget(self.eventEditWidget)
@@ -940,6 +988,12 @@ class Ui_Form(object):
         self.eatReservationCheckBox.setObjectName(u"eatReservationCheckBox")
 
         self.gridLayout_8.addWidget(self.eatReservationCheckBox, 3, 1, 1, 1)
+
+        self.eatHeaderLabel = QLabel(self.eatEditWidget)
+        self.eatHeaderLabel.setObjectName(u"eatHeaderLabel")
+        self.eatHeaderLabel.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout_8.addWidget(self.eatHeaderLabel, 0, 1, 1, 1)
 
 
         self.verticalLayout_4.addWidget(self.eatEditWidget)
@@ -1055,22 +1109,22 @@ class Ui_Form(object):
 
         self.verticalLayout_13.addWidget(self.stayPricingPricePerNightCheckBox)
 
-        self.widget_11 = QWidget(self.stayPricingWidget)
-        self.widget_11.setObjectName(u"widget_11")
-        self.gridLayout_9 = QGridLayout(self.widget_11)
+        self.stayPricingFlatRateWidget = QWidget(self.stayPricingWidget)
+        self.stayPricingFlatRateWidget.setObjectName(u"stayPricingFlatRateWidget")
+        self.gridLayout_9 = QGridLayout(self.stayPricingFlatRateWidget)
         self.gridLayout_9.setObjectName(u"gridLayout_9")
-        self.label_49 = QLabel(self.widget_11)
+        self.label_49 = QLabel(self.stayPricingFlatRateWidget)
         self.label_49.setObjectName(u"label_49")
 
         self.gridLayout_9.addWidget(self.label_49, 0, 0, 1, 1)
 
-        self.stayFlatPriceLineEdit = QLineEdit(self.widget_11)
+        self.stayFlatPriceLineEdit = QLineEdit(self.stayPricingFlatRateWidget)
         self.stayFlatPriceLineEdit.setObjectName(u"stayFlatPriceLineEdit")
 
         self.gridLayout_9.addWidget(self.stayFlatPriceLineEdit, 0, 1, 1, 1)
 
 
-        self.verticalLayout_13.addWidget(self.widget_11)
+        self.verticalLayout_13.addWidget(self.stayPricingFlatRateWidget)
 
         self.stayPricingPricePerNightWidget = QWidget(self.stayPricingWidget)
         self.stayPricingPricePerNightWidget.setObjectName(u"stayPricingPricePerNightWidget")
@@ -1122,6 +1176,12 @@ class Ui_Form(object):
 
         self.gridLayout_5.addWidget(self.stayPricingWidget, 4, 1, 1, 1)
 
+        self.stayHeaderLabel = QLabel(self.stayEditWidget)
+        self.stayHeaderLabel.setObjectName(u"stayHeaderLabel")
+        self.stayHeaderLabel.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout_5.addWidget(self.stayHeaderLabel, 0, 1, 1, 1)
+
 
         self.verticalLayout_4.addWidget(self.stayEditWidget)
 
@@ -1162,6 +1222,11 @@ class Ui_Form(object):
 
 
         self.retranslateUi(Form)
+        self.stayPricingFlatRateCheckBox.toggled.connect(self.stayPricingFlatRateWidget.setVisible)
+        self.stayPricingPricePerNightCheckBox.toggled.connect(self.stayPricingPricePerNightWidget.setVisible)
+        self.eventTicketCheckBox.toggled.connect(self.eventTicketWidget.setVisible)
+        self.checkBox_5.toggled.connect(self.placeOpenHoursWidget.setVisible)
+        self.travelTicketCheckBox.toggled.connect(self.travelTicketWidget.setVisible)
 
         self.typeComboBox.setCurrentIndex(-1)
 
@@ -1183,59 +1248,63 @@ class Ui_Form(object):
         self.typeComboBox.setPlaceholderText(QCoreApplication.translate("Form", u"Select component type", None))
         self.tripNameLineEdit.setText("")
         self.tripNameLineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert Trip Name", None))
+        self.tripTimeSensitiveCheckBox.setText(QCoreApplication.translate("Form", u"Remind me", None))
+        self.label_2.setText(QCoreApplication.translate("Form", u"Trip Name:", None))
+        self.label_3.setText(QCoreApplication.translate("Form", u"Time:", None))
+        self.label_8.setText(QCoreApplication.translate("Form", u"Information:", None))
+        self.label_6.setText(QCoreApplication.translate("Form", u"Reminders:", None))
         self.tripInfoTextEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert general information here", None))
         self.tripAddReminderLineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert new reminders", None))
         self.tripAddReminderButton.setText(QCoreApplication.translate("Form", u"Add", None))
-        self.tripTimeSensitiveLabel.setText(QCoreApplication.translate("Form", u"Time Sensitive:", None))
-        self.label_8.setText(QCoreApplication.translate("Form", u"Information:", None))
-        self.label_6.setText(QCoreApplication.translate("Form", u"Reminders:", None))
-        self.label_3.setText(QCoreApplication.translate("Form", u"Time:", None))
-        self.label_2.setText(QCoreApplication.translate("Form", u"Trip Name:", None))
         self.label_4.setText(QCoreApplication.translate("Form", u"from ", None))
         self.label_5.setText(QCoreApplication.translate("Form", u"to", None))
-        self.tripTimeSensitiveCheckBox.setText(QCoreApplication.translate("Form", u"Remind me", None))
-        self.travelInfoTextEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert general information here", None))
+        self.tripTimeSensitiveLabel.setText(QCoreApplication.translate("Form", u"Time Sensitive:", None))
+        self.tripHeaderLabel.setText(QCoreApplication.translate("Form", u"Trip", None))
         self.label_9.setText(QCoreApplication.translate("Form", u"Travel Name:", None))
+        self.label_16.setText(QCoreApplication.translate("Form", u"Information:", None))
+        self.travelNameLineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert Travel Name", None))
         self.travelTimeSensitiveCheckBox.setText(QCoreApplication.translate("Form", u"Remind me", None))
-        self.label_10.setText(QCoreApplication.translate("Form", u"from ", None))
-        self.label_11.setText(QCoreApplication.translate("Form", u"to", None))
+        self.travelTimeSensitiveLabel.setText(QCoreApplication.translate("Form", u"Time Sensitive:", None))
+        self.travelInfoTextEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert general information here", None))
         self.label_13.setText(QCoreApplication.translate("Form", u"Ticket:", None))
         self.label_14.setText(QCoreApplication.translate("Form", u"Price:", None))
         self.travelTicketPriceLineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert price of the ticket", None))
-        self.travelTimeSensitiveLabel.setText(QCoreApplication.translate("Form", u"Time Sensitive:", None))
-        self.label_16.setText(QCoreApplication.translate("Form", u"Information:", None))
-        self.label_12.setText(QCoreApplication.translate("Form", u"Time:", None))
-        self.travelNameLineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert Travel Name", None))
         self.travelTicketCheckBox.setText(QCoreApplication.translate("Form", u"Tickets needed", None))
+        self.label_12.setText(QCoreApplication.translate("Form", u"Time:", None))
+        self.label_10.setText(QCoreApplication.translate("Form", u"from ", None))
+        self.label_11.setText(QCoreApplication.translate("Form", u"to", None))
+        self.travelHeaderLabel.setText(QCoreApplication.translate("Form", u"Travel", None))
         self.label_17.setText(QCoreApplication.translate("Form", u"Place Name:", None))
-        self.placeNameLineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert Place Name", None))
-        self.label_25.setText(QCoreApplication.translate("Form", u"Information:", None))
-        self.checkBox_5.setText(QCoreApplication.translate("Form", u"Add open hours", None))
+        self.label_18.setText(QCoreApplication.translate("Form", u"Open Hours:", None))
+        self.placeTimeSensitiveLabel.setText(QCoreApplication.translate("Form", u"Time Sensitive:", None))
+        self.label_21.setText(QCoreApplication.translate("Form", u"Time:", None))
+        self.placeInfoTextEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert general information here", None))
         self.label_19.setText(QCoreApplication.translate("Form", u"from ", None))
         self.label_20.setText(QCoreApplication.translate("Form", u"to", None))
         self.placeOpenHoursInfoLineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Add additional information here (eg. \"Weekdays only\")", None))
         self.label_22.setText(QCoreApplication.translate("Form", u"from ", None))
         self.label_23.setText(QCoreApplication.translate("Form", u"to", None))
-        self.placeTimeSensitiveLabel.setText(QCoreApplication.translate("Form", u"Time Sensitive:", None))
-        self.label_21.setText(QCoreApplication.translate("Form", u"Time:", None))
+        self.label_25.setText(QCoreApplication.translate("Form", u"Information:", None))
+        self.placeNameLineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert Place Name", None))
         self.placeTimeSensitiveCheckBox.setText(QCoreApplication.translate("Form", u"Remind me", None))
-        self.placeInfoTextEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert general information here", None))
-        self.label_18.setText(QCoreApplication.translate("Form", u"Open Hours:", None))
-        self.label_40.setText(QCoreApplication.translate("Form", u"Time:", None))
-        self.eventTicketCheckBox.setText(QCoreApplication.translate("Form", u"Tickets needed", None))
-        self.eventTimeSensitiveLabel.setText(QCoreApplication.translate("Form", u"Time Sensitive:", None))
-        self.label_39.setText(QCoreApplication.translate("Form", u"Information:", None))
+        self.checkBox_5.setText(QCoreApplication.translate("Form", u"Add open hours", None))
+        self.placeHeaderLabel.setText(QCoreApplication.translate("Form", u"Place", None))
         self.eventTimeSensitiveCheckBox.setText(QCoreApplication.translate("Form", u"Remind me", None))
-        self.label_36.setText(QCoreApplication.translate("Form", u"Ticket:", None))
-        self.label_37.setText(QCoreApplication.translate("Form", u"Price:", None))
-        self.eventTicketPriceLineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert price of the ticket", None))
-        self.eventNameLineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert Event Name", None))
-        self.label_33.setText(QCoreApplication.translate("Form", u"Event Name:", None))
         self.eventInfoTextEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert general information here", None))
+        self.eventNameLineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert Event Name", None))
+        self.eventTicketCheckBox.setText(QCoreApplication.translate("Form", u"Tickets needed", None))
+        self.label_40.setText(QCoreApplication.translate("Form", u"Time:", None))
+        self.eventTypeLineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert event type (eg. Movies, Play, Show, etc.)", None))
+        self.label_36.setText(QCoreApplication.translate("Form", u"Ticket:", None))
+        self.label_39.setText(QCoreApplication.translate("Form", u"Information:", None))
         self.label_34.setText(QCoreApplication.translate("Form", u"from ", None))
         self.label_35.setText(QCoreApplication.translate("Form", u"to", None))
+        self.eventTimeSensitiveLabel.setText(QCoreApplication.translate("Form", u"Time Sensitive:", None))
+        self.label_33.setText(QCoreApplication.translate("Form", u"Event Name:", None))
         self.label_41.setText(QCoreApplication.translate("Form", u"Type:", None))
-        self.eventTypeLineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert event type (eg. Movies, Play, Show, etc.)", None))
+        self.label_37.setText(QCoreApplication.translate("Form", u"Price:", None))
+        self.eventTicketPriceLineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Insert price of the ticket", None))
+        self.eventHeaderLabel.setText(QCoreApplication.translate("Form", u"Event", None))
         self.label_42.setText(QCoreApplication.translate("Form", u"from ", None))
         self.label_43.setText(QCoreApplication.translate("Form", u"to", None))
         self.eatTimeSensitiveLabel.setText(QCoreApplication.translate("Form", u"Time Sensitive:", None))
@@ -1248,6 +1317,7 @@ class Ui_Form(object):
         self.label_47.setText(QCoreApplication.translate("Form", u"Restaurant:", None))
         self.label_48.setText(QCoreApplication.translate("Form", u"Reservation:", None))
         self.eatReservationCheckBox.setText(QCoreApplication.translate("Form", u"Need reservation", None))
+        self.eatHeaderLabel.setText(QCoreApplication.translate("Form", u"Eat", None))
         self.label_28.setText(QCoreApplication.translate("Form", u"from ", None))
         self.label_29.setText(QCoreApplication.translate("Form", u"to", None))
         self.stayNameLineEdit.setText("")
@@ -1269,6 +1339,7 @@ class Ui_Form(object):
         self.stayNumberOfNightLabel.setText(QCoreApplication.translate("Form", u"#ofNights", None))
         self.label_53.setText(QCoreApplication.translate("Form", u"Total Price:", None))
         self.stayTotalPriceLabel.setText(QCoreApplication.translate("Form", u"#totalprice", None))
+        self.stayHeaderLabel.setText(QCoreApplication.translate("Form", u"Stay", None))
         self.okButton.setText(QCoreApplication.translate("Form", u"OK", None))
         self.cancelButton.setText(QCoreApplication.translate("Form", u"Cancel", None))
         self.errorLabel.setText(QCoreApplication.translate("Form", u"error", None))

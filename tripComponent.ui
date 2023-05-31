@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>551</width>
-    <height>415</height>
+    <width>516</width>
+    <height>530</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -188,6 +188,11 @@ QLabel#reminderHeaderLabel{
   font-weight: 600;
   font-size: 20px
 }
+QLabel#budgetHeaderLabel{
+  color: #464d55;
+  font-weight: 600;
+  font-size: 20px
+}
 QLabel{
   color: #464d55;
   font-weight: 400;
@@ -322,6 +327,87 @@ tripDetails2</string>
                <string>Add Components</string>
               </property>
              </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="budgetWidget" native="true">
+           <property name="styleSheet">
+            <string notr="true">QLabel#budgetTotalLabel{
+font-weight: 600
+}
+QLabel#budgetTotalBudgetLabel{
+font-weight: 600
+}</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_6">
+            <item>
+             <widget class="QLabel" name="budgetHeaderLabel">
+              <property name="text">
+               <string>Budget</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="widget" native="true">
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <item>
+                <widget class="QLabel" name="budgetNameListLabel">
+                 <property name="text">
+                  <string>list</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="budgetPriceListLabel">
+                 <property name="text">
+                  <string>money</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_8">
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <spacer name="horizontalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="budgetTotalLabel">
+                <property name="text">
+                 <string>Total: </string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="budgetTotalBudgetLabel">
+                <property name="text">
+                 <string>#totalBudget</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>

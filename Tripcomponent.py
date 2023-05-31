@@ -66,6 +66,9 @@ class Tripcomponent(ABC):
     def setNotification(self, noti):
         self.__notification = noti
 
+    def getBudget(self) -> float:
+        return 0.0
+
 class Trip(Tripcomponent, persistent.Persistent):
     
     def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, duration):
@@ -101,6 +104,12 @@ class Trip(Tripcomponent, persistent.Persistent):
     def removeReminder(self, reminder):
         self.__reminder.remove(reminder)
 
+    def getBudget(self):
+        budget = 0.0
+        for c in self.componentList:
+            budget += c.getBudget()
+        return budget
+
 
 class Travel(Tripcomponent, persistent.Persistent):
 
@@ -122,6 +131,9 @@ class Travel(Tripcomponent, persistent.Persistent):
     
     def setTicketPrice(self, ticketPrice):
         self.__ticketPrice = ticketPrice
+
+    def getBudget(self):
+        return self.getTicketPrice()
 
 class Place(Tripcomponent, persistent.Persistent):
 
@@ -160,6 +172,7 @@ class Place(Tripcomponent, persistent.Persistent):
     def setAddOpen(self, addOpen):
         self.__addOpen = addOpen
 
+
 class Eat(Tripcomponent, persistent.Persistent):
 
     def __init__(self, name, timeFrom, timeTo, remind, timesensitive, info, reservationNeed):
@@ -172,6 +185,7 @@ class Eat(Tripcomponent, persistent.Persistent):
     
     def setReservationNeed(self, reservationNeed):
         self.__reservationNeed = reservationNeed
+
 
 class Event(Tripcomponent, persistent.Persistent):
 
@@ -201,6 +215,9 @@ class Event(Tripcomponent, persistent.Persistent):
     
     def setTicketPrice(self, ticketPrice):
         self.__ticketPrice = ticketPrice
+
+    def getBudget(self):
+        return self.getTicketPrice()
 
 class Stay(Tripcomponent, persistent.Persistent):
 
@@ -254,4 +271,7 @@ class Stay(Tripcomponent, persistent.Persistent):
     
     def setTotalPrice(self, totalPrice):
         self.__totalPrice = totalPrice
+
+    def getBudget(self):
+        return self.getTotalPrice()
 

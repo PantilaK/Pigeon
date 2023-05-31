@@ -58,6 +58,13 @@ class ComponentEditUI(QDialog):
 
         self.UI.tripAddReminderButton.clicked.connect(self.addReminderButtonClicked)
 
+        # hiding widgets
+        self.UI.stayPricingFlatRateWidget.setVisible(False)
+        self.UI.stayPricingPricePerNightWidget.setVisible(False)
+        self.UI.placeOpenHoursWidget.setVisible(False)
+        self.UI.eventTicketWidget.setVisible(False)
+        self.UI.travelTicketWidget.setVisible(False)
+
     def typeComboBoxChanged(self):
         self.controller.typeChange()
 

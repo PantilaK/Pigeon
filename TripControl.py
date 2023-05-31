@@ -11,12 +11,17 @@ if TYPE_CHECKING:
     pass
 
 class TripController():
-    def __init__(self, tripComponent=None, mainControl=None, isExpanded=False, hasReminder=True, isExtendable=True):
+    def __init__(self, tripComponent=None, mainControl=None, isExpanded=False, hasReminder=True, isExtendable=True, hasBudget=False):
         self.tripComponent:"Tripcomponent" = tripComponent
         self.isExpanded:bool = isExpanded
         self.hasReminder:bool = hasReminder
         self.isExtendable:bool = isExtendable
+        self.hasBudget:bool = hasBudget
         self.mainControl = mainControl
+
+        self.budget:list[(str, float)] = list()
+        self.budgetTextName = ""
+        self.budgetTextPrice = ""
 
         self.view:TripComponentWidget = TripComponentWidget(self, self.mainControl.view)
         self.update()
@@ -44,9 +49,13 @@ class TripController():
             self.view.UI.tripComponentControlWidget.setVisible(False)
             self.view.UI.componentWidget.setVisible(False)
 
+        # if hasBudget show budgetWidget
+        self.view.UI.budgetWidget.setVisible(self.hasBudget)
+
         self.setTitle()
         self.setDate()
         self.showInfo()
+        self.showBudgetInfo()
 
         if type(self.tripComponent) == Trip:
             # sort components
@@ -56,7 +65,7 @@ class TripController():
 
             for c in components:
                 if type(c) == Trip:
-                    componentControl = TripController(tripComponent=c, mainControl=self)
+                    componentControl = TripController(tripComponent=c, mainControl=self, hasBudget=True)
                 else:
                     componentControl = TripController(tripComponent=c, mainControl=self, hasReminder=False, isExtendable=False)
                     
@@ -68,6 +77,9 @@ class TripController():
             for r in reminders:
                 reminderControl = ReminderController(parentController=self, model=r)
                 self.view.UI.tripReminderLayout.addWidget(reminderControl.view)
+
+        if self.hasBudget:
+            self.showBudgetInfo()
     
     def setUI(self, widget):
         self.widget = widget
@@ -379,3 +391,42 @@ class TripController():
 
         transaction.commit()
         self.update()
+
+    def showBudgetInfo(self):
+        #propagate up
+        if isinstance(self.mainControl, TripController):
+            self.mainControl.showBudgetInfo()
+        if not self.hasBudget:
+            return
+        
+        # clear old budget list
+        self.budgetTextName = ""
+        self.budgetTextPrice = ""
+
+        # get all the budget
+        if isinstance(self.tripComponent, Trip):
+            components = self.tripComponent.getComponents()
+            for i in range(len(components)):
+                self.appendBudgetText(components[i], 0)
+        
+        self.view.UI.budgetNameListLabel.setText(self.budgetTextName)
+        self.view.UI.budgetPriceListLabel.setText(self.budgetTextPrice)
+        self.view.UI.budgetTotalBudgetLabel.setText(str(self.tripComponent.getBudget()))
+
+
+    def appendBudgetText(self, component, level:int=0):
+        if isinstance(component, Trip):
+            self.budgetTextName += ("    " * level) + component.getName() + "\n"
+            self.budgetTextPrice += "\n"
+            for c in component.getComponents():
+                self.appendBudgetText(c, level+1)
+            self.budgetTextName += "\n"
+            self.budgetTextPrice += "\n"
+        else:
+            # not a trip
+            budget = component.getBudget()
+            if budget == 0:
+                return
+            #budget not zero
+            self.budgetTextName += ("    " * level) + component.getName() + "\n"
+            self.budgetTextPrice += str(budget) + "\n"

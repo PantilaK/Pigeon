@@ -54,7 +54,7 @@ class MainController:
         trips: list["Trip"] = self.getTrips()
 
         for trip in trips:
-            tripControl = TripController(tripComponent=trip, mainControl=self)
+            tripControl = TripController(tripComponent=trip, mainControl=self, hasBudget=True)
             self.view.addTrip(tripControl.view)
 
         self.updateNoti()

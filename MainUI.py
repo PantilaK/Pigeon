@@ -1,4 +1,4 @@
-from ui_mainForm import *
+from mainForm_ui import *
 
 from typing import TYPE_CHECKING
 
